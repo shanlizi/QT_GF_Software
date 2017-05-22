@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GGA_View</class>
+ <widget class="QMainWindow" name="GGA_View">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>731</width>
+    <height>238</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(19, 156, 106);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(207, 220, 224);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QTableWidget" name="tableWidget_GGA">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="cornerButtonEnabled">
+          <bool>false</bool>
+         </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>70</number>
+         </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>自检</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>射检</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>星历状态</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>天线</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>信号</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>经度</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>纬度</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>高度</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>东速</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>北速</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>天速</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>定位卫星数</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>PDOP</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>卫星号</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
