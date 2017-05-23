@@ -1,4 +1,4 @@
-#ifndef BIN_H
+#ifndef BIN_H  //Test 2017/5/23
 #define BIN_H
 #include "typedefine.h"
 #include <qglobal.h>
