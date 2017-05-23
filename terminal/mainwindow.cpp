@@ -66,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     serial = new QSerialPort(this);
     settings = new SettingsDialog;
+    FastCmd_data = new FastCmd(this);
 
     p7373H = new C7373H(this);
 
@@ -85,8 +86,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this,
             SLOT(handleError(QSerialPort::SerialPortError)));
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData())); //收信息
+    connect(FastCmd_data,SIGNAL(windowTitleChanged(QString)),this,SLOT(readAll()));
     connect(ui->actionSaveFile, SIGNAL(triggered()), this, SLOT(saveFile()));
+    connect(ui->actionFastCmd,SIGNAL(triggered()),this,SLOT(onFastCmd()));
 
+    m_FastCmd_data = new QDockWidget("FastCmd",this);               //浮动
+    m_FastCmd_data->setFeatures(QDockWidget::AllDockWidgetFeatures);
+    m_FastCmd_data->setAllowedAreas(Qt::AllDockWidgetAreas);
+    m_FastCmd_data->setWidget(FastCmd_data);
 
     m_DkWgt_373H = new QDockWidget(tr("7373H_data"),this);
     m_DkWgt_373H->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
@@ -95,12 +102,15 @@ MainWindow::MainWindow(QWidget *parent) :
     //addDockWidget(Qt::TopDockWidgetArea,dock);
 
 
+    m_FastCmd_data->hide();
 
     this->setCentralWidget(m_DkWgt_373H);
-    //addDockWidget(Qt::BottomDockWidgetArea, m_GGA_data);
+    //addDockWidget(Qt::BottomDockWidgetArea, m_FastCmd_data);
 
     //将GGA 与 DHV 合并为标签页
     //tabifyDockWidget(m_GGA_data, m_DHV_data);
+
+
 
 }
 
@@ -110,7 +120,14 @@ MainWindow::~MainWindow()
     delete settings;
     delete ui;
 }
+void MainWindow::onFastCmd()
+{
 
+    m_FastCmd_data->move(this->width()/3,this->height()/3);
+    m_FastCmd_data->show();
+    m_FastCmd_data->setFloating(1);
+
+}
 //! [4]
 void MainWindow::openSerialPort()
 {
@@ -207,6 +224,39 @@ void MainWindow::saveFile()
    }
 }
 
+void MainWindow::readAll()
+{
+
+
+    if(FastCmd_data->flagSwitch_C)
+    {
+        serial->write("$CCSPM,C*21\r\n");
+        FastCmd_data->flagSwitch_C = 0;
+    }
+    if(FastCmd_data->flagSwitch_Z)
+    {
+        serial->write("$CCSPM,Z*38\r\n");
+        FastCmd_data->flagSwitch_Z = 0;
+    }
+    if(FastCmd_data->flagCPM)
+    {
+        serial->write("$CCCPM,0,C*2D\r\n");
+        FastCmd_data->flagCPM = 0;
+     }
+
+
+
+    for(int i=0;i<50;i++)
+    {
+        if(FastCmd_data->m_pWidgets[i]->flag)
+        {
+            QByteArray strData = FastCmd_data->GetData(i);
+            serial->write(strData);
+            FastCmd_data->m_pWidgets[i]->flag = 0;
+        }
+    }
+}
+
 //! [6]
 void MainWindow::writeData(const QByteArray &data)
 {
@@ -249,6 +299,9 @@ void MainWindow::readData()
            {
                outFile.close();
            }
+           break;
+       case 0x20:
+
            break;
 
         default:
