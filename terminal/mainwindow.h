@@ -49,6 +49,7 @@
 #include "typedefine.h"
 #include <QDockWidget>
 #include "TableView/c7373h.h"
+#include "TableView/fastcmd.h"
 
 #include <QFile>
 
@@ -79,15 +80,18 @@ private slots:
     void writeData(const QByteArray &data);
     void readData();
     void clear_All();
+    void readAll();
 
     void handleError(QSerialPort::SerialPortError error);
     void saveFile();
+    void onFastCmd();
 
 private:
     void initActionsConnections();
     int i4FlagSave;
     QFile outFile;
     QFile outFile1;
+    FastCmd  *FastCmd_data;
 
 private:
     Ui::MainWindow *ui;
@@ -100,7 +104,8 @@ private:
 
 public:
     // QDockWidget *m_console;
-     QDockWidget *m_DkWgt_373H;
+    QDockWidget *m_FastCmd_data;
+    QDockWidget *m_DkWgt_373H;
 
 
 };
