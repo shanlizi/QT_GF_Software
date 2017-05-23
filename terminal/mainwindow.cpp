@@ -67,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
     serial = new QSerialPort(this);
     settings = new SettingsDialog;
     FastCmd_data = new FastCmd(this);
+    pSendDialog = new CSendDialog(this);
 
     p7373H = new C7373H(this);
 
@@ -87,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
             SLOT(handleError(QSerialPort::SerialPortError)));
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData())); //收信息
     connect(FastCmd_data,SIGNAL(windowTitleChanged(QString)),this,SLOT(readAll()));
+    connect(pSendDialog,SIGNAL(windowTitleChanged(QString)),this,SLOT(readAll()));
     connect(ui->actionSaveFile, SIGNAL(triggered()), this, SLOT(saveFile()));
     connect(ui->actionFastCmd,SIGNAL(triggered()),this,SLOT(onFastCmd()));
 
@@ -101,11 +103,17 @@ MainWindow::MainWindow(QWidget *parent) :
     m_DkWgt_373H->setWidget(p7373H);
     //addDockWidget(Qt::TopDockWidgetArea,dock);
 
+    m_SendMsg = new QDockWidget(tr("SendMsg"),this);
+    m_SendMsg->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
+    m_SendMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
+    m_SendMsg->setWidget(pSendDialog);
+
 
     m_FastCmd_data->hide();
+    m_DkWgt_373H->hide();
 
-    this->setCentralWidget(m_DkWgt_373H);
-    //addDockWidget(Qt::BottomDockWidgetArea, m_FastCmd_data);
+    this->setCentralWidget(m_SendMsg);
+    //addDockWidget(Qt::BottomDockWidgetArea, m_SendMsg);
 
     //将GGA 与 DHV 合并为标签页
     //tabifyDockWidget(m_GGA_data, m_DHV_data);
@@ -227,7 +235,6 @@ void MainWindow::saveFile()
 void MainWindow::readAll()
 {
 
-
     if(FastCmd_data->flagSwitch_C)
     {
         serial->write("$CCSPM,C*21\r\n");
@@ -244,8 +251,6 @@ void MainWindow::readAll()
         FastCmd_data->flagCPM = 0;
      }
 
-
-
     for(int i=0;i<50;i++)
     {
         if(FastCmd_data->m_pWidgets[i]->flag)
@@ -254,6 +259,43 @@ void MainWindow::readAll()
             serial->write(strData);
             FastCmd_data->m_pWidgets[i]->flag = 0;
         }
+    }
+
+    if(pSendDialog->flag_11H)
+    {
+        QString strData0 = "24 42 49 4E 0B 00 01 00 01 00 00 0D 0A";
+        QByteArray strData = strData0.toLocal8Bit();
+        strData = QByteArray::fromHex(strData);
+        serial->write(strData);
+        pSendDialog->flag_11H = 0;
+    }
+    if(pSendDialog->flag_12H)
+    {
+        QString strData0[4] = {"24 42 49 4E 0C 00 01 00 00 00 00 0D 0A",
+                               "24 42 49 4E 0C 00 01 00 01 01 00 0D 0A",
+                               "24 42 49 4E 0C 00 01 00 02 02 00 0D 0A",
+                               "24 42 49 4E 0C 00 01 00 03 03 00 0D 0A",
+                              };
+
+        QByteArray strData = strData0[pSendDialog->flag_12H-1].toLocal8Bit();
+        strData = QByteArray::fromHex(strData);
+        serial->write(strData);
+        pSendDialog->flag_12H = 0;
+    }
+    if(pSendDialog->flag_14H)
+    {
+        QString str[18] = {"00","01","02","03","04","05","06","07","08","09","0A","0B","0C","0D","0E","0F","10","11"};
+        QString strData0 = "24 42 49 4E 0E 00 02 00";
+        strData0 += str[(i1)pSendDialog->flag_14H];
+        strData0 += str[(pSendDialog->flag_14H>>8)&0xFF];
+        char i1Check = (i1)pSendDialog->flag_14H + (pSendDialog->flag_14H>>8)&0xFF;
+        strData0 += str[i1Check];
+        strData0 += "0D 0A";
+        QByteArray strData = strData0.toLocal8Bit();
+        strData = QByteArray::fromHex(strData);
+        serial->write(strData);
+        pSendDialog->flag_11H = 0;
+
     }
 }
 
@@ -300,8 +342,18 @@ void MainWindow::readData()
                outFile.close();
            }
            break;
-       case 0x20:
-
+       case 0x1F:  //31H
+           memset(&g_T31, 0, sizeof(g_T31));
+           memcpy(&g_T31, &m_BuffRecv[8], sizeof(g_T31));
+           pSendDialog->Update31H(&g_T31);
+           if(1 == i4FlagSave)
+           {
+               outFile.write(pSendDialog->MakeSave(&g_T31));
+           }
+           else if(2 == i4FlagSave)
+           {
+               outFile.close();
+           }
            break;
 
         default:

@@ -55,6 +55,12 @@ typedef struct _t7373H
     i4 i4ClockCorrect;
     i1 i1Rest[20];
 }T7373H;
+
+typedef struct _t31H
+{
+    i1 i1model;
+}T31H;
+
 typedef struct _tCPM
 {
     u1     u1Zero;
@@ -64,6 +70,7 @@ typedef struct _tCPM
 
 int BIN_ParserFrame(char Buf);
 extern T7373H g_T7373;
+extern T31H   g_T31;
 extern u1 m_BuffRecv[MAX_LENTH];
 //extern TGGA Bin_GGA;
 

@@ -16,6 +16,7 @@ int g_nRevCnt = 0;
 u1 m_BuffRecv[MAX_LENTH];
 char Flag = GNSS;
 T7373H g_T7373 = {0};
+T31H   g_T31 = {0};
 static u2 s_u2LenRcv;
 i1 i1ID;
 u2 u2Len;
@@ -111,7 +112,6 @@ int BIN_ParserFrame(char Buf)
             break;
 
         case T31:
-        case T32:
             if(g_nRevCnt >= (u2Len+12))  //整帧数据接收完毕
             {
                 if((0x0D == m_BuffRecv[g_nRevCnt-2])&&(0x0A == m_BuffRecv[g_nRevCnt-1]))  //校验帧尾
