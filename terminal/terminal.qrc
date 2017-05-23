@@ -7,5 +7,6 @@
         <file>images/clear.png</file>
         <file>images/SaveFile.png</file>
         <file>images/SaveFile_Close.png</file>
+        <file>images/FastCmd.png</file>
     </qresource>
 </RCC>
