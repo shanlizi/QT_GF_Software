@@ -42,7 +42,7 @@ int BIN_ParserFrame(char Buf)
         case GNSS:
             if (g_nRevCnt == 4)
             {
-                if ((0xEB == m_BuffRecv[0]) && (0x90 == m_BuffRecv[1]) && (0x7E == m_BuffRecv[2]) && (0x7E == m_BuffRecv[3]))
+                if ((0x24 == m_BuffRecv[0]) && (0x42 == m_BuffRecv[1]) && (0x49 == m_BuffRecv[2]) && (0x4E == m_BuffRecv[3])) //帧头，$BIN,对应0X24 42 49 4E
                 {
                     Flag = T_ID;
                 }
@@ -69,10 +69,10 @@ int BIN_ParserFrame(char Buf)
             {
                 u2Len = m_BuffRecv[6] + (m_BuffRecv[7]<<8)&0xFFFF;  //帧长度赋给 u2Len
 
-                if((0x69 == m_BuffRecv[5])&&(0x69 == m_BuffRecv[4]))
-                    Flag = T6969;
-                else if((0x7A == m_BuffRecv[5])&&(0x7A == m_BuffRecv[4]))
-                    Flag = T7A7A;
+                if((0 == m_BuffRecv[5])&&(0x1F == m_BuffRecv[4]))  //31帧
+                    Flag = T31;
+                else if((0 == m_BuffRecv[5])&&(0x20 == m_BuffRecv[4]))
+                    Flag = T32;
                 else if((0x7C == m_BuffRecv[5])&&(0x7C == m_BuffRecv[4]))
                     Flag = T7C7C;
                 else if((0x7D == m_BuffRecv[5])&&(0x7D == m_BuffRecv[4]))
@@ -110,15 +110,16 @@ int BIN_ParserFrame(char Buf)
             }
             break;
 
-        case T7373:
-            if(g_nRevCnt >= u2Len)  //整帧数据接收完毕
+        case T31:
+        case T32:
+            if(g_nRevCnt >= (u2Len+12))  //整帧数据接收完毕
             {
-                if((0xED == m_BuffRecv[g_nRevCnt-4])&&(0x03 == m_BuffRecv[g_nRevCnt-3])&&(0xBF == m_BuffRecv[g_nRevCnt-2])&&(0xBF == m_BuffRecv[g_nRevCnt-1]))  //校验帧尾
+                if((0x0D == m_BuffRecv[g_nRevCnt-2])&&(0x0A == m_BuffRecv[g_nRevCnt-1]))  //校验帧尾
                 {
-                    u2 u2Sum = u2CheckSum(&m_BuffRecv[6],u2Len-12);
-                    u2 u2Sum1 = (m_BuffRecv[u2Len-5]<<8)&0xFFFF;
-                    if(0 == (u2)(u2Sum + m_BuffRecv[u2Len-6] + u2Sum1) )
-                        return (int)m_BuffRecv[5];
+                    u2 u2Sum = u2CheckSum(&m_BuffRecv[8],u2Len);
+                    u2 u2Sum1 = (m_BuffRecv[u2Len+9]<<8)&0xFFFF;
+                    if((u2)(u2Sum1 + m_BuffRecv[u2Len+8]) == u2Sum )
+                        return (int)m_BuffRecv[4];
                     else
                     {
                         //异常：没有通过校验和

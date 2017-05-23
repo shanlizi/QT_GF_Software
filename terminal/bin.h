@@ -1,4 +1,4 @@
-#ifndef BIN_H  //Test 2017/5/23
+#ifndef BIN_H
 #define BIN_H
 #include "typedefine.h"
 #include <qglobal.h>
@@ -30,8 +30,16 @@ enum ENUM_UART_STREAM_TYPE
     T0808,
     T1313,
     T1414,
-    T7979
+    T7979,
+    T31,
+    T32,
+    T33,
+    T34,
+    T35,
+    T36
 };
+
+
 
 
 typedef struct _t7373H
@@ -47,7 +55,11 @@ typedef struct _t7373H
     i4 i4ClockCorrect;
     i1 i1Rest[20];
 }T7373H;
-
+typedef struct _tCPM
+{
+    u1     u1Zero;
+    i1     i1Flag_CZ;
+}TCPM;
 
 
 int BIN_ParserFrame(char Buf);
