@@ -12,7 +12,8 @@ SOURCES += \
     mainwindow.cpp \
     settingsdialog.cpp \
     binParser.cpp \
-    TableView/c7373h.cpp
+    TableView/c7373h.cpp \
+    TableView/fastcmd.cpp
 
 
 HEADERS += \
@@ -20,12 +21,14 @@ HEADERS += \
     settingsdialog.h \
     typedefine.h \
     bin.h \
-    TableView/c7373h.h
+    TableView/c7373h.h \
+    TableView/fastcmd.h
 
 FORMS += \
     mainwindow.ui \
     settingsdialog.ui \
-    TableView/c7373h.ui
+    TableView/c7373h.ui \
+    TableView/fastcmd.ui
 
 RESOURCES += \
     terminal.qrc
