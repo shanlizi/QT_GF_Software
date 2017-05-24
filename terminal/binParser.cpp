@@ -17,6 +17,8 @@ u1 m_BuffRecv[MAX_LENTH];
 char Flag = GNSS;
 T7373H g_T7373 = {0};
 T31H   g_T31 = {0};
+T32H   g_T32 = {0};
+T36H   g_T36 = {0};
 static u2 s_u2LenRcv;
 i1 i1ID;
 u2 u2Len;
@@ -74,34 +76,10 @@ int BIN_ParserFrame(char Buf)
                     Flag = T31;
                 else if((0 == m_BuffRecv[5])&&(0x20 == m_BuffRecv[4]))
                     Flag = T32;
-                else if((0x7C == m_BuffRecv[5])&&(0x7C == m_BuffRecv[4]))
-                    Flag = T7C7C;
-                else if((0x7D == m_BuffRecv[5])&&(0x7D == m_BuffRecv[4]))
-                    Flag = T7D7D;
-                else if((0x7E == m_BuffRecv[5])&&(0x7E == m_BuffRecv[4]))
-                    Flag = T7E7E;
-                else if((0x71 == m_BuffRecv[5])&&(0x71 == m_BuffRecv[4]))
-                    Flag = T7171;
-                else if((0x72 == m_BuffRecv[5])&&(0x72 == m_BuffRecv[4]))
-                    Flag = T7272;
-                else if((0x73 == m_BuffRecv[5])&&(0x73 == m_BuffRecv[4]))
-                    Flag = T7373;
-                else if((0x03 == m_BuffRecv[5])&&(0x03 == m_BuffRecv[4]))
-                    Flag = T0303;
-                else if((0x04 == m_BuffRecv[5])&&(0x04 == m_BuffRecv[4]))
-                    Flag = T0404;
-                else if((0x05 == m_BuffRecv[5])&&(0x05 == m_BuffRecv[4]))
-                    Flag = T0505;
-                else if((0x06 == m_BuffRecv[5])&&(0x06 == m_BuffRecv[4]))
-                    Flag = T0606;
-                else if((0x08 == m_BuffRecv[5])&&(0x08 == m_BuffRecv[4]))
-                    Flag = T0808;
-                else if((0x13 == m_BuffRecv[5])&&(0x13 == m_BuffRecv[4]))
-                    Flag = T1313;
-                else if((0x14 == m_BuffRecv[5])&&(0x14 == m_BuffRecv[4]))
-                    Flag = T1414;
-                else if((0x79 == m_BuffRecv[5])&&(0x79 == m_BuffRecv[4]))
-                    Flag = T7979;
+                else if((0 == m_BuffRecv[5])&&(0x24 == m_BuffRecv[4]))
+                    Flag = T36;
+
+
                 else
                 {
                     g_nRevCnt = 0;  //异常：帧ID没有对上
@@ -112,6 +90,8 @@ int BIN_ParserFrame(char Buf)
             break;
 
         case T31:
+        case T32:
+        case T36:
             if(g_nRevCnt >= (u2Len+12))  //整帧数据接收完毕
             {
                 if((0x0D == m_BuffRecv[g_nRevCnt-2])&&(0x0A == m_BuffRecv[g_nRevCnt-1]))  //校验帧尾
@@ -119,7 +99,11 @@ int BIN_ParserFrame(char Buf)
                     u2 u2Sum = u2CheckSum(&m_BuffRecv[8],u2Len);
                     u2 u2Sum1 = (m_BuffRecv[u2Len+9]<<8)&0xFFFF;
                     if((u2)(u2Sum1 + m_BuffRecv[u2Len+8]) == u2Sum )
+                    {
+                        g_nRevCnt = 0;
+                        Flag = GNSS;
                         return (int)m_BuffRecv[4];
+                    }
                     else
                     {
                         //异常：没有通过校验和

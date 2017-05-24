@@ -263,7 +263,7 @@ void MainWindow::readAll()
 
     if(pSendDialog->flag_11H)
     {
-        QString strData0 = "24 42 49 4E 0B 00 01 00 01 00 00 0D 0A";
+        QString strData0 = "24 42 49 4E 0B 00 01 00 01 01 00 0D 0A";
         QByteArray strData = strData0.toLocal8Bit();
         strData = QByteArray::fromHex(strData);
         serial->write(strData);
@@ -295,7 +295,24 @@ void MainWindow::readAll()
         strData = QByteArray::fromHex(strData);
         serial->write(strData);
         pSendDialog->flag_11H = 0;
+    }
 
+    if(pSendDialog->flag_15H)
+    {
+        QString strData0 = "24 42 49 4E 0F 00 01 00 01 01 00 0D 0A";
+        QByteArray strData = strData0.toLocal8Bit();
+        strData = QByteArray::fromHex(strData);
+        serial->write(strData);
+        pSendDialog->flag_15H = 0;
+    }
+
+    if(pSendDialog->flag_16H)
+    {
+        QString strData0 = "24 42 49 4E 10 00 01 00 01 01 00 0D 0A";
+        QByteArray strData = strData0.toLocal8Bit();
+        strData = QByteArray::fromHex(strData);
+        serial->write(strData);
+        pSendDialog->flag_16H = 0;
     }
 }
 
@@ -356,6 +373,34 @@ void MainWindow::readData()
            }
            break;
 
+       case 0x20:  //32H
+           memset(&g_T32, 0, sizeof(g_T32));
+           memcpy(&g_T32, &m_BuffRecv[8], sizeof(g_T32));
+           pSendDialog->Update32H(&g_T32);
+           if(1 == i4FlagSave)
+           {
+               outFile.write(pSendDialog->MakeSave(&g_T32));
+           }
+           else if(2 == i4FlagSave)
+           {
+               outFile.close();
+           }
+           break;
+
+       case 0x24:  //36H
+           memset(&g_T36, 0, sizeof(g_T36));
+           memcpy(&g_T36, &m_BuffRecv[8], sizeof(g_T36));
+           pSendDialog->Update36H(&g_T36);
+           if(1 == i4FlagSave)
+           {
+               outFile.write(pSendDialog->MakeSave(&g_T36));
+           }
+           else if(2 == i4FlagSave)
+           {
+               outFile.close();
+           }
+           break;
+
         default:
             break;
 
@@ -389,4 +434,7 @@ void MainWindow::initActionsConnections()
 void MainWindow::clear_All()
 {
     p7373H->clear_7373H();
+    pSendDialog->clear_31H();
+    pSendDialog->clear_32H();
+
 }
