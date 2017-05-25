@@ -31,16 +31,19 @@ private slots:
 
     void on_pushButton_version_clicked();
 
+    void on_pushButton_AcpSet_13H_clicked();
+
 private:
     Ui::CSendDialog *ui;
 
 public:
-    int flag_11H = 0;
-    int flag_12H = 0;
-    int flag_13H = 0;
-    int flag_14H = 0;
-    int flag_15H = 0;
-    int flag_16H = 0;
+    int flag_11H;
+    int flag_12H;
+    int flag_13H;
+    int flag_14H;
+    int flag_15H;
+    int flag_16H;
+    TAcqParam_13H m_TAcqParam_13H;
 
 public:
     void Update31H(const T31H *p31H);

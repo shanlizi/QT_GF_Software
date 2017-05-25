@@ -56,6 +56,21 @@ typedef struct _t36H
     i1 i1version[50];
 }T36H;
 
+typedef struct _tChannel
+{
+    u2 u2OriginV;
+    u2 u2HighV;
+    u2 u2Slope;
+    i1 i1Range;
+}StrChannel;
+
+typedef struct _tAcqParam
+{
+    i1 i1Model;
+    StrChannel mChannel[16];
+}TAcqParam_13H;
+
+
 typedef struct _tCPM
 {
     u1     u1Zero;

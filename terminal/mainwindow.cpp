@@ -282,6 +282,20 @@ void MainWindow::readAll()
         serial->write(strData);
         pSendDialog->flag_12H = 0;
     }
+
+    if(pSendDialog->flag_13H)  //m_TAcqParam_13H  113 = 0x071  113+12=125
+    {
+        char data[125] = {0x24, 0x42, 0x49, 0x4E, 0x0D, 0x00, 0x71, 0x00};
+        memcpy(&data[8], &pSendDialog->m_TAcqParam_13H, 125);
+        u2 u2Sum = u2GetSum(&data[8], 113);
+        data[121] = (i1)(u2Sum & 0xFF);
+        data[122] = (i1)(u2Sum>>8 & 0xFF);
+        data[123] = 0x0D;
+        data[124] = 0x0A;
+        serial->write(data, sizeof(data));
+        pSendDialog->flag_13H = 0;
+    }
+
     if(pSendDialog->flag_14H)
     {
         QString str[18] = {"00","01","02","03","04","05","06","07","08","09","0A","0B","0C","0D","0E","0F","10","11"};
@@ -321,6 +335,7 @@ void MainWindow::writeData(const QByteArray &data)
 {
     serial->write(data);
 }
+
 //! [6]
 
 //! [7]
@@ -437,4 +452,14 @@ void MainWindow::clear_All()
     pSendDialog->clear_31H();
     pSendDialog->clear_32H();
 
+}
+
+u2 MainWindow::u2GetSum(const char *p, int nLen)
+{
+    u2 u2Sum = 0;
+    for(int i=0; i<nLen; i++)
+    {
+        u2Sum += p[i];
+    }
+    return u2Sum;
 }

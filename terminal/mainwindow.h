@@ -71,6 +71,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    u2 u2GetSum(const char *p, int nLen);
 
 
 
