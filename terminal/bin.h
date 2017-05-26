@@ -53,6 +53,7 @@ typedef struct _t32H
 
 typedef struct _t36H
 {
+    i1 i1Type[50];
     i1 i1version[50];
 }T36H;
 

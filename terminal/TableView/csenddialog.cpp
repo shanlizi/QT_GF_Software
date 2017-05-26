@@ -259,6 +259,7 @@ void CSendDialog::Update31H(const T31H *p31H)
 void CSendDialog::Update32H(const T32H *p32H)
 {
     ui->label_32H_12H->setText(QString("%1").arg(" "));
+    ui->label_32H_13H->setText(QString("%1").arg(" "));
     ui->label_32H_14H->setText(QString("%1").arg(" "));
     ui->label_32H_15H->setText(QString("%1").arg(" "));
     QString strFlag;
@@ -282,6 +283,7 @@ void CSendDialog::Update32H(const T32H *p32H)
             ui->label_32H_12H->setText(QString("%1").arg(strFlag));
             break;
         case 13:
+            ui->label_32H_13H->setText(QString("%1").arg(strFlag));
             break;
         case 14:
             ui->label_32H_14H->setText(QString("%1").arg(strFlag));
@@ -302,7 +304,9 @@ void CSendDialog::clear_31H()
 void CSendDialog::clear_32H()
 {
     ui->label_32H_12H->clear();
+    ui->label_32H_13H->clear();
     ui->label_32H_14H->clear();
+    ui->label_32H_15H->clear();
 }
 QByteArray CSendDialog::MakeSave(const T31H *p31H)
 {
@@ -324,16 +328,24 @@ QByteArray CSendDialog::MakeSave(const T32H *p32H)
 
 void CSendDialog::Update36H(const T36H *p36H)
 {
+    ui->label_Type->setText(QString("%1").arg(p36H->i1Type));
     ui->label_version->setText(QString("%1").arg(p36H->i1version));
 }
 
 void CSendDialog::clear_36H()
 {
+    ui->label_Type->clear();
     ui->label_version->clear();
 }
 
 QByteArray CSendDialog::MakeSave(const T36H *p36H)
 {
+    QByteArray BtAryMsg;
+    BtAryMsg.append(QString("32H：%1 %2\r\n")
+            .arg(p36H->i1Type)
+            .arg(p36H->i1version)
+            );
+    return BtAryMsg;
 
 }
 
