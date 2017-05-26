@@ -58,9 +58,9 @@ typedef struct _t36H
 
 typedef struct _tChannel
 {
-    u2 u2OriginV;
-    u2 u2HighV;
-    u2 u2Slope;
+    i2 i2OriginV;
+    i2 i2HighV;
+    i2 i2Slope;
     i1 i1Range;
 }StrChannel;
 

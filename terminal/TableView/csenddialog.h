@@ -7,6 +7,7 @@
 #include <QString>
 #include <QByteArray>
 #include <QMessageBox>
+#include  <QValidator>
 
 namespace Ui {
 class CSendDialog;
@@ -19,6 +20,9 @@ class CSendDialog : public QDialog
 public:
     explicit CSendDialog(QWidget *parent = 0);
     ~CSendDialog();
+    QValidator* validator1;
+    QValidator* validator2;
+    QValidator* validator3;
 
 private slots:
     void on_pushButton_model_clicked();

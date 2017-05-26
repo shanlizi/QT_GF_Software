@@ -1,6 +1,7 @@
 #include "csenddialog.h"
 #include "ui_csenddialog.h"
 
+
 CSendDialog::CSendDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CSendDialog)
@@ -13,6 +14,92 @@ CSendDialog::CSendDialog(QWidget *parent) :
     flag_15H = 0;
     flag_16H = 0;
     m_TAcqParam_13H = {0};
+
+    validator1 = new QIntValidator( -2500, 2500, this );
+    validator2 = new QIntValidator( -10000, 10000, this );
+    validator3 = new QIntValidator( 0, 1, this );
+
+    ui->lineEdit_1_1->setValidator(validator1);
+    ui->lineEdit_1_2->setValidator(validator1);
+    ui->lineEdit_1_3->setValidator(validator2);
+    ui->lineEdit_1_4->setValidator(validator3);
+
+    ui->lineEdit_2_1->setValidator(validator1);
+    ui->lineEdit_2_2->setValidator(validator1);
+    ui->lineEdit_2_3->setValidator(validator2);
+    ui->lineEdit_2_4->setValidator(validator3);
+
+    ui->lineEdit_3_1->setValidator(validator1);
+    ui->lineEdit_3_2->setValidator(validator1);
+    ui->lineEdit_3_3->setValidator(validator2);
+    ui->lineEdit_3_4->setValidator(validator3);
+
+    ui->lineEdit_4_1->setValidator(validator1);
+    ui->lineEdit_4_2->setValidator(validator1);
+    ui->lineEdit_4_3->setValidator(validator2);
+    ui->lineEdit_4_4->setValidator(validator3);
+
+    ui->lineEdit_5_1->setValidator(validator1);
+    ui->lineEdit_5_2->setValidator(validator1);
+    ui->lineEdit_5_3->setValidator(validator2);
+    ui->lineEdit_6_4->setValidator(validator3);
+
+    ui->lineEdit_6_1->setValidator(validator1);
+    ui->lineEdit_6_2->setValidator(validator1);
+    ui->lineEdit_6_3->setValidator(validator2);
+    ui->lineEdit_6_4->setValidator(validator3);
+
+    ui->lineEdit_7_1->setValidator(validator1);
+    ui->lineEdit_7_2->setValidator(validator1);
+    ui->lineEdit_7_3->setValidator(validator2);
+    ui->lineEdit_7_4->setValidator(validator3);
+
+    ui->lineEdit_8_1->setValidator(validator1);
+    ui->lineEdit_8_2->setValidator(validator1);
+    ui->lineEdit_8_3->setValidator(validator2);
+    ui->lineEdit_8_4->setValidator(validator3);
+
+    ui->lineEdit_9_1->setValidator(validator1);
+    ui->lineEdit_9_2->setValidator(validator1);
+    ui->lineEdit_9_3->setValidator(validator2);
+    ui->lineEdit_9_4->setValidator(validator3);
+
+    ui->lineEdit_10_1->setValidator(validator1);
+    ui->lineEdit_10_2->setValidator(validator1);
+    ui->lineEdit_10_3->setValidator(validator2);
+    ui->lineEdit_10_4->setValidator(validator3);
+
+    ui->lineEdit_11_1->setValidator(validator1);
+    ui->lineEdit_11_2->setValidator(validator1);
+    ui->lineEdit_11_3->setValidator(validator2);
+    ui->lineEdit_11_4->setValidator(validator3);
+
+    ui->lineEdit_12_1->setValidator(validator1);
+    ui->lineEdit_12_2->setValidator(validator1);
+    ui->lineEdit_12_3->setValidator(validator2);
+    ui->lineEdit_12_4->setValidator(validator3);
+
+    ui->lineEdit_13_1->setValidator(validator1);
+    ui->lineEdit_13_2->setValidator(validator1);
+    ui->lineEdit_13_3->setValidator(validator2);
+    ui->lineEdit_13_4->setValidator(validator3);
+
+    ui->lineEdit_14_1->setValidator(validator1);
+    ui->lineEdit_14_2->setValidator(validator1);
+    ui->lineEdit_14_3->setValidator(validator2);
+    ui->lineEdit_14_4->setValidator(validator3);
+
+    ui->lineEdit_15_1->setValidator(validator1);
+    ui->lineEdit_15_2->setValidator(validator1);
+    ui->lineEdit_15_3->setValidator(validator2);
+    ui->lineEdit_15_4->setValidator(validator3);
+
+    ui->lineEdit_16_1->setValidator(validator1);
+    ui->lineEdit_16_2->setValidator(validator1);
+    ui->lineEdit_16_3->setValidator(validator2);
+    ui->lineEdit_16_4->setValidator(validator3);
+
+
 }
 
 CSendDialog::~CSendDialog()
@@ -39,84 +126,84 @@ void CSendDialog::on_pushButton_AcpSet_13H_clicked()
 
     m_TAcqParam_13H.i1Model = ui->comboBox_AcpModel_13H->currentIndex();
 
-    m_TAcqParam_13H.mChannel[0].u2OriginV = ui->lineEdit_1_1->text().toInt();
-    m_TAcqParam_13H.mChannel[0].u2HighV = ui->lineEdit_1_2->text().toInt();
-    m_TAcqParam_13H.mChannel[0].u2Slope = ui->lineEdit_1_3->text().toInt();
+    m_TAcqParam_13H.mChannel[0].i2OriginV = ui->lineEdit_1_1->text().toInt();
+    m_TAcqParam_13H.mChannel[0].i2HighV = ui->lineEdit_1_2->text().toInt();
+    m_TAcqParam_13H.mChannel[0].i2Slope = ui->lineEdit_1_3->text().toInt();
     m_TAcqParam_13H.mChannel[0].i1Range = ui->lineEdit_1_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[1].u2OriginV = ui->lineEdit_2_1->text().toInt();
-    m_TAcqParam_13H.mChannel[1].u2HighV = ui->lineEdit_2_2->text().toInt();
-    m_TAcqParam_13H.mChannel[1].u2Slope = ui->lineEdit_2_3->text().toInt();
+    m_TAcqParam_13H.mChannel[1].i2OriginV = ui->lineEdit_2_1->text().toInt();
+    m_TAcqParam_13H.mChannel[1].i2HighV = ui->lineEdit_2_2->text().toInt();
+    m_TAcqParam_13H.mChannel[1].i2Slope = ui->lineEdit_2_3->text().toInt();
     m_TAcqParam_13H.mChannel[1].i1Range = ui->lineEdit_2_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[2].u2OriginV = ui->lineEdit_3_1->text().toInt();
-    m_TAcqParam_13H.mChannel[2].u2HighV = ui->lineEdit_3_2->text().toInt();
-    m_TAcqParam_13H.mChannel[2].u2Slope = ui->lineEdit_3_3->text().toInt();
+    m_TAcqParam_13H.mChannel[2].i2OriginV = ui->lineEdit_3_1->text().toInt();
+    m_TAcqParam_13H.mChannel[2].i2HighV = ui->lineEdit_3_2->text().toInt();
+    m_TAcqParam_13H.mChannel[2].i2Slope = ui->lineEdit_3_3->text().toInt();
     m_TAcqParam_13H.mChannel[2].i1Range = ui->lineEdit_3_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[3].u2OriginV = ui->lineEdit_4_1->text().toInt();
-    m_TAcqParam_13H.mChannel[3].u2HighV = ui->lineEdit_4_2->text().toInt();
-    m_TAcqParam_13H.mChannel[3].u2Slope = ui->lineEdit_4_3->text().toInt();
+    m_TAcqParam_13H.mChannel[3].i2OriginV = ui->lineEdit_4_1->text().toInt();
+    m_TAcqParam_13H.mChannel[3].i2HighV = ui->lineEdit_4_2->text().toInt();
+    m_TAcqParam_13H.mChannel[3].i2Slope = ui->lineEdit_4_3->text().toInt();
     m_TAcqParam_13H.mChannel[3].i1Range = ui->lineEdit_4_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[4].u2OriginV = ui->lineEdit_5_1->text().toInt();
-    m_TAcqParam_13H.mChannel[4].u2HighV = ui->lineEdit_5_2->text().toInt();
-    m_TAcqParam_13H.mChannel[4].u2Slope = ui->lineEdit_5_3->text().toInt();
+    m_TAcqParam_13H.mChannel[4].i2OriginV = ui->lineEdit_5_1->text().toInt();
+    m_TAcqParam_13H.mChannel[4].i2HighV = ui->lineEdit_5_2->text().toInt();
+    m_TAcqParam_13H.mChannel[4].i2Slope = ui->lineEdit_5_3->text().toInt();
     m_TAcqParam_13H.mChannel[4].i1Range = ui->lineEdit_6_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[5].u2OriginV = ui->lineEdit_6_1->text().toInt();
-    m_TAcqParam_13H.mChannel[5].u2HighV = ui->lineEdit_6_2->text().toInt();
-    m_TAcqParam_13H.mChannel[5].u2Slope = ui->lineEdit_6_3->text().toInt();
+    m_TAcqParam_13H.mChannel[5].i2OriginV = ui->lineEdit_6_1->text().toInt();
+    m_TAcqParam_13H.mChannel[5].i2HighV = ui->lineEdit_6_2->text().toInt();
+    m_TAcqParam_13H.mChannel[5].i2Slope = ui->lineEdit_6_3->text().toInt();
     m_TAcqParam_13H.mChannel[5].i1Range = ui->lineEdit_6_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[6].u2OriginV = ui->lineEdit_7_1->text().toInt();
-    m_TAcqParam_13H.mChannel[6].u2HighV = ui->lineEdit_7_2->text().toInt();
-    m_TAcqParam_13H.mChannel[6].u2Slope = ui->lineEdit_7_3->text().toInt();
+    m_TAcqParam_13H.mChannel[6].i2OriginV = ui->lineEdit_7_1->text().toInt();
+    m_TAcqParam_13H.mChannel[6].i2HighV = ui->lineEdit_7_2->text().toInt();
+    m_TAcqParam_13H.mChannel[6].i2Slope = ui->lineEdit_7_3->text().toInt();
     m_TAcqParam_13H.mChannel[6].i1Range = ui->lineEdit_7_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[7].u2OriginV = ui->lineEdit_8_1->text().toInt();
-    m_TAcqParam_13H.mChannel[7].u2HighV = ui->lineEdit_8_2->text().toInt();
-    m_TAcqParam_13H.mChannel[7].u2Slope = ui->lineEdit_8_3->text().toInt();
+    m_TAcqParam_13H.mChannel[7].i2OriginV = ui->lineEdit_8_1->text().toInt();
+    m_TAcqParam_13H.mChannel[7].i2HighV = ui->lineEdit_8_2->text().toInt();
+    m_TAcqParam_13H.mChannel[7].i2Slope = ui->lineEdit_8_3->text().toInt();
     m_TAcqParam_13H.mChannel[7].i1Range = ui->lineEdit_8_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[8].u2OriginV = ui->lineEdit_9_1->text().toInt();
-    m_TAcqParam_13H.mChannel[8].u2HighV = ui->lineEdit_9_2->text().toInt();
-    m_TAcqParam_13H.mChannel[8].u2Slope = ui->lineEdit_9_3->text().toInt();
+    m_TAcqParam_13H.mChannel[8].i2OriginV = ui->lineEdit_9_1->text().toInt();
+    m_TAcqParam_13H.mChannel[8].i2HighV = ui->lineEdit_9_2->text().toInt();
+    m_TAcqParam_13H.mChannel[8].i2Slope = ui->lineEdit_9_3->text().toInt();
     m_TAcqParam_13H.mChannel[8].i1Range = ui->lineEdit_9_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[9].u2OriginV = ui->lineEdit_10_1->text().toInt();
-    m_TAcqParam_13H.mChannel[9].u2HighV = ui->lineEdit_10_2->text().toInt();
-    m_TAcqParam_13H.mChannel[9].u2Slope = ui->lineEdit_10_3->text().toInt();
+    m_TAcqParam_13H.mChannel[9].i2OriginV = ui->lineEdit_10_1->text().toInt();
+    m_TAcqParam_13H.mChannel[9].i2HighV = ui->lineEdit_10_2->text().toInt();
+    m_TAcqParam_13H.mChannel[9].i2Slope = ui->lineEdit_10_3->text().toInt();
     m_TAcqParam_13H.mChannel[9].i1Range = ui->lineEdit_10_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[10].u2OriginV = ui->lineEdit_11_1->text().toInt();
-    m_TAcqParam_13H.mChannel[10].u2HighV = ui->lineEdit_11_2->text().toInt();
-    m_TAcqParam_13H.mChannel[10].u2Slope = ui->lineEdit_11_3->text().toInt();
+    m_TAcqParam_13H.mChannel[10].i2OriginV = ui->lineEdit_11_1->text().toInt();
+    m_TAcqParam_13H.mChannel[10].i2HighV = ui->lineEdit_11_2->text().toInt();
+    m_TAcqParam_13H.mChannel[10].i2Slope = ui->lineEdit_11_3->text().toInt();
     m_TAcqParam_13H.mChannel[10].i1Range = ui->lineEdit_11_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[11].u2OriginV = ui->lineEdit_12_1->text().toInt();
-    m_TAcqParam_13H.mChannel[11].u2HighV = ui->lineEdit_12_2->text().toInt();
-    m_TAcqParam_13H.mChannel[11].u2Slope = ui->lineEdit_12_3->text().toInt();
+    m_TAcqParam_13H.mChannel[11].i2OriginV = ui->lineEdit_12_1->text().toInt();
+    m_TAcqParam_13H.mChannel[11].i2HighV = ui->lineEdit_12_2->text().toInt();
+    m_TAcqParam_13H.mChannel[11].i2Slope = ui->lineEdit_12_3->text().toInt();
     m_TAcqParam_13H.mChannel[11].i1Range = ui->lineEdit_12_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[12].u2OriginV = ui->lineEdit_13_1->text().toInt();
-    m_TAcqParam_13H.mChannel[12].u2HighV = ui->lineEdit_13_2->text().toInt();
-    m_TAcqParam_13H.mChannel[12].u2Slope = ui->lineEdit_13_3->text().toInt();
+    m_TAcqParam_13H.mChannel[12].i2OriginV = ui->lineEdit_13_1->text().toInt();
+    m_TAcqParam_13H.mChannel[12].i2HighV = ui->lineEdit_13_2->text().toInt();
+    m_TAcqParam_13H.mChannel[12].i2Slope = ui->lineEdit_13_3->text().toInt();
     m_TAcqParam_13H.mChannel[12].i1Range = ui->lineEdit_13_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[13].u2OriginV = ui->lineEdit_14_1->text().toInt();
-    m_TAcqParam_13H.mChannel[13].u2HighV = ui->lineEdit_14_2->text().toInt();
-    m_TAcqParam_13H.mChannel[13].u2Slope = ui->lineEdit_14_3->text().toInt();
+    m_TAcqParam_13H.mChannel[13].i2OriginV = ui->lineEdit_14_1->text().toInt();
+    m_TAcqParam_13H.mChannel[13].i2HighV = ui->lineEdit_14_2->text().toInt();
+    m_TAcqParam_13H.mChannel[13].i2Slope = ui->lineEdit_14_3->text().toInt();
     m_TAcqParam_13H.mChannel[13].i1Range = ui->lineEdit_14_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[14].u2OriginV = ui->lineEdit_15_1->text().toInt();
-    m_TAcqParam_13H.mChannel[14].u2HighV = ui->lineEdit_15_2->text().toInt();
-    m_TAcqParam_13H.mChannel[14].u2Slope = ui->lineEdit_15_3->text().toInt();
+    m_TAcqParam_13H.mChannel[14].i2OriginV = ui->lineEdit_15_1->text().toInt();
+    m_TAcqParam_13H.mChannel[14].i2HighV = ui->lineEdit_15_2->text().toInt();
+    m_TAcqParam_13H.mChannel[14].i2Slope = ui->lineEdit_15_3->text().toInt();
     m_TAcqParam_13H.mChannel[14].i1Range = ui->lineEdit_15_4->text().toInt();
 
-    m_TAcqParam_13H.mChannel[15].u2OriginV = ui->lineEdit_16_1->text().toInt();
-    m_TAcqParam_13H.mChannel[15].u2HighV = ui->lineEdit_16_2->text().toInt();
-    m_TAcqParam_13H.mChannel[15].u2Slope = ui->lineEdit_16_3->text().toInt();
+    m_TAcqParam_13H.mChannel[15].i2OriginV = ui->lineEdit_16_1->text().toInt();
+    m_TAcqParam_13H.mChannel[15].i2HighV = ui->lineEdit_16_2->text().toInt();
+    m_TAcqParam_13H.mChannel[15].i2Slope = ui->lineEdit_16_3->text().toInt();
     m_TAcqParam_13H.mChannel[15].i1Range = ui->lineEdit_16_4->text().toInt();
 
     this->windowTitleChanged("hi");
