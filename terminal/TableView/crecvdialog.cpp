@@ -7,6 +7,8 @@ CRecvDialog::CRecvDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget_33H_1->horizontalHeader()->show();
+    ui->tableWidget_33H_1->verticalHeader()->show();
+    ui->tableWidget_33H_2->horizontalHeader()->show();
     ui->tableWidget_33H_2->verticalHeader()->show();
 }
 

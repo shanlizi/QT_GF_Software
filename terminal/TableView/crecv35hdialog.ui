@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>CRecv35HDialog</class>
  <widget class="QDialog" name="CRecv35HDialog">
@@ -5,13 +6,125 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>791</width>
+    <height>231</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>771</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(207, 220, 224);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QTableWidget" name="tableWidget_35H">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>761</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>70</number>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>通道1</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道2</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道3</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道4</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道5</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道6</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道7</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道8</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道9</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道10</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道11</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道12</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道13</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道14</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道15</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>通道16</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>

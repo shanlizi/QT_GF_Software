@@ -52,6 +52,8 @@
 #include "TableView/fastcmd.h"
 #include "TableView/csenddialog.h"
 #include "TableView/crecvdialog.h"
+#include "TableView/crecv35hdialog.h"
+#include "TableView/crecv34hdialog.h"
 
 #include <QFile>
 
@@ -97,6 +99,9 @@ private:
     FastCmd  *FastCmd_data;
     CSendDialog *pSendDialog;
     CRecvDialog *pRecvDialog;
+    CRecv35HDialog *pRecv35HDialog;
+    CRecv34HDialog *pRecv34HDialog;
+
 
 private:
     Ui::MainWindow *ui;
@@ -115,6 +120,8 @@ public:
     QDockWidget *m_DkWgt_373H;
     QDockWidget *m_SendMsg;
     QDockWidget *m_RecvMsg;
+    QDockWidget *m_Recv35HMsg;
+    QDockWidget *m_Recv34HMsg;
 
 
 };

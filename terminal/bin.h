@@ -78,6 +78,19 @@ typedef struct _tAcqData
     u2 u2RealData[16];
 }T33H;
 
+
+typedef struct _tCheckData
+{
+    u2 u2CheckData[16];
+}T35H;
+
+typedef struct _tMonitorData
+{
+    f4 f4MonitorData[5];
+    i1 i1Hatch;
+    i1 i1LED;
+}T34H;
+
 typedef struct _tCPM
 {
     u1     u1Zero;
@@ -91,6 +104,8 @@ extern T31H   g_T31;
 extern T32H   g_T32;
 extern T36H   g_T36;
 extern T33H   g_T33;
+extern T35H   g_T35;
+extern T34H   g_T34;
 extern u1 m_BuffRecv[MAX_LENTH];
 //extern TGGA Bin_GGA;
 

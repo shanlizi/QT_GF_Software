@@ -16,7 +16,8 @@ SOURCES += \
     TableView/fastcmd.cpp \
     TableView/csenddialog.cpp \
     TableView/crecvdialog.cpp \
-    TableView/crecv35hdialog.cpp
+    TableView/crecv35hdialog.cpp \
+    TableView/crecv34hdialog.cpp
 
 
 HEADERS += \
@@ -28,7 +29,8 @@ HEADERS += \
     TableView/fastcmd.h \
     TableView/csenddialog.h \
     TableView/crecvdialog.h \
-    TableView/crecv35hdialog.h
+    TableView/crecv35hdialog.h \
+    TableView/crecv34hdialog.h
 
 FORMS += \
     mainwindow.ui \
@@ -37,7 +39,8 @@ FORMS += \
     TableView/fastcmd.ui \
     TableView/csenddialog.ui \
     TableView/crecvdialog.ui \
-    TableView/crecv35hdialog.ui
+    TableView/crecv35hdialog.ui \
+    TableView/crecv34hdialog.ui
 
 RESOURCES += \
     terminal.qrc

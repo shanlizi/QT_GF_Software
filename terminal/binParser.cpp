@@ -19,6 +19,8 @@ T7373H g_T7373 = {0};
 T31H   g_T31 = {0};
 T32H   g_T32 = {0};
 T33H   g_T33 = {0};
+T34H   g_T34 = {0};
+T35H   g_T35 = {0};
 T36H   g_T36 = {0};
 static u2 s_u2LenRcv;
 i1 i1ID;
@@ -79,6 +81,10 @@ int BIN_ParserFrame(char Buf)
                     Flag = T32;
                 else if((0 == m_BuffRecv[5])&&(0x21 == m_BuffRecv[4]))
                     Flag = T33;
+                else if((0 == m_BuffRecv[5])&&(0x22 == m_BuffRecv[4]))
+                    Flag = T34;
+                else if((0 == m_BuffRecv[5])&&(0x23 == m_BuffRecv[4]))
+                    Flag = T35;
                 else if((0 == m_BuffRecv[5])&&(0x24 == m_BuffRecv[4]))
                     Flag = T36;
 
@@ -95,6 +101,8 @@ int BIN_ParserFrame(char Buf)
         case T31:
         case T32:
         case T33:
+        case T34:
+        case T35:
         case T36:
             if(g_nRevCnt >= (u2Len+12))  //整帧数据接收完毕
             {

@@ -69,6 +69,8 @@ MainWindow::MainWindow(QWidget *parent) :
     FastCmd_data = new FastCmd(this);
     pSendDialog = new CSendDialog(this);
     pRecvDialog = new CRecvDialog(this);
+    pRecv35HDialog = new CRecv35HDialog(this);
+    pRecv34HDialog = new CRecv34HDialog(this);
 
     p7373H = new C7373H(this);
 
@@ -114,12 +116,24 @@ MainWindow::MainWindow(QWidget *parent) :
     m_RecvMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
     m_RecvMsg->setWidget(pRecvDialog);
 
+    m_Recv35HMsg = new QDockWidget(tr("Recv35HMsg"),this);
+    m_Recv35HMsg->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
+    m_Recv35HMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
+    m_Recv35HMsg->setWidget(pRecv35HDialog);
+
+    m_Recv34HMsg = new QDockWidget(tr("Recv34HMsg"),this);
+    m_Recv34HMsg->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
+    m_Recv34HMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
+    m_Recv34HMsg->setWidget(pRecv34HDialog);
+
 
     m_FastCmd_data->hide();
     m_DkWgt_373H->hide();
 
     this->setCentralWidget(m_SendMsg);
     addDockWidget(Qt::BottomDockWidgetArea, m_RecvMsg);
+    addDockWidget(Qt::RightDockWidgetArea, m_Recv35HMsg);
+    addDockWidget(Qt::RightDockWidgetArea, m_Recv34HMsg);
 
     //将GGA 与 DHV 合并为标签页
     //tabifyDockWidget(m_GGA_data, m_DHV_data);
@@ -136,7 +150,6 @@ MainWindow::~MainWindow()
 }
 void MainWindow::onFastCmd()
 {
-
     m_FastCmd_data->move(this->width()/3,this->height()/3);
     m_FastCmd_data->show();
     m_FastCmd_data->setFloating(1);
@@ -421,6 +434,34 @@ void MainWindow::readData()
            }
            break;
 
+       case 0x22:  //34H
+           memset(&g_T34, 0, sizeof(g_T34));
+           memcpy(&g_T34, &m_BuffRecv[8], sizeof(g_T34));
+           pRecv34HDialog->Update34H(&g_T34);
+           if(1 == i4FlagSave)
+           {
+               outFile.write(pRecv34HDialog->MakeSave(&g_T34));
+           }
+           else if(2 == i4FlagSave)
+           {
+               outFile.close();
+           }
+           break;
+
+       case 0x23:  //35H
+           memset(&g_T35, 0, sizeof(g_T35));
+           memcpy(&g_T35, &m_BuffRecv[8], sizeof(g_T35));
+           pRecv35HDialog->Update35H(&g_T35);
+           if(1 == i4FlagSave)
+           {
+               outFile.write(pRecv35HDialog->MakeSave(&g_T35));
+           }
+           else if(2 == i4FlagSave)
+           {
+               outFile.close();
+           }
+           break;
+
        case 0x24:  //36H
            memset(&g_T36, 0, sizeof(g_T36));
            memcpy(&g_T36, &m_BuffRecv[8], sizeof(g_T36));
@@ -471,7 +512,8 @@ void MainWindow::clear_All()
     pSendDialog->clear_31H();
     pSendDialog->clear_32H();
     pRecvDialog->clear_33H();
-
+    pRecv34HDialog->clear_34H();
+    pRecv35HDialog->clear_35H();
 }
 
 u2 MainWindow::u2GetSum(const char *p, int nLen)
