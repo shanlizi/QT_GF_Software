@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>952</width>
-    <height>380</height>
+    <width>890</width>
+    <height>299</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label_25">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>360</y>
+     <x>20</x>
+     <y>270</y>
      <width>321</width>
      <height>16</height>
     </rect>
@@ -29,8 +29,8 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>230</y>
+     <x>20</x>
+     <y>150</y>
      <width>861</width>
      <height>118</height>
     </rect>
@@ -636,11 +636,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>51</x>
-     <y>190</y>
+     <x>21</x>
+     <y>120</y>
      <width>311</width>
      <height>25</height>
     </rect>
@@ -686,11 +686,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>30</y>
+     <x>20</x>
+     <y>10</y>
      <width>141</width>
      <height>25</height>
     </rect>
@@ -712,12 +712,12 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>30</y>
-     <width>281</width>
+     <x>190</x>
+     <y>10</y>
+     <width>291</width>
      <height>25</height>
     </rect>
    </property>
@@ -769,12 +769,12 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>80</y>
-     <width>281</width>
+     <x>190</x>
+     <y>40</y>
+     <width>291</width>
      <height>25</height>
     </rect>
    </property>
@@ -900,11 +900,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>80</y>
+     <x>20</x>
+     <y>40</y>
      <width>137</width>
      <height>25</height>
     </rect>
@@ -926,12 +926,12 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>130</y>
-     <width>451</width>
+     <x>20</x>
+     <y>70</y>
+     <width>461</width>
      <height>25</height>
     </rect>
    </property>
@@ -974,25 +974,12 @@
   </widget>
   <zorder>layoutWidget</zorder>
   <zorder>layoutWidget</zorder>
-  <zorder>pushButton_model</zorder>
-  <zorder>label_model</zorder>
-  <zorder>comboBox_model</zorder>
-  <zorder>pushButton_setmodel</zorder>
-  <zorder>label</zorder>
-  <zorder>label_2</zorder>
-  <zorder>comboBox_14H_channel</zorder>
-  <zorder>comboBox_14H_LED</zorder>
-  <zorder>pushButton_14H_set</zorder>
-  <zorder>label_32H_12H</zorder>
-  <zorder>label_32H_14H</zorder>
-  <zorder>pushButton_adjust_15H</zorder>
-  <zorder>label_32H_15H</zorder>
-  <zorder>pushButton_version</zorder>
-  <zorder>label_version</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>layoutWidget</zorder>
   <zorder>label_25</zorder>
-  <zorder>label_32H_13H</zorder>
-  <zorder>label_26</zorder>
-  <zorder>label_Type</zorder>
  </widget>
  <resources/>
  <connections/>

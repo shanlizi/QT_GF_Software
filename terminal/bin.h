@@ -71,6 +71,12 @@ typedef struct _tAcqParam
     StrChannel mChannel[16];
 }TAcqParam_13H;
 
+typedef struct _tAcqData
+{
+    u2 u2Time;
+    u2 u2OriginData[18];
+    u2 u2RealData[16];
+}T33H;
 
 typedef struct _tCPM
 {
@@ -84,6 +90,7 @@ extern T7373H g_T7373;
 extern T31H   g_T31;
 extern T32H   g_T32;
 extern T36H   g_T36;
+extern T33H   g_T33;
 extern u1 m_BuffRecv[MAX_LENTH];
 //extern TGGA Bin_GGA;
 

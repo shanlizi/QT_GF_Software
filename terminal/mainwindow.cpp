@@ -68,6 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
     settings = new SettingsDialog;
     FastCmd_data = new FastCmd(this);
     pSendDialog = new CSendDialog(this);
+    pRecvDialog = new CRecvDialog(this);
 
     p7373H = new C7373H(this);
 
@@ -108,12 +109,17 @@ MainWindow::MainWindow(QWidget *parent) :
     m_SendMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
     m_SendMsg->setWidget(pSendDialog);
 
+    m_RecvMsg = new QDockWidget(tr("RecvMsg"),this);
+    m_RecvMsg->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
+    m_RecvMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
+    m_RecvMsg->setWidget(pRecvDialog);
+
 
     m_FastCmd_data->hide();
     m_DkWgt_373H->hide();
 
     this->setCentralWidget(m_SendMsg);
-    //addDockWidget(Qt::BottomDockWidgetArea, m_SendMsg);
+    addDockWidget(Qt::BottomDockWidgetArea, m_RecvMsg);
 
     //将GGA 与 DHV 合并为标签页
     //tabifyDockWidget(m_GGA_data, m_DHV_data);
@@ -401,6 +407,19 @@ void MainWindow::readData()
                outFile.close();
            }
            break;
+       case 0x21:  //33H
+           memset(&g_T33, 0, sizeof(g_T33));
+           memcpy(&g_T33, &m_BuffRecv[8], sizeof(g_T33));
+           pRecvDialog->Update33H(&g_T33);
+           if(1 == i4FlagSave)
+           {
+               outFile.write(pRecvDialog->MakeSave(&g_T33));
+           }
+           else if(2 == i4FlagSave)
+           {
+               outFile.close();
+           }
+           break;
 
        case 0x24:  //36H
            memset(&g_T36, 0, sizeof(g_T36));
@@ -451,6 +470,7 @@ void MainWindow::clear_All()
     p7373H->clear_7373H();
     pSendDialog->clear_31H();
     pSendDialog->clear_32H();
+    pRecvDialog->clear_33H();
 
 }
 

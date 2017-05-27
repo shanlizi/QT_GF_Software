@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CRecvDialog</class>
+ <widget class="QDialog" name="CRecvDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>821</width>
+    <height>440</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>801</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(207, 220, 224);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QTableWidget" name="tableWidget_33H_1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>771</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>70</number>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>1ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>2ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>3ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>4ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>5ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>6ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>7ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>8ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>9ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>10ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>11ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>12ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>13ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>14ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>15ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>16ADC</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget_33H_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>771</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>70</number>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>1ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>2ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>3ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>4ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>5ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>6ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>7ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>8ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>9ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>10ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>11ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>12ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>13ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>14ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>15ADC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>16ADC</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>110</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>采集时刻</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_AcqTime">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>10</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>17ADC</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_17ADC">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>10</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>18ADC</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_18ADC">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
