@@ -52,7 +52,6 @@ background-color: rgb(115, 122, 126);</string>
      <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
-    <addaction name="actionAboutQt"/>
    </widget>
    <addaction name="menuCalls"/>
    <addaction name="menuTools"/>

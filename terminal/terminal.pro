@@ -17,7 +17,9 @@ SOURCES += \
     TableView/csenddialog.cpp \
     TableView/crecvdialog.cpp \
     TableView/crecv35hdialog.cpp \
-    TableView/crecv34hdialog.cpp
+    TableView/crecv34hdialog.cpp \
+    TableView/cgraphdialog.cpp \
+    qcustomplot.cpp
 
 
 HEADERS += \
@@ -30,7 +32,9 @@ HEADERS += \
     TableView/csenddialog.h \
     TableView/crecvdialog.h \
     TableView/crecv35hdialog.h \
-    TableView/crecv34hdialog.h
+    TableView/crecv34hdialog.h \
+    TableView/cgraphdialog.h \
+    qcustomplot.h
 
 FORMS += \
     mainwindow.ui \
@@ -40,7 +44,8 @@ FORMS += \
     TableView/csenddialog.ui \
     TableView/crecvdialog.ui \
     TableView/crecv35hdialog.ui \
-    TableView/crecv34hdialog.ui
+    TableView/crecv34hdialog.ui \
+    TableView/cgraphdialog.ui
 
 RESOURCES += \
     terminal.qrc

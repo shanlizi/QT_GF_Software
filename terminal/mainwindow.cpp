@@ -193,10 +193,10 @@ void MainWindow::closeSerialPort()
 
 void MainWindow::about()
 {
-    QMessageBox::about(this, tr("About Simple Terminal"),
-                       tr("The <b>Simple Terminal</b> example demonstrates how to "
-                          "use the Qt Serial Port module in modern GUI applications "
-                          "using Qt, with a menu bar, toolbars, and a status bar."));
+    QMessageBox::about(this, tr("关于GF_Software"),
+                       tr("        宁海捷仪生物科技有限公司       \t\t \r\n\r\n"
+                          "     Verson V1.0          2017-5-30        "
+                          ));
 }
 
 void MainWindow::saveFile()
