@@ -253,23 +253,6 @@ void MainWindow::saveFile()
 
 void MainWindow::readAll()
 {
-
-    if(FastCmd_data->flagSwitch_C)
-    {
-        serial->write("$CCSPM,C*21\r\n");
-        FastCmd_data->flagSwitch_C = 0;
-    }
-    if(FastCmd_data->flagSwitch_Z)
-    {
-        serial->write("$CCSPM,Z*38\r\n");
-        FastCmd_data->flagSwitch_Z = 0;
-    }
-    if(FastCmd_data->flagCPM)
-    {
-        serial->write("$CCCPM,0,C*2D\r\n");
-        FastCmd_data->flagCPM = 0;
-     }
-
     for(int i=0;i<50;i++)
     {
         if(FastCmd_data->m_pWidgets[i]->flag)
@@ -317,11 +300,12 @@ void MainWindow::readAll()
 
     if(pSendDialog->flag_14H)
     {
+        char i1Check;
         QString str[18] = {"00","01","02","03","04","05","06","07","08","09","0A","0B","0C","0D","0E","0F","10","11"};
         QString strData0 = "24 42 49 4E 0E 00 02 00";
         strData0 += str[(i1)pSendDialog->flag_14H];
         strData0 += str[(pSendDialog->flag_14H>>8)&0xFF];
-        char i1Check = (i1)pSendDialog->flag_14H + (pSendDialog->flag_14H>>8)&0xFF;
+        i1Check = (i1)pSendDialog->flag_14H + (pSendDialog->flag_14H>>8)&0xFF;
         strData0 += str[i1Check];
         strData0 += "0D 0A";
         QByteArray strData = strData0.toLocal8Bit();

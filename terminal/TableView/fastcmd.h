@@ -38,24 +38,17 @@ private:
 public:
 
     QTabWidget  *m_pTab;
-    CmdWidgets *m_pWidgets[50];
+    CmdWidgets *m_pWidgets[10];
     QByteArray GetData(int i);
 
     void connectWidgets();
     void saveSettings();
     void readSettings();
-    int flagSwitch_C = 0;
-    int flagSwitch_Z = 0;
-    int flagCPM = 0;
 
-    void UpdateCPM(const TCPM *pCPM);
     void clear_CPM();
 
 private slots:
     void on_button(int i);
-    void on_Btn_Switch_Z_clicked();
-    void on_Btn_Switch_C_clicked();
-    void on_Btn_CPM_clicked();
     void on_pushButton_CheckSum_clicked();
 };
 

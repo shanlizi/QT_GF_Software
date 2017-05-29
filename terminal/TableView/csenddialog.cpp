@@ -89,7 +89,85 @@ CSendDialog::CSendDialog(QWidget *parent) :
     ui->lineEdit_14_3->setValidator(validator2);
     ui->lineEdit_14_4->setValidator(validator3);
 
+    ui->lineEdit_15_1->setValidator(validator1);ui->lineEdit_1_1->setValidator(validator1);
+    ui->lineEdit_1_2->setValidator(validator1);
+    ui->lineEdit_1_3->setValidator(validator2);
+    ui->lineEdit_1_4->setValidator(validator3);
+
+    ui->lineEdit_2_1->setValidator(validator1);
+    ui->lineEdit_2_2->setValidator(validator1);
+    ui->lineEdit_2_3->setValidator(validator2);
+    ui->lineEdit_2_4->setValidator(validator3);
+
+    ui->lineEdit_3_1->setValidator(validator1);
+    ui->lineEdit_3_2->setValidator(validator1);
+    ui->lineEdit_3_3->setValidator(validator2);
+    ui->lineEdit_3_4->setValidator(validator3);
+
+    ui->lineEdit_4_1->setValidator(validator1);
+    ui->lineEdit_4_2->setValidator(validator1);
+    ui->lineEdit_4_3->setValidator(validator2);
+    ui->lineEdit_4_4->setValidator(validator3);
+
+    ui->lineEdit_5_1->setValidator(validator1);
+    ui->lineEdit_5_2->setValidator(validator1);
+    ui->lineEdit_5_3->setValidator(validator2);
+    ui->lineEdit_6_4->setValidator(validator3);
+
+    ui->lineEdit_6_1->setValidator(validator1);
+    ui->lineEdit_6_2->setValidator(validator1);
+    ui->lineEdit_6_3->setValidator(validator2);
+    ui->lineEdit_6_4->setValidator(validator3);
+
+    ui->lineEdit_7_1->setValidator(validator1);
+    ui->lineEdit_7_2->setValidator(validator1);
+    ui->lineEdit_7_3->setValidator(validator2);
+    ui->lineEdit_7_4->setValidator(validator3);
+
+    ui->lineEdit_8_1->setValidator(validator1);
+    ui->lineEdit_8_2->setValidator(validator1);
+    ui->lineEdit_8_3->setValidator(validator2);
+    ui->lineEdit_8_4->setValidator(validator3);
+
+    ui->lineEdit_9_1->setValidator(validator1);
+    ui->lineEdit_9_2->setValidator(validator1);
+    ui->lineEdit_9_3->setValidator(validator2);
+    ui->lineEdit_9_4->setValidator(validator3);
+
+    ui->lineEdit_10_1->setValidator(validator1);
+    ui->lineEdit_10_2->setValidator(validator1);
+    ui->lineEdit_10_3->setValidator(validator2);
+    ui->lineEdit_10_4->setValidator(validator3);
+
+    ui->lineEdit_11_1->setValidator(validator1);
+    ui->lineEdit_11_2->setValidator(validator1);
+    ui->lineEdit_11_3->setValidator(validator2);
+    ui->lineEdit_11_4->setValidator(validator3);
+
+    ui->lineEdit_12_1->setValidator(validator1);
+    ui->lineEdit_12_2->setValidator(validator1);
+    ui->lineEdit_12_3->setValidator(validator2);
+    ui->lineEdit_12_4->setValidator(validator3);
+
+    ui->lineEdit_13_1->setValidator(validator1);
+    ui->lineEdit_13_2->setValidator(validator1);
+    ui->lineEdit_13_3->setValidator(validator2);
+    ui->lineEdit_13_4->setValidator(validator3);
+
+    ui->lineEdit_14_1->setValidator(validator1);
+    ui->lineEdit_14_2->setValidator(validator1);
+    ui->lineEdit_14_3->setValidator(validator2);
+    ui->lineEdit_14_4->setValidator(validator3);
+
     ui->lineEdit_15_1->setValidator(validator1);
+    ui->lineEdit_15_2->setValidator(validator1);
+    ui->lineEdit_15_3->setValidator(validator2);
+    ui->lineEdit_15_4->setValidator(validator3);
+
+    ui->lineEdit_16_1->setValidator(validator1);
+    ui->lineEdit_16_2->setValidator(validator1);
+    ui->lineEdit_16_3->setValidator(validator2);
+    ui->lineEdit_16_4->setValidator(validator3);
     ui->lineEdit_15_2->setValidator(validator1);
     ui->lineEdit_15_3->setValidator(validator2);
     ui->lineEdit_15_4->setValidator(validator3);
@@ -105,6 +183,176 @@ CSendDialog::CSendDialog(QWidget *parent) :
 CSendDialog::~CSendDialog()
 {
     delete ui;
+}
+
+void CSendDialog::readSettings()
+{
+    QSettings settings("GF_Data0","Send_Data");
+
+    ui->lineEdit_1_1->setText(settings.value(QString("Edit%1").arg(1)).toString());
+    ui->lineEdit_1_2->setText(settings.value(QString("Edit%2").arg(1)).toString());
+    ui->lineEdit_1_3->setText(settings.value(QString("Edit%3").arg(1)).toString());
+    ui->lineEdit_1_4->setText(settings.value(QString("Edit%4").arg(1)).toString());
+
+    ui->lineEdit_2_1->setText(settings.value(QString("Edit%5").arg(1)).toString());
+    ui->lineEdit_2_2->setText(settings.value(QString("Edit%6").arg(1)).toString());
+    ui->lineEdit_2_3->setText(settings.value(QString("Edit%7").arg(1)).toString());
+    ui->lineEdit_2_4->setText(settings.value(QString("Edit%8").arg(1)).toString());
+
+    ui->lineEdit_3_1->setText(settings.value(QString("Edit%9").arg(1)).toString());
+    ui->lineEdit_3_2->setText(settings.value(QString("Edit%10").arg(1)).toString());
+    ui->lineEdit_3_3->setText(settings.value(QString("Edit%11").arg(1)).toString());
+    ui->lineEdit_3_4->setText(settings.value(QString("Edit%12").arg(1)).toString());
+
+    ui->lineEdit_4_1->setText(settings.value(QString("Edit%13").arg(1)).toString());
+    ui->lineEdit_4_2->setText(settings.value(QString("Edit%14").arg(1)).toString());
+    ui->lineEdit_4_3->setText(settings.value(QString("Edit%15").arg(1)).toString());
+    ui->lineEdit_4_4->setText(settings.value(QString("Edit%16").arg(1)).toString());
+
+    ui->lineEdit_5_1->setText(settings.value(QString("Edit%17").arg(1)).toString());
+    ui->lineEdit_5_2->setText(settings.value(QString("Edit%18").arg(1)).toString());
+    ui->lineEdit_5_3->setText(settings.value(QString("Edit%19").arg(1)).toString());
+    ui->lineEdit_6_4->setText(settings.value(QString("Edit%20").arg(1)).toString());
+
+    ui->lineEdit_6_1->setText(settings.value(QString("Edit%21").arg(1)).toString());
+    ui->lineEdit_6_2->setText(settings.value(QString("Edit%22").arg(1)).toString());
+    ui->lineEdit_6_3->setText(settings.value(QString("Edit%23").arg(1)).toString());
+    ui->lineEdit_6_4->setText(settings.value(QString("Edit%24").arg(1 )).toString());
+
+    ui->lineEdit_7_1->setText(settings.value(QString("Edit%25").arg(1)).toString());
+    ui->lineEdit_7_2->setText(settings.value(QString("Edit%26").arg(1)).toString());
+    ui->lineEdit_7_3->setText(settings.value(QString("Edit%27").arg(1)).toString());
+    ui->lineEdit_7_4->setText(settings.value(QString("Edit%28").arg(1)).toString());
+
+    ui->lineEdit_8_1->setText(settings.value(QString("Edit%29").arg(1)).toString());
+    ui->lineEdit_8_2->setText(settings.value(QString("Edit%30").arg(1)).toString());
+    ui->lineEdit_8_3->setText(settings.value(QString("Edit%31").arg(1)).toString());
+    ui->lineEdit_8_4->setText(settings.value(QString("Edit%32").arg(1)).toString());
+
+    ui->lineEdit_9_1->setText(settings.value(QString("Edit%33").arg(1)).toString());
+    ui->lineEdit_9_2->setText(settings.value(QString("Edit%34").arg(1)).toString());
+    ui->lineEdit_9_3->setText(settings.value(QString("Edit%35").arg(1)).toString());
+    ui->lineEdit_9_4->setText(settings.value(QString("Edit%36").arg(1)).toString());
+
+    ui->lineEdit_10_1->setText(settings.value(QString("Edit%37").arg(1)).toString());
+    ui->lineEdit_10_2->setText(settings.value(QString("Edit%38").arg(1)).toString());
+    ui->lineEdit_10_3->setText(settings.value(QString("Edit%39").arg(1)).toString());
+    ui->lineEdit_10_4->setText(settings.value(QString("Edit%40").arg(1)).toString());
+
+    ui->lineEdit_11_1->setText(settings.value(QString("Edit%41").arg(1)).toString());
+    ui->lineEdit_11_2->setText(settings.value(QString("Edit%42").arg(1)).toString());
+    ui->lineEdit_11_3->setText(settings.value(QString("Edit%43").arg(1)).toString());
+    ui->lineEdit_11_4->setText(settings.value(QString("Edit%44").arg(1)).toString());
+
+    ui->lineEdit_12_1->setText(settings.value(QString("Edit%45").arg(1)).toString());
+    ui->lineEdit_12_2->setText(settings.value(QString("Edit%46").arg(1)).toString());
+    ui->lineEdit_12_3->setText(settings.value(QString("Edit%47").arg(1)).toString());
+    ui->lineEdit_12_4->setText(settings.value(QString("Edit%48").arg(1)).toString());
+
+    ui->lineEdit_13_1->setText(settings.value(QString("Edit%49").arg(1)).toString());
+    ui->lineEdit_13_2->setText(settings.value(QString("Edit%50").arg(1)).toString());
+    ui->lineEdit_13_3->setText(settings.value(QString("Edit%51").arg(1)).toString());
+    ui->lineEdit_13_4->setText(settings.value(QString("Edit%52").arg(1)).toString());
+
+    ui->lineEdit_14_1->setText(settings.value(QString("Edit%53").arg(1)).toString());
+    ui->lineEdit_14_2->setText(settings.value(QString("Edit%54").arg(1)).toString());
+    ui->lineEdit_14_3->setText(settings.value(QString("Edit%55").arg(1)).toString());
+    ui->lineEdit_14_4->setText(settings.value(QString("Edit%56").arg(1)).toString());
+
+    ui->lineEdit_15_1->setText(settings.value(QString("Edit%57").arg(1)).toString());
+    ui->lineEdit_15_2->setText(settings.value(QString("Edit%58").arg(1)).toString());
+    ui->lineEdit_15_3->setText(settings.value(QString("Edit%59").arg(1)).toString());
+    ui->lineEdit_15_4->setText(settings.value(QString("Edit%60").arg(1)).toString());
+
+    ui->lineEdit_16_1->setText(settings.value(QString("Edit%61").arg(1)).toString());
+    ui->lineEdit_16_2->setText(settings.value(QString("Edit%62").arg(1)).toString());
+    ui->lineEdit_16_3->setText(settings.value(QString("Edit%63").arg(1)).toString());
+    ui->lineEdit_16_4->setText(settings.value(QString("Edit%64").arg(1)).toString());
+}
+
+void CSendDialog::saveSettings()
+{
+    QSettings settings("GF_Data0","Send_Data");
+
+    settings.setValue(QString("Edit%1").arg(1),ui->lineEdit_1_1->text());
+    settings.setValue(QString("Edit%2").arg(1),ui->lineEdit_1_2->text());
+    settings.setValue(QString("Edit%3").arg(1),ui->lineEdit_1_3->text());
+    settings.setValue(QString("Edit%4").arg(1),ui->lineEdit_1_4->text());
+
+    settings.setValue(QString("Edit%5").arg(1),ui->lineEdit_2_1->text());
+    settings.setValue(QString("Edit%6").arg(1),ui->lineEdit_2_2->text());
+    settings.setValue(QString("Edit%7").arg(1),ui->lineEdit_2_3->text());
+    settings.setValue(QString("Edit%8").arg(1),ui->lineEdit_2_4->text());
+
+    settings.setValue(QString("Edit%9").arg(1),ui->lineEdit_3_1->text());
+    settings.setValue(QString("Edit%10").arg(1),ui->lineEdit_3_2->text());
+    settings.setValue(QString("Edit%11").arg(1),ui->lineEdit_3_3->text());
+    settings.setValue(QString("Edit%12").arg(1),ui->lineEdit_3_4->text());
+
+    settings.setValue(QString("Edit%13").arg(1),ui->lineEdit_4_1->text());
+    settings.setValue(QString("Edit%14").arg(1),ui->lineEdit_4_2->text());
+    settings.setValue(QString("Edit%15").arg(1),ui->lineEdit_4_3->text());
+    settings.setValue(QString("Edit%16").arg(1),ui->lineEdit_4_4->text());
+
+    settings.setValue(QString("Edit%17").arg(1),ui->lineEdit_5_1->text());
+    settings.setValue(QString("Edit%18").arg(1),ui->lineEdit_5_2->text());
+    settings.setValue(QString("Edit%19").arg(1),ui->lineEdit_5_3->text());
+    settings.setValue(QString("Edit%20").arg(1),ui->lineEdit_6_4->text());
+
+    settings.setValue(QString("Edit%21").arg(1),ui->lineEdit_6_1->text());
+    settings.setValue(QString("Edit%22").arg(1),ui->lineEdit_6_2->text());
+    settings.setValue(QString("Edit%23").arg(1),ui->lineEdit_6_3->text());
+    settings.setValue(QString("Edit%24").arg(1),ui->lineEdit_6_4->text());
+
+    settings.setValue(QString("Edit%25").arg(1),ui->lineEdit_7_1->text());
+    settings.setValue(QString("Edit%26").arg(1),ui->lineEdit_7_2->text());
+    settings.setValue(QString("Edit%27").arg(1),ui->lineEdit_7_3->text());
+    settings.setValue(QString("Edit%28").arg(1),ui->lineEdit_7_4->text());
+
+    settings.setValue(QString("Edit%29").arg(1),ui->lineEdit_8_1->text());
+    settings.setValue(QString("Edit%30").arg(1),ui->lineEdit_8_2->text());
+    settings.setValue(QString("Edit%31").arg(1),ui->lineEdit_8_3->text());
+    settings.setValue(QString("Edit%32").arg(1),ui->lineEdit_8_4->text());
+
+    settings.setValue(QString("Edit%33").arg(1),ui->lineEdit_9_1->text());
+    settings.setValue(QString("Edit%34").arg(1),ui->lineEdit_9_2->text());
+    settings.setValue(QString("Edit%35").arg(1),ui->lineEdit_9_3->text());
+    settings.setValue(QString("Edit%36").arg(1),ui->lineEdit_9_4->text());
+
+    settings.setValue(QString("Edit%37").arg(1),ui->lineEdit_10_1->text());
+    settings.setValue(QString("Edit%38").arg(1),ui->lineEdit_10_2->text());
+    settings.setValue(QString("Edit%39").arg(1),ui->lineEdit_10_3->text());
+    settings.setValue(QString("Edit%40").arg(1),ui->lineEdit_10_4->text());
+
+    settings.setValue(QString("Edit%41").arg(1),ui->lineEdit_11_1->text());
+    settings.setValue(QString("Edit%42").arg(1),ui->lineEdit_11_2->text());
+    settings.setValue(QString("Edit%43").arg(1),ui->lineEdit_11_3->text());
+    settings.setValue(QString("Edit%44").arg(1),ui->lineEdit_11_4->text());
+
+    settings.setValue(QString("Edit%45").arg(1),ui->lineEdit_12_1->text());
+    settings.setValue(QString("Edit%46").arg(1),ui->lineEdit_12_2->text());
+    settings.setValue(QString("Edit%47").arg(1),ui->lineEdit_12_3->text());
+    settings.setValue(QString("Edit%48").arg(1),ui->lineEdit_12_4->text());
+
+    settings.setValue(QString("Edit%49").arg(1),ui->lineEdit_13_1->text());
+    settings.setValue(QString("Edit%50").arg(1),ui->lineEdit_13_2->text());
+    settings.setValue(QString("Edit%51").arg(1),ui->lineEdit_13_3->text());
+    settings.setValue(QString("Edit%52").arg(1),ui->lineEdit_13_4->text());
+
+    settings.setValue(QString("Edit%53").arg(1),ui->lineEdit_14_1->text());
+    settings.setValue(QString("Edit%54").arg(1),ui->lineEdit_14_2->text());
+    settings.setValue(QString("Edit%55").arg(1),ui->lineEdit_14_3->text());
+    settings.setValue(QString("Edit%56").arg(1),ui->lineEdit_14_4->text());
+
+    settings.setValue(QString("Edit%57").arg(1),ui->lineEdit_15_1->text());
+    settings.setValue(QString("Edit%58").arg(1),ui->lineEdit_15_2->text());
+    settings.setValue(QString("Edit%59").arg(1),ui->lineEdit_15_3->text());
+    settings.setValue(QString("Edit%60").arg(1),ui->lineEdit_15_4->text());
+
+    settings.setValue(QString("Edit%61").arg(1),ui->lineEdit_16_1->text());
+    settings.setValue(QString("Edit%62").arg(1),ui->lineEdit_16_2->text());
+    settings.setValue(QString("Edit%63").arg(1),ui->lineEdit_16_3->text());
+    settings.setValue(QString("Edit%64").arg(1),ui->lineEdit_16_4->text());
 }
 
 void CSendDialog::on_pushButton_model_clicked()

@@ -13,7 +13,8 @@ FastCmd::FastCmd(QWidget *parent) :
     connectWidgets();
     readSettings();
 
-    m_pWidgets[40]->pEdit->setText("$CCRMO,GSA,2,1*");
+   /*
+    * m_pWidgets[40]->pEdit->setText("$CCRMO,GSA,2,1*");
     m_pWidgets[41]->pEdit->setText("$CCRMO,DWR,2,1*");
     m_pWidgets[42]->pEdit->setText("$CCRMO,BSI,2,1*");
     m_pWidgets[43]->pEdit->setText("$CCRMO,FKI,2,1*");
@@ -23,6 +24,7 @@ FastCmd::FastCmd(QWidget *parent) :
     m_pWidgets[47]->pEdit->setText("$CCRMO,ZDA,2,1*");
     m_pWidgets[48]->pEdit->setText("$CCRMO,GSI,2,1*");
     m_pWidgets[49]->pEdit->setText("$CCRMO,GGA,3,1*");
+    */
 }
 
 FastCmd::~FastCmd()
@@ -35,7 +37,7 @@ void FastCmd::connectWidgets()
 {
     QSignalMapper *pMapper = new QSignalMapper(this);
     connect(pMapper,SIGNAL(mapped(int)),this,SLOT(on_button(int)));
-    for(int i=0;i<50;i++)
+    for(int i=0;i<10;i++)
     {
        m_pWidgets[i] = new CmdWidgets;
        m_pWidgets[i]->pButton = new QPushButton;
@@ -53,7 +55,7 @@ void FastCmd::connectWidgets()
        pMapper->setMapping(m_pWidgets[i]->pButton,i);
     }
 
-    for(int j=0;j<5;j++)
+    for(int j=0;j<1;j++)
     {
         QVBoxLayout *layoutH = new QVBoxLayout;
         for(int i=0;i<10;i++)
@@ -105,8 +107,8 @@ QByteArray FastCmd::GetData(int i)
 
 void FastCmd::readSettings()
 {
-    QSettings settings("HWA_QXJ","QXJ_Qt");
-    for(int i=0;i<50;i++)
+    QSettings settings("GF_Data1","CMD_Data");
+    for(int i=0;i<10;i++)
     {
         m_pWidgets[i]->pCheckBox->setChecked(settings.value(QString("Check%1").arg(i)).toBool());
         m_pWidgets[i]->pEdit->setText(settings.value(QString("Cmd%1").arg(i)).toString());
@@ -115,79 +117,30 @@ void FastCmd::readSettings()
 
 void FastCmd::saveSettings()
 {
-    QSettings settings("HWA_QXJ","QXJ_Qt");
-    for(int i=0;i<50;i++)
+    QSettings settings("GF_Data1","CMD_Data");
+    for(int i=0;i<10;i++)
     {
         settings.setValue(QString("Check%1").arg(i),m_pWidgets[i]->pCheckBox->isChecked());
         settings.setValue(QString("Cmd%1").arg(i),m_pWidgets[i]->pEdit->text());
     }
 }
 
-void FastCmd::on_Btn_Switch_Z_clicked()
-{
-    flagSwitch_Z = 1;
-    this->windowTitleChanged("hi");
-}
-
-void FastCmd::on_Btn_Switch_C_clicked()
-{
-    flagSwitch_C = 1;
-    this->windowTitleChanged("hi");
-}
-
-void FastCmd::on_Btn_CPM_clicked()
-{
-    flagCPM = 1;
-    this->windowTitleChanged("hi");
-}
-
-void FastCmd::UpdateCPM(const TCPM *pCPM)
-{
-    ui->label_CPM_out->setText(QString("%1").arg(" "));
-    QString strFlag;
-    if('C' == pCPM->i1Flag_CZ)
-    {
-        strFlag = "测试码";
-    }
-    else if('Z' == pCPM->i1Flag_CZ)
-    {
-        strFlag = "正式码";
-    }
-    else
-    {
-        strFlag = "错误";
-    }
-    ui->label_CPM_out->setText(QString("%1").arg(strFlag));
-}
 void FastCmd::clear_CPM()
 {
-    ui->label_CPM_out->clear();
+   // ui->label_CPM_out->clear();
 }
 
 void FastCmd::on_pushButton_CheckSum_clicked()
 {
-    char CheckSum = 0;
     QString strTemp;
-    QByteArray byte;
     QString strdata = ui->textEdit_data->toPlainText();
 
-    if(ui->checkBox_Hex->isChecked())
+    strTemp = CalcXorCheckSumHex(strdata);
+    if(1 == strTemp.length())
     {
-        strTemp = CalcXorCheckSumHex(strdata);
-        if(1 == strTemp.length())
-            strTemp.insert(0,"0");
+        strTemp.insert(0,"0");
     }
-    else
-    {
-        for(int i=0; i<strdata.length();i++)
-        {
-            CheckSum ^= strdata.at(i).toLatin1();
-        }
 
-        QTextCodec *codec = QTextCodec::codecForName("GBK");
-        byte.append(CheckSum);
-        strTemp = codec->toUnicode(byte.toHex());
-    }
     strTemp.insert(0,"0x");
     ui->label_CheckSum->setText(QString("%1").arg(strTemp));
 }
@@ -242,8 +195,8 @@ QString FastCmd::CalcXorCheckSumHex(QString m_StrData)
                      return "";
                 sum += GetValue(Value);
 
-                checkSum ^= sum;  //--
-                sum = 0;  //--
+               // checkSum ^= sum;  //--
+               // sum = 0;  //--
 
                 flag++;
                 if (1 == flag_num)
@@ -263,7 +216,7 @@ QString FastCmd::CalcXorCheckSumHex(QString m_StrData)
         QMessageBox::warning(this, tr("Error"),tr("数据不规范!如十六进制“F”,应写为“0F”!"));
         return "";
     }
-    m_strSumHex =  itoa(checkSum, strHex, 16);
+    m_strSumHex =  itoa(sum, strHex, 16);
     return m_strSumHex;
 
 }
