@@ -2,6 +2,7 @@
 #define CGRAPHDIALOG_H
 
 #include <QDialog>
+#include "qcustomplot.h"
 
 namespace Ui {
 class CGraphDialog;
@@ -17,6 +18,8 @@ public:
 
 private:
     Ui::CGraphDialog *ui;
+public:
+    void DrawGraph();
 };
 
 #endif // CGRAPHDIALOG_H

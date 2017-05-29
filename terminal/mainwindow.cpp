@@ -71,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pRecvDialog = new CRecvDialog(this);
     pRecv35HDialog = new CRecv35HDialog(this);
     pRecv34HDialog = new CRecv34HDialog(this);
+    p_GraphDialog = new CGraphDialog(this);
 
     p7373H = new C7373H(this);
 
@@ -126,18 +127,24 @@ MainWindow::MainWindow(QWidget *parent) :
     m_Recv34HMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
     m_Recv34HMsg->setWidget(pRecv34HDialog);
 
+    m_Graph = new QDockWidget(tr("Graph"),this);
+    m_Graph->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
+    m_Graph->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
+    m_Graph->setWidget(p_GraphDialog);
+
 
     m_FastCmd_data->hide();
     m_DkWgt_373H->hide();
 
     this->setCentralWidget(m_SendMsg);
+    addDockWidget(Qt::BottomDockWidgetArea, m_Graph);
     addDockWidget(Qt::BottomDockWidgetArea, m_RecvMsg);
     addDockWidget(Qt::RightDockWidgetArea, m_Recv35HMsg);
     addDockWidget(Qt::RightDockWidgetArea, m_Recv34HMsg);
 
-    //将GGA 与 DHV 合并为标签页
-    //tabifyDockWidget(m_GGA_data, m_DHV_data);
 
+    //将GGA 与 DHV 合并为标签页
+    tabifyDockWidget(m_Recv35HMsg, m_Recv34HMsg);
 
 
 }
@@ -270,6 +277,7 @@ void MainWindow::readAll()
         strData = QByteArray::fromHex(strData);
         serial->write(strData);
         pSendDialog->flag_11H = 0;
+        p_GraphDialog->DrawGraph();
     }
     if(pSendDialog->flag_12H)
     {
@@ -498,6 +506,7 @@ void MainWindow::clear_All()
     pRecvDialog->clear_33H();
     pRecv34HDialog->clear_34H();
     pRecv35HDialog->clear_35H();
+    pSendDialog->clear_36H();
 }
 
 u2 MainWindow::u2GetSum(const char *p, int nLen)

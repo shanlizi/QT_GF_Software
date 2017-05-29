@@ -54,6 +54,7 @@
 #include "TableView/crecvdialog.h"
 #include "TableView/crecv35hdialog.h"
 #include "TableView/crecv34hdialog.h"
+#include "TableView/cgraphdialog.h"
 
 #include <QFile>
 
@@ -101,6 +102,8 @@ private:
     CRecvDialog *pRecvDialog;
     CRecv35HDialog *pRecv35HDialog;
     CRecv34HDialog *pRecv34HDialog;
+    CGraphDialog *p_GraphDialog;
+
 
 
 private:
@@ -122,6 +125,7 @@ public:
     QDockWidget *m_RecvMsg;
     QDockWidget *m_Recv35HMsg;
     QDockWidget *m_Recv34HMsg;
+    QDockWidget *m_Graph;
 
 
 };
