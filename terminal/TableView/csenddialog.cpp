@@ -89,76 +89,6 @@ CSendDialog::CSendDialog(QWidget *parent) :
     ui->lineEdit_14_3->setValidator(validator2);
     ui->lineEdit_14_4->setValidator(validator3);
 
-    ui->lineEdit_15_1->setValidator(validator1);ui->lineEdit_1_1->setValidator(validator1);
-    ui->lineEdit_1_2->setValidator(validator1);
-    ui->lineEdit_1_3->setValidator(validator2);
-    ui->lineEdit_1_4->setValidator(validator3);
-
-    ui->lineEdit_2_1->setValidator(validator1);
-    ui->lineEdit_2_2->setValidator(validator1);
-    ui->lineEdit_2_3->setValidator(validator2);
-    ui->lineEdit_2_4->setValidator(validator3);
-
-    ui->lineEdit_3_1->setValidator(validator1);
-    ui->lineEdit_3_2->setValidator(validator1);
-    ui->lineEdit_3_3->setValidator(validator2);
-    ui->lineEdit_3_4->setValidator(validator3);
-
-    ui->lineEdit_4_1->setValidator(validator1);
-    ui->lineEdit_4_2->setValidator(validator1);
-    ui->lineEdit_4_3->setValidator(validator2);
-    ui->lineEdit_4_4->setValidator(validator3);
-
-    ui->lineEdit_5_1->setValidator(validator1);
-    ui->lineEdit_5_2->setValidator(validator1);
-    ui->lineEdit_5_3->setValidator(validator2);
-    ui->lineEdit_6_4->setValidator(validator3);
-
-    ui->lineEdit_6_1->setValidator(validator1);
-    ui->lineEdit_6_2->setValidator(validator1);
-    ui->lineEdit_6_3->setValidator(validator2);
-    ui->lineEdit_6_4->setValidator(validator3);
-
-    ui->lineEdit_7_1->setValidator(validator1);
-    ui->lineEdit_7_2->setValidator(validator1);
-    ui->lineEdit_7_3->setValidator(validator2);
-    ui->lineEdit_7_4->setValidator(validator3);
-
-    ui->lineEdit_8_1->setValidator(validator1);
-    ui->lineEdit_8_2->setValidator(validator1);
-    ui->lineEdit_8_3->setValidator(validator2);
-    ui->lineEdit_8_4->setValidator(validator3);
-
-    ui->lineEdit_9_1->setValidator(validator1);
-    ui->lineEdit_9_2->setValidator(validator1);
-    ui->lineEdit_9_3->setValidator(validator2);
-    ui->lineEdit_9_4->setValidator(validator3);
-
-    ui->lineEdit_10_1->setValidator(validator1);
-    ui->lineEdit_10_2->setValidator(validator1);
-    ui->lineEdit_10_3->setValidator(validator2);
-    ui->lineEdit_10_4->setValidator(validator3);
-
-    ui->lineEdit_11_1->setValidator(validator1);
-    ui->lineEdit_11_2->setValidator(validator1);
-    ui->lineEdit_11_3->setValidator(validator2);
-    ui->lineEdit_11_4->setValidator(validator3);
-
-    ui->lineEdit_12_1->setValidator(validator1);
-    ui->lineEdit_12_2->setValidator(validator1);
-    ui->lineEdit_12_3->setValidator(validator2);
-    ui->lineEdit_12_4->setValidator(validator3);
-
-    ui->lineEdit_13_1->setValidator(validator1);
-    ui->lineEdit_13_2->setValidator(validator1);
-    ui->lineEdit_13_3->setValidator(validator2);
-    ui->lineEdit_13_4->setValidator(validator3);
-
-    ui->lineEdit_14_1->setValidator(validator1);
-    ui->lineEdit_14_2->setValidator(validator1);
-    ui->lineEdit_14_3->setValidator(validator2);
-    ui->lineEdit_14_4->setValidator(validator3);
-
     ui->lineEdit_15_1->setValidator(validator1);
     ui->lineEdit_15_2->setValidator(validator1);
     ui->lineEdit_15_3->setValidator(validator2);
@@ -177,11 +107,12 @@ CSendDialog::CSendDialog(QWidget *parent) :
     ui->lineEdit_16_3->setValidator(validator2);
     ui->lineEdit_16_4->setValidator(validator3);
 
-
+    readSettings();
 }
 
 CSendDialog::~CSendDialog()
 {
+    saveSettings();
     delete ui;
 }
 

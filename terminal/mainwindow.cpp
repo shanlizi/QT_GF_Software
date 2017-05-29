@@ -253,7 +253,7 @@ void MainWindow::saveFile()
 
 void MainWindow::readAll()
 {
-    for(int i=0;i<50;i++)
+    for(int i=0;i<10;i++)
     {
         if(FastCmd_data->m_pWidgets[i]->flag)
         {
