@@ -72,6 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pRecv35HDialog = new CRecv35HDialog(this);
     pRecv34HDialog = new CRecv34HDialog(this);
     p_GraphDialog = new CGraphDialog(this);
+    this->setWindowTitle("GF_Software");
 
     p7373H = new C7373H(this);
 
@@ -113,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_SendMsg->setWidget(pSendDialog);
 
     m_RecvMsg = new QDockWidget(tr("RecvMsg"),this);
-    m_RecvMsg->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
+    m_RecvMsg->setFeatures(QDockWidget::NoDockWidgetFeatures);     //全部特性
     m_RecvMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
     m_RecvMsg->setWidget(pRecvDialog);
 
@@ -205,7 +206,7 @@ void MainWindow::about()
 {
     QMessageBox::about(this, tr("关于GF_Software"),
                        tr("        XXXXXX科技有限公司       \t\t \r\n\r\n"
-                          "     Verson V1.0          2017-5-30        "
+                          "     Verson V1.0          2017-5-31        "
                           ));
 }
 

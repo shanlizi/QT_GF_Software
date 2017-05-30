@@ -84,11 +84,6 @@ background-color: rgb(115, 122, 126);</string>
     <string>Alt+A</string>
    </property>
   </action>
-  <action name="actionAboutQt">
-   <property name="text">
-    <string>About Qt</string>
-   </property>
-  </action>
   <action name="actionConnect">
    <property name="icon">
     <iconset resource="terminal.qrc">
@@ -186,6 +181,11 @@ background-color: rgb(115, 122, 126);</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>About Qt</string>
    </property>
   </action>
  </widget>
