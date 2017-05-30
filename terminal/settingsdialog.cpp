@@ -190,7 +190,7 @@ void SettingsDialog::updateSettings()
 
 void SettingsDialog::readSettings()
 {
-    QSettings settings("HongDu660");
+    QSettings settings("GF_Data2");
     ui->serialPortInfoListBox->setCurrentIndex(settings.value(QString("%1").arg(1)).toInt());
     ui->baudRateBox->setCurrentIndex(settings.value(QString("%1").arg(2)).toInt());
     ui->dataBitsBox->setCurrentIndex(settings.value(QString("%1").arg(3)).toInt());
@@ -202,7 +202,7 @@ void SettingsDialog::readSettings()
 
 void SettingsDialog::saveSettings()
 {
-    QSettings settings("HongDu660");
+    QSettings settings("GF_Data2");
     settings.setValue(QString("%1").arg(1),ui->serialPortInfoListBox->currentIndex());
     settings.setValue(QString("%1").arg(2),ui->baudRateBox->currentIndex());
     settings.setValue(QString("%1").arg(3),ui->dataBitsBox->currentIndex());

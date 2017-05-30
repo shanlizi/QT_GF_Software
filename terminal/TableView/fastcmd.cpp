@@ -107,7 +107,7 @@ QByteArray FastCmd::GetData(int i)
 
 void FastCmd::readSettings()
 {
-    QSettings settings("GF_Data1","CMD_Data");
+    QSettings settings("GF_Data1");
     for(int i=0;i<10;i++)
     {
         m_pWidgets[i]->pCheckBox->setChecked(settings.value(QString("Check%1").arg(i)).toBool());
@@ -117,7 +117,7 @@ void FastCmd::readSettings()
 
 void FastCmd::saveSettings()
 {
-    QSettings settings("GF_Data1","CMD_Data");
+    QSettings settings("GF_Data1");
     for(int i=0;i<10;i++)
     {
         settings.setValue(QString("Check%1").arg(i),m_pWidgets[i]->pCheckBox->isChecked());

@@ -131,6 +131,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_Graph->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
     m_Graph->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
     m_Graph->setWidget(p_GraphDialog);
+    //m_Graph->setSizeIncrement(832,435);
+
 
 
     m_FastCmd_data->hide();
@@ -139,12 +141,13 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setCentralWidget(m_SendMsg);
     addDockWidget(Qt::BottomDockWidgetArea, m_Graph);
     addDockWidget(Qt::BottomDockWidgetArea, m_RecvMsg);
-    addDockWidget(Qt::RightDockWidgetArea, m_Recv35HMsg);
     addDockWidget(Qt::RightDockWidgetArea, m_Recv34HMsg);
+    addDockWidget(Qt::RightDockWidgetArea, m_Recv35HMsg);
+
 
 
     //将GGA 与 DHV 合并为标签页
-    tabifyDockWidget(m_Recv35HMsg, m_Recv34HMsg);
+    tabifyDockWidget(m_Recv34HMsg, m_Recv35HMsg);
 
 
 }
@@ -201,7 +204,7 @@ void MainWindow::closeSerialPort()
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("关于GF_Software"),
-                       tr("        宁海捷仪生物科技有限公司       \t\t \r\n\r\n"
+                       tr("        XXXXXX科技有限公司       \t\t \r\n\r\n"
                           "     Verson V1.0          2017-5-30        "
                           ));
 }

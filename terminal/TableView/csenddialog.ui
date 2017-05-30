@@ -10,6 +10,12 @@
     <height>255</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>832</width>
+    <height>255</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
@@ -101,12 +107,18 @@
             <item>
              <widget class="QLabel" name="label">
               <property name="text">
-               <string> 模      式:</string>
+               <string>模   式:</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QComboBox" name="comboBox_model">
+              <property name="minimumSize">
+               <size>
+                <width>103</width>
+                <height>0</height>
+               </size>
+              </property>
               <item>
                <property name="text">
                 <string>停止模式</string>
@@ -156,6 +168,12 @@
             </item>
             <item>
              <widget class="QComboBox" name="comboBox_14H_channel">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>0</height>
+               </size>
+              </property>
               <item>
                <property name="text">
                 <string>1</string>
@@ -240,6 +258,12 @@
             </item>
             <item>
              <widget class="QComboBox" name="comboBox_14H_LED">
+              <property name="minimumSize">
+               <size>
+                <width>51</width>
+                <height>0</height>
+               </size>
+              </property>
               <item>
                <property name="text">
                 <string>熄灭</string>
@@ -275,7 +299,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <spacer name="horizontalSpacer_2">
+             <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -298,12 +322,12 @@
              <widget class="QLabel" name="label_26">
               <property name="maximumSize">
                <size>
-                <width>35</width>
+                <width>200</width>
                 <height>16777215</height>
                </size>
               </property>
               <property name="text">
-               <string>型号:</string>
+               <string>    型 号: </string>
               </property>
              </widget>
             </item>
@@ -320,6 +344,19 @@
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
              <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_6">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -560,115 +597,108 @@
         <item row="1" column="1">
          <widget class="QLineEdit" name="lineEdit_1_1">
           <property name="autoFillBackground">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QLineEdit" name="lineEdit_2_1">
-          <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="3">
          <widget class="QLineEdit" name="lineEdit_3_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="4">
          <widget class="QLineEdit" name="lineEdit_4_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="5">
          <widget class="QLineEdit" name="lineEdit_5_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="6">
          <widget class="QLineEdit" name="lineEdit_6_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="7">
          <widget class="QLineEdit" name="lineEdit_7_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="8">
          <widget class="QLineEdit" name="lineEdit_8_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="9">
          <widget class="QLineEdit" name="lineEdit_9_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="10">
          <widget class="QLineEdit" name="lineEdit_10_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="11">
          <widget class="QLineEdit" name="lineEdit_11_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="12">
          <widget class="QLineEdit" name="lineEdit_12_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="13">
          <widget class="QLineEdit" name="lineEdit_13_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="14">
          <widget class="QLineEdit" name="lineEdit_14_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="15">
          <widget class="QLineEdit" name="lineEdit_15_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="16">
          <widget class="QLineEdit" name="lineEdit_16_1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -682,112 +712,105 @@
         <item row="2" column="1">
          <widget class="QLineEdit" name="lineEdit_1_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="2">
          <widget class="QLineEdit" name="lineEdit_2_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="3">
          <widget class="QLineEdit" name="lineEdit_3_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="4">
          <widget class="QLineEdit" name="lineEdit_4_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="5">
          <widget class="QLineEdit" name="lineEdit_5_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="6">
          <widget class="QLineEdit" name="lineEdit_6_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="7">
          <widget class="QLineEdit" name="lineEdit_7_2">
           <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="8">
-         <widget class="QLineEdit" name="lineEdit_8_2">
-          <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="9">
          <widget class="QLineEdit" name="lineEdit_9_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="10">
          <widget class="QLineEdit" name="lineEdit_10_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="11">
          <widget class="QLineEdit" name="lineEdit_11_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="12">
          <widget class="QLineEdit" name="lineEdit_12_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="13">
          <widget class="QLineEdit" name="lineEdit_13_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="14">
          <widget class="QLineEdit" name="lineEdit_14_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="15">
          <widget class="QLineEdit" name="lineEdit_15_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="2" column="16">
          <widget class="QLineEdit" name="lineEdit_16_2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -801,112 +824,112 @@
         <item row="3" column="1">
          <widget class="QLineEdit" name="lineEdit_1_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="2">
          <widget class="QLineEdit" name="lineEdit_2_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="3">
          <widget class="QLineEdit" name="lineEdit_3_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="4">
          <widget class="QLineEdit" name="lineEdit_4_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="5">
          <widget class="QLineEdit" name="lineEdit_5_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="6">
          <widget class="QLineEdit" name="lineEdit_6_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="7">
          <widget class="QLineEdit" name="lineEdit_7_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="8">
          <widget class="QLineEdit" name="lineEdit_8_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="9">
          <widget class="QLineEdit" name="lineEdit_9_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="10">
          <widget class="QLineEdit" name="lineEdit_10_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="11">
          <widget class="QLineEdit" name="lineEdit_11_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="12">
          <widget class="QLineEdit" name="lineEdit_12_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="13">
          <widget class="QLineEdit" name="lineEdit_13_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="14">
          <widget class="QLineEdit" name="lineEdit_14_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="15">
          <widget class="QLineEdit" name="lineEdit_15_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="3" column="16">
          <widget class="QLineEdit" name="lineEdit_16_3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -923,141 +946,132 @@
            <set>Qt::ImhNone</set>
           </property>
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="2">
          <widget class="QLineEdit" name="lineEdit_2_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="3">
          <widget class="QLineEdit" name="lineEdit_3_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="4">
          <widget class="QLineEdit" name="lineEdit_4_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="5">
          <widget class="QLineEdit" name="lineEdit_5_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="6">
          <widget class="QLineEdit" name="lineEdit_6_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="7">
          <widget class="QLineEdit" name="lineEdit_7_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="8">
          <widget class="QLineEdit" name="lineEdit_8_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="9">
          <widget class="QLineEdit" name="lineEdit_9_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="10">
          <widget class="QLineEdit" name="lineEdit_10_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="11">
          <widget class="QLineEdit" name="lineEdit_11_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="12">
          <widget class="QLineEdit" name="lineEdit_12_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="13">
          <widget class="QLineEdit" name="lineEdit_13_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="14">
          <widget class="QLineEdit" name="lineEdit_14_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="15">
          <widget class="QLineEdit" name="lineEdit_15_4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="4" column="16">
          <widget class="QLineEdit" name="lineEdit_16_4">
           <property name="text">
-           <string>0</string>
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLineEdit" name="lineEdit_2_1">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="8">
+         <widget class="QLineEdit" name="lineEdit_8_2">
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </item>
      </layout>
-     <zorder>label_25</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>label_25</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
-     <zorder>horizontalSpacer</zorder>
-     <zorder>horizontalSpacer_2</zorder>
-     <zorder>horizontalSpacer_3</zorder>
-     <zorder>horizontalSpacer_4</zorder>
-     <zorder>horizontalSpacer_5</zorder>
-     <zorder>verticalSpacer</zorder>
-     <zorder>verticalSpacer</zorder>
     </widget>
    </item>
   </layout>
