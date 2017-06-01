@@ -235,82 +235,82 @@
         </attribute>
         <column>
          <property name="text">
-          <string>1ADC</string>
+          <string>1DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>2ADC</string>
+          <string>2DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>3ADC</string>
+          <string>3DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>4ADC</string>
+          <string>4DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>5ADC</string>
+          <string>5DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>6ADC</string>
+          <string>6DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>7ADC</string>
+          <string>7DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>8ADC</string>
+          <string>8DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>9ADC</string>
+          <string>9DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>10ADC</string>
+          <string>10DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>11ADC</string>
+          <string>11DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>12ADC</string>
+          <string>12DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>13ADC</string>
+          <string>13DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>14ADC</string>
+          <string>14DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>15ADC</string>
+          <string>15DAC</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>16ADC</string>
+          <string>16DAC</string>
          </property>
         </column>
        </widget>

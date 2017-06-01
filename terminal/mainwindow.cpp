@@ -319,7 +319,7 @@ void MainWindow::readAll()
         strData0 += str[(pSendDialog->flag_14H>>8)&0xFF];
         i1Check = (i1)pSendDialog->flag_14H + (pSendDialog->flag_14H>>8)&0xFF;
         strData0 += str[i1Check];
-        strData0 += "0D 0A";
+        strData0 += "00 0D 0A";
         QByteArray strData = strData0.toLocal8Bit();
         strData = QByteArray::fromHex(strData);
         serial->write(strData);
