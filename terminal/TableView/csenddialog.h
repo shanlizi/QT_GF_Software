@@ -40,6 +40,8 @@ private slots:
 
     void on_pushButton_AcpSet_13H_clicked();
 
+    void on_pushButton_13H_QuickSet_clicked();
+
 private:
     Ui::CSendDialog *ui;
 

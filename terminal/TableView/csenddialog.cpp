@@ -289,18 +289,27 @@ void CSendDialog::saveSettings()
 
 void CSendDialog::on_pushButton_model_clicked()
 {
+    ui->label_model->setText(QString("%1").arg(" "));
     flag_11H = 1;
     this->windowTitleChanged("hi");
 }
 
 void CSendDialog::on_pushButton_setmodel_clicked()
 {
+    ui->label_32H_12H->setText(QString("%1").arg(" "));
+    ui->label_32H_13H->setText(QString("%1").arg(" "));
+    ui->label_32H_14H->setText(QString("%1").arg(" "));
+    ui->label_32H_15H->setText(QString("%1").arg(" "));
    flag_12H = ui->comboBox_model->currentIndex()+1;
    this->windowTitleChanged("hi");
 }
 
 void CSendDialog::on_pushButton_AcpSet_13H_clicked()
 {
+    ui->label_32H_12H->setText(QString("%1").arg(" "));
+    ui->label_32H_13H->setText(QString("%1").arg(" "));
+    ui->label_32H_14H->setText(QString("%1").arg(" "));
+    ui->label_32H_15H->setText(QString("%1").arg(" "));
     flag_13H = 1;
     m_TAcqParam_13H = {0};
 
@@ -393,25 +402,111 @@ void CSendDialog::on_pushButton_AcpSet_13H_clicked()
 
 void CSendDialog::on_pushButton_14H_set_clicked()
 { 
+    ui->label_32H_12H->setText(QString("%1").arg(" "));
+    ui->label_32H_13H->setText(QString("%1").arg(" "));
+    ui->label_32H_14H->setText(QString("%1").arg(" "));
+    ui->label_32H_15H->setText(QString("%1").arg(" "));
     flag_14H = (ui->comboBox_14H_channel->currentIndex()+1) + (ui->comboBox_14H_LED->currentIndex()<<8);
     this->windowTitleChanged("hi");
+}
+void CSendDialog::on_pushButton_13H_QuickSet_clicked()
+{
+    if(NULL != ui->lineEdit_16_1->text())
+    {
+        ui->lineEdit_1_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_2_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_3_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_4_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_5_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_6_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_7_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_8_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_9_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_10_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_11_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_12_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_13_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_14_1->setText(ui->lineEdit_16_1->text());
+        ui->lineEdit_15_1->setText(ui->lineEdit_16_1->text());
+    }
+    if(NULL != ui->lineEdit_16_2->text())
+    {
+        ui->lineEdit_1_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_2_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_3_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_4_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_5_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_6_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_7_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_8_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_9_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_10_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_11_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_12_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_13_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_14_2->setText(ui->lineEdit_16_2->text());
+        ui->lineEdit_15_2->setText(ui->lineEdit_16_2->text());
+    }
+    if(NULL != ui->lineEdit_16_3->text())
+    {
+        ui->lineEdit_1_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_2_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_3_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_4_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_5_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_6_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_7_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_8_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_9_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_10_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_11_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_12_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_13_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_14_3->setText(ui->lineEdit_16_3->text());
+        ui->lineEdit_15_3->setText(ui->lineEdit_16_3->text());
+    }
+    if(NULL != ui->lineEdit_16_4->text())
+    {
+        ui->lineEdit_1_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_2_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_3_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_4_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_5_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_6_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_7_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_8_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_9_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_10_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_11_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_12_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_13_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_14_4->setText(ui->lineEdit_16_4->text());
+        ui->lineEdit_15_4->setText(ui->lineEdit_16_4->text());
+    }
+
 }
 
 void CSendDialog::on_pushButton_adjust_15H_clicked()
 {
+    ui->label_32H_12H->setText(QString("%1").arg(" "));
+    ui->label_32H_13H->setText(QString("%1").arg(" "));
+    ui->label_32H_14H->setText(QString("%1").arg(" "));
+    ui->label_32H_15H->setText(QString("%1").arg(" "));
     flag_15H = 1;
     this->windowTitleChanged("hi");
 }
 
 void CSendDialog::on_pushButton_version_clicked()
 {
+    ui->label_Type->setText(QString("%1").arg(" "));
+    ui->label_version->setText(QString("%1").arg(" "));
     flag_16H = 1;
     this->windowTitleChanged("hi");
 }
 
 void CSendDialog::Update31H(const T31H *p31H)
 {
-    ui->label_model->setText(QString("%1").arg(" "));
+    //ui->label_model->setText(QString("%1").arg(" "));
     QString strFlag;
     if(0 == p31H->i1model)
     {
@@ -438,10 +533,10 @@ void CSendDialog::Update31H(const T31H *p31H)
 
 void CSendDialog::Update32H(const T32H *p32H)
 {
-    ui->label_32H_12H->setText(QString("%1").arg(" "));
-    ui->label_32H_13H->setText(QString("%1").arg(" "));
-    ui->label_32H_14H->setText(QString("%1").arg(" "));
-    ui->label_32H_15H->setText(QString("%1").arg(" "));
+    //ui->label_32H_12H->setText(QString("%1").arg(" "));
+    //ui->label_32H_13H->setText(QString("%1").arg(" "));
+    //ui->label_32H_14H->setText(QString("%1").arg(" "));
+    //ui->label_32H_15H->setText(QString("%1").arg(" "));
     QString strFlag;
 
     if(0 == p32H->i1flag)
@@ -528,10 +623,6 @@ QByteArray CSendDialog::MakeSave(const T36H *p36H)
     return BtAryMsg;
 
 }
-
-
-
-
 
 
 

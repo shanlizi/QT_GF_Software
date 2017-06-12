@@ -27,24 +27,24 @@ void CRecvDialog::Update33H(const T33H *p33H)
 
 
     ui->label_AcqTime->setText(QString("%1").arg(p33H->u2Time));
-    ui->label_17ADC->setText(QString("%1").arg(p33H->u2OriginData[16]));
-    ui->label_18ADC->setText(QString("%1").arg(p33H->u2OriginData[17]));
-    ui->tableWidget_33H_1->setItem(0,0,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[0])));
-    ui->tableWidget_33H_1->setItem(0,1,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[1])));
-    ui->tableWidget_33H_1->setItem(0,2,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[2])));
-    ui->tableWidget_33H_1->setItem(0,3,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[3])));
-    ui->tableWidget_33H_1->setItem(0,4,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[4])));
-    ui->tableWidget_33H_1->setItem(0,5,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[5])));
-    ui->tableWidget_33H_1->setItem(0,6,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[6])));
-    ui->tableWidget_33H_1->setItem(0,7,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[7])));
-    ui->tableWidget_33H_1->setItem(0,8,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[8])));
-    ui->tableWidget_33H_1->setItem(0,9,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[9])));
-    ui->tableWidget_33H_1->setItem(0,10,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[10])));
-    ui->tableWidget_33H_1->setItem(0,11,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[11])));
-    ui->tableWidget_33H_1->setItem(0,12,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[12])));
-    ui->tableWidget_33H_1->setItem(0,13,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[13])));
-    ui->tableWidget_33H_1->setItem(0,14,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[14])));
-    ui->tableWidget_33H_1->setItem(0,15,new QTableWidgetItem(QString("%1").arg(p33H->u2OriginData[15])));
+    ui->label_17ADC->setText(QString("%1").arg(GetComplement(p33H->u2OriginData[16])));
+    ui->label_18ADC->setText(QString("%1").arg(GetComplement(p33H->u2OriginData[17])));
+    ui->tableWidget_33H_1->setItem(0,0,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[0]))));
+    ui->tableWidget_33H_1->setItem(0,1,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[1]))));
+    ui->tableWidget_33H_1->setItem(0,2,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[2]))));
+    ui->tableWidget_33H_1->setItem(0,3,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[3]))));
+    ui->tableWidget_33H_1->setItem(0,4,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[4]))));
+    ui->tableWidget_33H_1->setItem(0,5,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[5]))));
+    ui->tableWidget_33H_1->setItem(0,6,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[6]))));
+    ui->tableWidget_33H_1->setItem(0,7,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[7]))));
+    ui->tableWidget_33H_1->setItem(0,8,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[8]))));
+    ui->tableWidget_33H_1->setItem(0,9,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[9]))));
+    ui->tableWidget_33H_1->setItem(0,10,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[10]))));
+    ui->tableWidget_33H_1->setItem(0,11,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[11]))));
+    ui->tableWidget_33H_1->setItem(0,12,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[12]))));
+    ui->tableWidget_33H_1->setItem(0,13,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[13]))));
+    ui->tableWidget_33H_1->setItem(0,14,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[14]))));
+    ui->tableWidget_33H_1->setItem(0,15,new QTableWidgetItem(QString("%1").arg(GetComplement(p33H->u2OriginData[15]))));
 
     ui->tableWidget_33H_2->setItem(0,0,new QTableWidgetItem(QString("%1").arg(p33H->u2RealData[0])));
     ui->tableWidget_33H_2->setItem(0,1,new QTableWidgetItem(QString("%1").arg(p33H->u2RealData[1])));
@@ -71,6 +71,17 @@ void CRecvDialog::Update33H(const T33H *p33H)
     ui->tableWidget_33H_2->show();
 
 }
+
+short int CRecvDialog::GetComplement(short int a)  //求补码
+{
+    if(a & 0x8000)
+    {
+        a = -(0xFFFF - a + 1);
+    }
+    return a;
+}
+
+
 void CRecvDialog::clear_33H()
 {
     ui->tableWidget_33H_1->clearContents();

@@ -35,11 +35,11 @@ void CRecv34HDialog::Update34H(const T34H *p34H)
         str1 = "错误";
     }
 
-    if(0 == p34H->i1Hatch)
+    if(0 == p34H->i1LED)
     {
         str2 = "熄灭";
     }
-    else if(1 == p34H->i1Hatch)
+    else if(1 == p34H->i1LED)
     {
         str2 = "点亮";
     }
