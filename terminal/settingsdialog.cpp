@@ -131,6 +131,7 @@ void SettingsDialog::fillPortsParameters()
     ui->flowControlBox->addItem(QStringLiteral("None"), QSerialPort::NoFlowControl);
     ui->flowControlBox->addItem(QStringLiteral("RTS/CTS"), QSerialPort::HardwareControl);
     ui->flowControlBox->addItem(QStringLiteral("XON/XOFF"), QSerialPort::SoftwareControl);
+    ui->flowControlBox->addItem(QStringLiteral("Unknown"), QSerialPort::UnknownFlowControl);
 }
 
 void SettingsDialog::fillPortsInfo()

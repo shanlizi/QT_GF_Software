@@ -323,7 +323,7 @@ void MainWindow::readAll()
         QByteArray strData = strData0.toLocal8Bit();
         strData = QByteArray::fromHex(strData);
         serial->write(strData);
-        pSendDialog->flag_11H = 0;
+        pSendDialog->flag_14H = 0;
     }
 
     if(pSendDialog->flag_15H)
