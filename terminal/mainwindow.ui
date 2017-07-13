@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1318</width>
-    <height>890</height>
+    <width>792</width>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@ background-color: rgb(115, 122, 126);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1318</width>
+     <width>792</width>
      <height>23</height>
     </rect>
    </property>
@@ -46,12 +46,14 @@ background-color: rgb(115, 122, 126);</string>
     <addaction name="actionClear"/>
     <addaction name="separator"/>
     <addaction name="actionSaveFile"/>
+    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>Collection</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="actionCollectStart"/>
+    <addaction name="actionCollectEnd"/>
    </widget>
    <addaction name="menuCalls"/>
    <addaction name="menuTools"/>
@@ -70,6 +72,10 @@ background-color: rgb(115, 122, 126);</string>
    <addaction name="actionFastCmd"/>
    <addaction name="actionSaveFile"/>
    <addaction name="actionClear"/>
+   <addaction name="separator"/>
+   <addaction name="actionCollectStart"/>
+   <addaction name="actionCollectEnd"/>
+   <addaction name="separator"/>
    <addaction name="actionQuit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -186,6 +192,24 @@ background-color: rgb(115, 122, 126);</string>
   <action name="actionAboutQt">
    <property name="text">
     <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionCollectStart">
+   <property name="icon">
+    <iconset resource="terminal.qrc">
+     <normaloff>:/images/collectStart.png</normaloff>:/images/collectStart.png</iconset>
+   </property>
+   <property name="text">
+    <string>CollectStart</string>
+   </property>
+  </action>
+  <action name="actionCollectEnd">
+   <property name="icon">
+    <iconset resource="terminal.qrc">
+     <normaloff>:/images/collectEnd.png</normaloff>:/images/collectEnd.png</iconset>
+   </property>
+   <property name="text">
+    <string>CollectEnd</string>
    </property>
   </action>
  </widget>

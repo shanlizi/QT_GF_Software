@@ -87,6 +87,8 @@ private slots:
     void readData();
     void clear_All();
     void readAll();
+    void collectStart();
+    void collectEnd();
 
     void handleError(QSerialPort::SerialPortError error);
     void saveFile();

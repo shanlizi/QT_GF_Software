@@ -108,6 +108,34 @@ CSendDialog::CSendDialog(QWidget *parent) :
     ui->lineEdit_16_4->setValidator(validator3);
 
     readSettings();
+
+    /************************使按钮编辑框隐藏***********************/
+    ui->pushButton_model->hide();
+    ui->pushButton_adjust_15H->hide();
+    ui->pushButton_14H_set->hide();
+    ui->pushButton_AcpSet_13H->hide();
+    ui->pushButton_setmodel->hide();
+    ui->pushButton_version->hide();
+
+    ui->label->hide();
+    ui->label_2->hide();
+    ui->label_32H_12H->hide();
+    ui->label_32H_14H->hide();
+    ui->label_32H_15H->hide();
+    ui->label_version->hide();
+    ui->label_Type->hide();
+    ui->label_model->hide();
+    ui->label_26->hide();
+    ui->comboBox_14H_channel->hide();
+    ui->comboBox_14H_LED->hide();
+    ui->comboBox_model->hide();
+    QVBoxLayout *layoutH = new QVBoxLayout;
+    layoutH->addLayout(ui->verticalLayout);
+
+
+
+
+
 }
 
 CSendDialog::~CSendDialog()

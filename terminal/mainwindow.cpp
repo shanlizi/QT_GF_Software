@@ -138,22 +138,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_FastCmd_data->hide();
     m_DkWgt_373H->hide();
+    m_RecvMsg->hide();
+    m_Recv34HMsg->hide();
+    m_Recv35HMsg->hide();
 
     this->setCentralWidget(m_SendMsg);
     addDockWidget(Qt::BottomDockWidgetArea, m_Graph);
-    addDockWidget(Qt::BottomDockWidgetArea, m_RecvMsg);
-    addDockWidget(Qt::RightDockWidgetArea, m_Recv34HMsg);
-    addDockWidget(Qt::RightDockWidgetArea, m_Recv35HMsg);
-
-
+    //addDockWidget(Qt::BottomDockWidgetArea, m_RecvMsg);
+    //addDockWidget(Qt::RightDockWidgetArea, m_Recv34HMsg);
+    //addDockWidget(Qt::RightDockWidgetArea, m_Recv35HMsg);
 
     //将GGA 与 DHV 合并为标签页
-    tabifyDockWidget(m_Recv34HMsg, m_Recv35HMsg);
+    //tabifyDockWidget(m_Recv34HMsg, m_Recv35HMsg);
 
+    /**********开机初始操作***************/
+    openSerialPort();  //开机即连接串口
 
+    collectStart();  //开机设置为采集模式
 }
-
-
 MainWindow::~MainWindow()
 {
     delete settings;
@@ -166,7 +168,6 @@ void MainWindow::onFastCmd()
     m_FastCmd_data->setFloating(1);
 
 }
-//! [4]
 void MainWindow::openSerialPort()
 {
     SettingsDialog::Settings p = settings->settings();
@@ -285,10 +286,10 @@ void MainWindow::readAll()
     }
     if(pSendDialog->flag_12H)
     {
-        QString strData0[4] = {"24 42 49 4E 0C 00 01 00 00 00 00 0D 0A",
-                               "24 42 49 4E 0C 00 01 00 01 01 00 0D 0A",
-                               "24 42 49 4E 0C 00 01 00 02 02 00 0D 0A",
-                               "24 42 49 4E 0C 00 01 00 03 03 00 0D 0A",
+        QString strData0[4] = {"24 42 49 4E 0C 00 01 00 00 00 00 0D 0A",  //停止模式
+                               "24 42 49 4E 0C 00 01 00 01 01 00 0D 0A",  //采集模式
+                               "24 42 49 4E 0C 00 01 00 02 02 00 0D 0A",  //工程模式
+                               "24 42 49 4E 0C 00 01 00 03 03 00 0D 0A",  //校准模式
                               };
 
         QByteArray strData = strData0[pSendDialog->flag_12H-1].toLocal8Bit();
@@ -501,6 +502,8 @@ void MainWindow::initActionsConnections()
     connect(ui->actionClear, SIGNAL(triggered()), this, SLOT(clear_All()));
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
     connect(ui->actionAboutQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+    connect(ui->actionCollectStart, SIGNAL(triggered()), this, SLOT(collectStart()));
+    connect(ui->actionCollectEnd, SIGNAL(triggered()), this, SLOT(collectEnd()));
 }
 void MainWindow::clear_All()
 {
@@ -511,6 +514,22 @@ void MainWindow::clear_All()
     pRecv34HDialog->clear_34H();
     pRecv35HDialog->clear_35H();
     pSendDialog->clear_36H();
+}
+void MainWindow::collectStart()
+{
+    QString strData0 = "24 42 49 4E 0C 00 01 00 01 01 00 0D 0A";  //开始采集
+    QByteArray strData = strData0.toLocal8Bit();
+    strData = QByteArray::fromHex(strData);
+    serial->write(strData);
+    ui->actionCollectStart->setEnabled(false);
+}
+void MainWindow::collectEnd()
+{
+    QString strData0 = "24 42 49 4E 0C 00 01 00 00 00 00 0D 0A";  //停止采集
+    QByteArray strData = strData0.toLocal8Bit();
+    strData = QByteArray::fromHex(strData);
+    serial->write(strData);
+    ui->actionCollectEnd->setEnabled(false);
 }
 
 u2 MainWindow::u2GetSum(const char *p, int nLen)

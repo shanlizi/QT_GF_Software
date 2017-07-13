@@ -8,5 +8,7 @@
         <file>images/SaveFile.png</file>
         <file>images/SaveFile_Close.png</file>
         <file>images/FastCmd.png</file>
+        <file>images/collectEnd.png</file>
+        <file>images/collectStart.png</file>
     </qresource>
 </RCC>
