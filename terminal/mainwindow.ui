@@ -52,6 +52,7 @@ background-color: rgb(115, 122, 126);</string>
     <property name="title">
      <string>Collection</string>
     </property>
+    <addaction name="actionCollectSetting"/>
     <addaction name="actionCollectStart"/>
     <addaction name="actionCollectEnd"/>
    </widget>
@@ -73,6 +74,7 @@ background-color: rgb(115, 122, 126);</string>
    <addaction name="actionSaveFile"/>
    <addaction name="actionClear"/>
    <addaction name="separator"/>
+   <addaction name="actionCollectSetting"/>
    <addaction name="actionCollectStart"/>
    <addaction name="actionCollectEnd"/>
    <addaction name="separator"/>
@@ -210,6 +212,15 @@ background-color: rgb(115, 122, 126);</string>
    </property>
    <property name="text">
     <string>CollectEnd</string>
+   </property>
+  </action>
+  <action name="actionCollectSetting">
+   <property name="icon">
+    <iconset resource="terminal.qrc">
+     <normaloff>:/images/collectSetting.png</normaloff>:/images/collectSetting.png</iconset>
+   </property>
+   <property name="text">
+    <string>CollectSetting</string>
    </property>
   </action>
  </widget>

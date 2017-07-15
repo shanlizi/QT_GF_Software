@@ -113,7 +113,6 @@ CSendDialog::CSendDialog(QWidget *parent) :
     ui->pushButton_model->hide();
     ui->pushButton_adjust_15H->hide();
     ui->pushButton_14H_set->hide();
-    ui->pushButton_AcpSet_13H->hide();
     ui->pushButton_setmodel->hide();
     ui->pushButton_version->hide();
 
@@ -132,10 +131,9 @@ CSendDialog::CSendDialog(QWidget *parent) :
     QVBoxLayout *layoutH = new QVBoxLayout;
     layoutH->addLayout(ui->verticalLayout);
 
-
-
-
-
+    i4index_1x = 0;
+    i4index_2x = 0;
+    Flag1x2x = 0;
 }
 
 CSendDialog::~CSendDialog()
@@ -147,6 +145,11 @@ CSendDialog::~CSendDialog()
 void CSendDialog::readSettings()
 {
     QSettings settings("GF_Data0");
+
+    ui->comboBox_1x->setCurrentIndex((settings.value(QString("i4index_1x").arg(1)).toInt()));
+    ui->comboBox_2x->setCurrentIndex((settings.value(QString("i4index_2x").arg(1)).toInt()));
+    ui->comboBox_AcpModel_13H->setCurrentIndex((settings.value(QString("comboBox_AcpModel_13H").arg(1)).toInt()));
+    on_comboBox_AcpModel_13H_currentIndexChanged(ui->comboBox_AcpModel_13H->currentIndex());
 
     ui->lineEdit_1_1->setText(settings.value(QString("Edit%1").arg(1)).toString());
     ui->lineEdit_1_2->setText(settings.value(QString("Edit%2").arg(2)).toString());
@@ -228,10 +231,13 @@ void CSendDialog::readSettings()
     ui->lineEdit_16_3->setText(settings.value(QString("Edit%63").arg(63)).toString());
     ui->lineEdit_16_4->setText(settings.value(QString("Edit%64").arg(64)).toString());
 }
-
 void CSendDialog::saveSettings()
 {
     QSettings settings("GF_Data0");
+
+    settings.setValue(QString("i4index_1x").arg(1),ui->comboBox_1x->currentIndex());
+    settings.setValue(QString("i4index_2x").arg(1),ui->comboBox_2x->currentIndex());
+    settings.setValue(QString("comboBox_AcpModel_13H").arg(1),ui->comboBox_AcpModel_13H->currentIndex());
 
     settings.setValue(QString("Edit%1").arg(1),ui->lineEdit_1_1->text());
     settings.setValue(QString("Edit%2").arg(2),ui->lineEdit_1_2->text());
@@ -314,6 +320,275 @@ void CSendDialog::saveSettings()
     settings.setValue(QString("Edit%64").arg(64),ui->lineEdit_16_4->text());
 
 }
+
+void CSendDialog::readSettings0(int i)
+{
+    QSettings settings("Moose Soft", "Clipper");
+    if(i<5)
+    {
+        i4index_1x = i;
+    }
+    else
+    {
+        i4index_2x = i;
+    }
+
+    if(0 == i)
+    {
+        settings.beginGroup("GF_Data1");
+    }
+    else if(1 == i)
+    {
+        settings.beginGroup("GF_Data2");
+    }
+    else if(2 == i)
+    {
+        settings.beginGroup("GF_Data3");
+    }
+    else if(3 == i)
+    {
+        settings.beginGroup("GF_Data4");
+    }
+    else if(4 == i)
+    {
+        settings.beginGroup("GF_Data5");
+    }
+
+
+
+    else if(5 == i)
+    {
+        settings.beginGroup("GF_Data6");
+    }
+    else if(6 == i)
+    {
+        settings.beginGroup("GF_Data7");
+    }
+    else if(7 == i)
+    {
+        settings.beginGroup("GF_Data8");
+    }
+    else if(8 == i)
+    {
+        settings.beginGroup("GF_Data9");
+    }
+    else if(9 == i)
+    {
+        settings.beginGroup("GF_Data10");
+    }
+
+    ui->lineEdit_1_1->setText(settings.value(QString("Edit%1").arg(1)).toString());
+    ui->lineEdit_1_2->setText(settings.value(QString("Edit%2").arg(2)).toString());
+    ui->lineEdit_1_3->setText(settings.value(QString("Edit%3").arg(3)).toString());
+    ui->lineEdit_1_4->setText(settings.value(QString("Edit%4").arg(4)).toString());
+
+    ui->lineEdit_2_1->setText(settings.value(QString("Edit%5").arg(5)).toString());
+    ui->lineEdit_2_2->setText(settings.value(QString("Edit%6").arg(6)).toString());
+    ui->lineEdit_2_3->setText(settings.value(QString("Edit%7").arg(7)).toString());
+    ui->lineEdit_2_4->setText(settings.value(QString("Edit%8").arg(8)).toString());
+
+    ui->lineEdit_3_1->setText(settings.value(QString("Edit%9").arg(9)).toString());
+    ui->lineEdit_3_2->setText(settings.value(QString("Edit%10").arg(10)).toString());
+    ui->lineEdit_3_3->setText(settings.value(QString("Edit%11").arg(11)).toString());
+    ui->lineEdit_3_4->setText(settings.value(QString("Edit%12").arg(12)).toString());
+
+    ui->lineEdit_4_1->setText(settings.value(QString("Edit%13").arg(13)).toString());
+    ui->lineEdit_4_2->setText(settings.value(QString("Edit%14").arg(14)).toString());
+    ui->lineEdit_4_3->setText(settings.value(QString("Edit%15").arg(15)).toString());
+    ui->lineEdit_4_4->setText(settings.value(QString("Edit%16").arg(16)).toString());
+
+    ui->lineEdit_5_1->setText(settings.value(QString("Edit%17").arg(17)).toString());
+    ui->lineEdit_5_2->setText(settings.value(QString("Edit%18").arg(18)).toString());
+    ui->lineEdit_5_3->setText(settings.value(QString("Edit%19").arg(19)).toString());
+    ui->lineEdit_5_4->setText(settings.value(QString("Edit%20").arg(20)).toString());
+
+    ui->lineEdit_6_1->setText(settings.value(QString("Edit%21").arg(21)).toString());
+    ui->lineEdit_6_2->setText(settings.value(QString("Edit%22").arg(22)).toString());
+    ui->lineEdit_6_3->setText(settings.value(QString("Edit%23").arg(23)).toString());
+    ui->lineEdit_6_4->setText(settings.value(QString("Edit%24").arg(24 )).toString());
+
+    ui->lineEdit_7_1->setText(settings.value(QString("Edit%25").arg(25)).toString());
+    ui->lineEdit_7_2->setText(settings.value(QString("Edit%26").arg(26)).toString());
+    ui->lineEdit_7_3->setText(settings.value(QString("Edit%27").arg(27)).toString());
+    ui->lineEdit_7_4->setText(settings.value(QString("Edit%28").arg(28)).toString());
+
+    ui->lineEdit_8_1->setText(settings.value(QString("Edit%29").arg(29)).toString());
+    ui->lineEdit_8_2->setText(settings.value(QString("Edit%30").arg(30)).toString());
+    ui->lineEdit_8_3->setText(settings.value(QString("Edit%31").arg(31)).toString());
+    ui->lineEdit_8_4->setText(settings.value(QString("Edit%32").arg(32)).toString());
+
+    ui->lineEdit_9_1->setText(settings.value(QString("Edit%33").arg(33)).toString());
+    ui->lineEdit_9_2->setText(settings.value(QString("Edit%34").arg(34)).toString());
+    ui->lineEdit_9_3->setText(settings.value(QString("Edit%35").arg(35)).toString());
+    ui->lineEdit_9_4->setText(settings.value(QString("Edit%36").arg(36)).toString());
+
+    ui->lineEdit_10_1->setText(settings.value(QString("Edit%37").arg(37)).toString());
+    ui->lineEdit_10_2->setText(settings.value(QString("Edit%38").arg(38)).toString());
+    ui->lineEdit_10_3->setText(settings.value(QString("Edit%39").arg(39)).toString());
+    ui->lineEdit_10_4->setText(settings.value(QString("Edit%40").arg(40)).toString());
+
+    ui->lineEdit_11_1->setText(settings.value(QString("Edit%41").arg(41)).toString());
+    ui->lineEdit_11_2->setText(settings.value(QString("Edit%42").arg(42)).toString());
+    ui->lineEdit_11_3->setText(settings.value(QString("Edit%43").arg(43)).toString());
+    ui->lineEdit_11_4->setText(settings.value(QString("Edit%44").arg(44)).toString());
+
+    ui->lineEdit_12_1->setText(settings.value(QString("Edit%45").arg(45)).toString());
+    ui->lineEdit_12_2->setText(settings.value(QString("Edit%46").arg(46)).toString());
+    ui->lineEdit_12_3->setText(settings.value(QString("Edit%47").arg(47)).toString());
+    ui->lineEdit_12_4->setText(settings.value(QString("Edit%48").arg(48)).toString());
+
+    ui->lineEdit_13_1->setText(settings.value(QString("Edit%49").arg(49)).toString());
+    ui->lineEdit_13_2->setText(settings.value(QString("Edit%50").arg(50)).toString());
+    ui->lineEdit_13_3->setText(settings.value(QString("Edit%51").arg(51)).toString());
+    ui->lineEdit_13_4->setText(settings.value(QString("Edit%52").arg(52)).toString());
+
+    ui->lineEdit_14_1->setText(settings.value(QString("Edit%53").arg(53)).toString());
+    ui->lineEdit_14_2->setText(settings.value(QString("Edit%54").arg(54)).toString());
+    ui->lineEdit_14_3->setText(settings.value(QString("Edit%55").arg(55)).toString());
+    ui->lineEdit_14_4->setText(settings.value(QString("Edit%56").arg(56)).toString());
+
+    ui->lineEdit_15_1->setText(settings.value(QString("Edit%57").arg(57)).toString());
+    ui->lineEdit_15_2->setText(settings.value(QString("Edit%58").arg(58)).toString());
+    ui->lineEdit_15_3->setText(settings.value(QString("Edit%59").arg(59)).toString());
+    ui->lineEdit_15_4->setText(settings.value(QString("Edit%60").arg(60)).toString());
+
+    ui->lineEdit_16_1->setText(settings.value(QString("Edit%61").arg(61)).toString());
+    ui->lineEdit_16_2->setText(settings.value(QString("Edit%62").arg(62)).toString());
+    ui->lineEdit_16_3->setText(settings.value(QString("Edit%63").arg(63)).toString());
+    ui->lineEdit_16_4->setText(settings.value(QString("Edit%64").arg(64)).toString());
+
+    settings.endGroup();
+}
+void CSendDialog::saveSettings0(int i)
+{
+    QSettings settings("Moose Soft", "Clipper");
+    if(0 == i)
+    {
+        settings.beginGroup("GF_Data1");
+    }
+    else if(1 == i)
+    {
+        settings.beginGroup("GF_Data2");
+    }
+    else if(2 == i)
+    {
+        settings.beginGroup("GF_Data3");
+    }
+    else if(3 == i)
+    {
+        settings.beginGroup("GF_Data4");
+    }
+    else if(4 == i)
+    {
+        settings.beginGroup("GF_Data5");
+    }
+
+
+    else if(5 == i)
+    {
+        settings.beginGroup("GF_Data6");
+    }
+    else if(6 == i)
+    {
+        settings.beginGroup("GF_Data7");
+    }
+    else if(7 == i)
+    {
+        settings.beginGroup("GF_Data8");
+    }
+    else if(8 == i)
+    {
+        settings.beginGroup("GF_Data9");
+    }
+    else if(9 == i)
+    {
+        settings.beginGroup("GF_Data10");
+    }
+
+    settings.setValue(QString("Edit%1").arg(1),ui->lineEdit_1_1->text());
+    settings.setValue(QString("Edit%2").arg(2),ui->lineEdit_1_2->text());
+    settings.setValue(QString("Edit%3").arg(3),ui->lineEdit_1_3->text());
+    settings.setValue(QString("Edit%4").arg(4),ui->lineEdit_1_4->text());
+
+    settings.setValue(QString("Edit%5").arg(5),ui->lineEdit_2_1->text());
+    settings.setValue(QString("Edit%6").arg(6),ui->lineEdit_2_2->text());
+    settings.setValue(QString("Edit%7").arg(7),ui->lineEdit_2_3->text());
+    settings.setValue(QString("Edit%8").arg(8),ui->lineEdit_2_4->text());
+
+    settings.setValue(QString("Edit%9").arg(9),ui->lineEdit_3_1->text());
+    settings.setValue(QString("Edit%10").arg(10),ui->lineEdit_3_2->text());
+    settings.setValue(QString("Edit%11").arg(11),ui->lineEdit_3_3->text());
+    settings.setValue(QString("Edit%12").arg(12),ui->lineEdit_3_4->text());
+
+    settings.setValue(QString("Edit%13").arg(13),ui->lineEdit_4_1->text());
+    settings.setValue(QString("Edit%14").arg(14),ui->lineEdit_4_2->text());
+    settings.setValue(QString("Edit%15").arg(15),ui->lineEdit_4_3->text());
+    settings.setValue(QString("Edit%16").arg(16),ui->lineEdit_4_4->text());
+
+    settings.setValue(QString("Edit%17").arg(17),ui->lineEdit_5_1->text());
+    settings.setValue(QString("Edit%18").arg(18),ui->lineEdit_5_2->text());
+    settings.setValue(QString("Edit%19").arg(19),ui->lineEdit_5_3->text());
+    settings.setValue(QString("Edit%20").arg(20),ui->lineEdit_5_4->text());
+
+    settings.setValue(QString("Edit%21").arg(21),ui->lineEdit_6_1->text());
+    settings.setValue(QString("Edit%22").arg(22),ui->lineEdit_6_2->text());
+    settings.setValue(QString("Edit%23").arg(23),ui->lineEdit_6_3->text());
+    settings.setValue(QString("Edit%24").arg(24),ui->lineEdit_6_4->text());
+
+    settings.setValue(QString("Edit%25").arg(25),ui->lineEdit_7_1->text());
+    settings.setValue(QString("Edit%26").arg(26),ui->lineEdit_7_2->text());
+    settings.setValue(QString("Edit%27").arg(27),ui->lineEdit_7_3->text());
+    settings.setValue(QString("Edit%28").arg(28),ui->lineEdit_7_4->text());
+
+    settings.setValue(QString("Edit%29").arg(29),ui->lineEdit_8_1->text());
+    settings.setValue(QString("Edit%30").arg(30),ui->lineEdit_8_2->text());
+    settings.setValue(QString("Edit%31").arg(31),ui->lineEdit_8_3->text());
+    settings.setValue(QString("Edit%32").arg(32),ui->lineEdit_8_4->text());
+
+    settings.setValue(QString("Edit%33").arg(33),ui->lineEdit_9_1->text());
+    settings.setValue(QString("Edit%34").arg(34),ui->lineEdit_9_2->text());
+    settings.setValue(QString("Edit%35").arg(35),ui->lineEdit_9_3->text());
+    settings.setValue(QString("Edit%36").arg(36),ui->lineEdit_9_4->text());
+
+    settings.setValue(QString("Edit%37").arg(37),ui->lineEdit_10_1->text());
+    settings.setValue(QString("Edit%38").arg(38),ui->lineEdit_10_2->text());
+    settings.setValue(QString("Edit%39").arg(39),ui->lineEdit_10_3->text());
+    settings.setValue(QString("Edit%40").arg(40),ui->lineEdit_10_4->text());
+
+    settings.setValue(QString("Edit%41").arg(41),ui->lineEdit_11_1->text());
+    settings.setValue(QString("Edit%42").arg(42),ui->lineEdit_11_2->text());
+    settings.setValue(QString("Edit%43").arg(43),ui->lineEdit_11_3->text());
+    settings.setValue(QString("Edit%44").arg(44),ui->lineEdit_11_4->text());
+
+    settings.setValue(QString("Edit%45").arg(45),ui->lineEdit_12_1->text());
+    settings.setValue(QString("Edit%46").arg(46),ui->lineEdit_12_2->text());
+    settings.setValue(QString("Edit%47").arg(47),ui->lineEdit_12_3->text());
+    settings.setValue(QString("Edit%48").arg(48),ui->lineEdit_12_4->text());
+
+    settings.setValue(QString("Edit%49").arg(49),ui->lineEdit_13_1->text());
+    settings.setValue(QString("Edit%50").arg(50),ui->lineEdit_13_2->text());
+    settings.setValue(QString("Edit%51").arg(51),ui->lineEdit_13_3->text());
+    settings.setValue(QString("Edit%52").arg(52),ui->lineEdit_13_4->text());
+
+    settings.setValue(QString("Edit%53").arg(53),ui->lineEdit_14_1->text());
+    settings.setValue(QString("Edit%54").arg(54),ui->lineEdit_14_2->text());
+    settings.setValue(QString("Edit%55").arg(55),ui->lineEdit_14_3->text());
+    settings.setValue(QString("Edit%56").arg(56),ui->lineEdit_14_4->text());
+
+    settings.setValue(QString("Edit%57").arg(57),ui->lineEdit_15_1->text());
+    settings.setValue(QString("Edit%58").arg(58),ui->lineEdit_15_2->text());
+    settings.setValue(QString("Edit%59").arg(59),ui->lineEdit_15_3->text());
+    settings.setValue(QString("Edit%60").arg(60),ui->lineEdit_15_4->text());
+
+    settings.setValue(QString("Edit%61").arg(61),ui->lineEdit_16_1->text());
+    settings.setValue(QString("Edit%62").arg(62),ui->lineEdit_16_2->text());
+    settings.setValue(QString("Edit%63").arg(63),ui->lineEdit_16_3->text());
+    settings.setValue(QString("Edit%64").arg(64),ui->lineEdit_16_4->text());
+
+    settings.endGroup();
+
+}
+
 
 void CSendDialog::on_pushButton_model_clicked()
 {
@@ -652,6 +927,38 @@ QByteArray CSendDialog::MakeSave(const T36H *p36H)
 
 }
 
+void CSendDialog::on_comboBox_AcpModel_13H_currentIndexChanged(int index)
+{
+    if(0 == ui->comboBox_AcpModel_13H->currentIndex())
+    {
+        ui->comboBox_2x->setEnabled(false);
+        ui->comboBox_1x->setEnabled(true);
+        readSettings0(i4index_1x);
+    }
+    else if(1 == ui->comboBox_AcpModel_13H->currentIndex())
+    {
+        ui->comboBox_1x->setEnabled(false);
+        ui->comboBox_2x->setEnabled(true);
+        readSettings0(i4index_2x);
+    }
+}
 
+void CSendDialog::on_comboBox_1x_currentIndexChanged(int index)
+{
+    if(1 == Flag1x2x)
+    {
+        saveSettings0(i4index_1x);
+    }
+    readSettings0(index);
+    Flag1x2x = 1;
+}
 
-
+void CSendDialog::on_comboBox_2x_currentIndexChanged(int index)
+{
+    if(2 == Flag1x2x)
+    {
+        saveSettings0(i4index_2x);
+    }
+    readSettings0(index+5);
+    Flag1x2x = 2;
+}

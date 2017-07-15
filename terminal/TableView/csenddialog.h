@@ -26,21 +26,23 @@ public:
     QValidator* validator3;
     void saveSettings();
     void readSettings();
+    void saveSettings0(int i);
+    void readSettings0(int i);
 
 private slots:
     void on_pushButton_model_clicked();
-
     void on_pushButton_setmodel_clicked();
-
     void on_pushButton_14H_set_clicked();
-
     void on_pushButton_adjust_15H_clicked();
-
     void on_pushButton_version_clicked();
-
     void on_pushButton_AcpSet_13H_clicked();
-
     void on_pushButton_13H_QuickSet_clicked();
+
+    void on_comboBox_AcpModel_13H_currentIndexChanged(int index);
+
+    void on_comboBox_1x_currentIndexChanged(int index);
+
+    void on_comboBox_2x_currentIndexChanged(int index);
 
 private:
     Ui::CSendDialog *ui;
@@ -53,6 +55,10 @@ public:
     int flag_15H;
     int flag_16H;
     TAcqParam_13H m_TAcqParam_13H;
+
+    int i4index_1x;  //保存combobox修改前的序号，用于保存修改前序号的数据
+    int i4index_2x;
+    int Flag1x2x;
 
 public:
     void Update31H(const T31H *p31H);

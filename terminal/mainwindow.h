@@ -57,6 +57,7 @@
 #include "TableView/cgraphdialog.h"
 
 #include <QFile>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 
@@ -87,12 +88,14 @@ private slots:
     void readData();
     void clear_All();
     void readAll();
+    void collectSetting();
     void collectStart();
     void collectEnd();
 
     void handleError(QSerialPort::SerialPortError error);
     void saveFile();
     void onFastCmd();
+    void onTimerOut();
 
 private:
     void initActionsConnections();
@@ -114,6 +117,7 @@ private:
     QSerialPort *serial;
 
     C7373H *p7373H;
+    QTimer *timer;
 
 
 

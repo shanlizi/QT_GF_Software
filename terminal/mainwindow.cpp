@@ -76,6 +76,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     p7373H = new C7373H(this);
 
+    timer = new QTimer();   //新建一个QTimer对象
+    timer->setInterval(5000);  //1分钟
+    timer->start();    //启动定时器
+    connect(timer, SIGNAL(timeout()), this, SLOT(onTimerOut()));
+
 
     i4FlagSave = 0;
 
@@ -108,7 +113,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_DkWgt_373H->setWidget(p7373H);
     //addDockWidget(Qt::TopDockWidgetArea,dock);
 
-    m_SendMsg = new QDockWidget(tr("SendMsg"),this);
+    m_SendMsg = new QDockWidget(tr("CollectSetting"),this);
     m_SendMsg->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
     m_SendMsg->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
     m_SendMsg->setWidget(pSendDialog);
@@ -129,7 +134,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_Recv34HMsg->setWidget(pRecv34HDialog);
 
     m_Graph = new QDockWidget(tr("Graph"),this);
-    m_Graph->setFeatures(QDockWidget::AllDockWidgetFeatures);     //全部特性
+    m_Graph->setFeatures(QDockWidget::NoDockWidgetFeatures);     //全部特性
     m_Graph->setAllowedAreas(Qt::AllDockWidgetAreas);//全部特性
     m_Graph->setWidget(p_GraphDialog);
     //m_Graph->setSizeIncrement(832,435);
@@ -141,9 +146,10 @@ MainWindow::MainWindow(QWidget *parent) :
     m_RecvMsg->hide();
     m_Recv34HMsg->hide();
     m_Recv35HMsg->hide();
+    m_SendMsg->hide();
 
-    this->setCentralWidget(m_SendMsg);
-    addDockWidget(Qt::BottomDockWidgetArea, m_Graph);
+    this->setCentralWidget(m_Graph);
+    //(Qt::BottomDockWidgetArea, m_Graph);
     //addDockWidget(Qt::BottomDockWidgetArea, m_RecvMsg);
     //addDockWidget(Qt::RightDockWidgetArea, m_Recv34HMsg);
     //addDockWidget(Qt::RightDockWidgetArea, m_Recv35HMsg);
@@ -190,9 +196,13 @@ void MainWindow::openSerialPort()
         ui->statusBar->showMessage(tr("Open error"));
     }
 }
-//! [4]
 
-//! [5]
+void MainWindow::onTimerOut()
+{
+    collectEnd();
+    timer->stop();
+}
+
 void MainWindow::closeSerialPort()
 {
     serial->close();
@@ -282,7 +292,7 @@ void MainWindow::readAll()
         strData = QByteArray::fromHex(strData);
         serial->write(strData);
         pSendDialog->flag_11H = 0;
-        p_GraphDialog->DrawGraph();
+        //p_GraphDialog->DrawGraph();
     }
     if(pSendDialog->flag_12H)
     {
@@ -502,6 +512,7 @@ void MainWindow::initActionsConnections()
     connect(ui->actionClear, SIGNAL(triggered()), this, SLOT(clear_All()));
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
     connect(ui->actionAboutQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+    connect(ui->actionCollectSetting, SIGNAL(triggered()), this, SLOT(collectSetting()));
     connect(ui->actionCollectStart, SIGNAL(triggered()), this, SLOT(collectStart()));
     connect(ui->actionCollectEnd, SIGNAL(triggered()), this, SLOT(collectEnd()));
 }
@@ -514,14 +525,24 @@ void MainWindow::clear_All()
     pRecv34HDialog->clear_34H();
     pRecv35HDialog->clear_35H();
     pSendDialog->clear_36H();
+
+}
+void MainWindow::collectSetting()
+{
+    m_SendMsg->move(this->width()/3,this->height()/3);
+    m_SendMsg->show();
+    m_SendMsg->setFloating(1);
 }
 void MainWindow::collectStart()
 {
+    p_GraphDialog->DrawGraph();
     QString strData0 = "24 42 49 4E 0C 00 01 00 01 01 00 0D 0A";  //开始采集
     QByteArray strData = strData0.toLocal8Bit();
     strData = QByteArray::fromHex(strData);
     serial->write(strData);
     ui->actionCollectStart->setEnabled(false);
+    ui->actionCollectEnd->setEnabled(true);
+    timer->start();
 }
 void MainWindow::collectEnd()
 {
@@ -530,6 +551,7 @@ void MainWindow::collectEnd()
     strData = QByteArray::fromHex(strData);
     serial->write(strData);
     ui->actionCollectEnd->setEnabled(false);
+    ui->actionCollectStart->setEnabled(true);
 }
 
 u2 MainWindow::u2GetSum(const char *p, int nLen)
