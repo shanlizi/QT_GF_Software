@@ -108,6 +108,7 @@ private:
     CRecv35HDialog *pRecv35HDialog;
     CRecv34HDialog *pRecv34HDialog;
     CGraphDialog *p_GraphDialog;
+    double f8countGraph;
 
 
 
@@ -132,6 +133,9 @@ public:
     QDockWidget *m_Recv35HMsg;
     QDockWidget *m_Recv34HMsg;
     QDockWidget *m_Graph;
+
+    QVector<double> x;
+    QVector<double> y[16];
 
 
 };

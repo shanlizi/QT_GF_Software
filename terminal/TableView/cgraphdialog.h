@@ -2,6 +2,7 @@
 #define CGRAPHDIALOG_H
 
 #include <QDialog>
+#include <math.h>
 #include "qcustomplot.h"
 
 namespace Ui {
@@ -18,8 +19,17 @@ public:
 
 private:
     Ui::CGraphDialog *ui;
+
 public:
-    void DrawGraph();
+    void InitGraph();
+    void DrawGraph(QVector<double> xx, QVector<double> yy[16]);
+    bool bFlagIsFirst;
+    void clearGraph();
+    void saveSettings();
+    void readSettings();
+
+private slots:
+    void on_checkBoxAll_clicked(bool checked);
 };
 
 #endif // CGRAPHDIALOG_H

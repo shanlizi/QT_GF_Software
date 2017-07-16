@@ -44,7 +44,7 @@
 #include "ui_mainwindow.h"
 #include "console.h"
 #include "settingsdialog.h"
-#include<QDockWidget>
+#include <QDockWidget>
 
 #include <QMessageBox>
 #include <QtSerialPort/QSerialPort>
@@ -83,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     i4FlagSave = 0;
+    f8countGraph = 0.0;
 
 
     setCentralWidget(p7373H);
@@ -159,11 +160,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /**********开机初始操作***************/
     openSerialPort();  //开机即连接串口
-
     collectStart();  //开机设置为采集模式
+
+    //p_GraphDialog->readSettings();
 }
 MainWindow::~MainWindow()
 {
+    //p_GraphDialog->saveSettings();
     delete settings;
     delete ui;
 }
@@ -292,7 +295,6 @@ void MainWindow::readAll()
         strData = QByteArray::fromHex(strData);
         serial->write(strData);
         pSendDialog->flag_11H = 0;
-        //p_GraphDialog->DrawGraph();
     }
     if(pSendDialog->flag_12H)
     {
@@ -430,6 +432,30 @@ void MainWindow::readData()
        case 0x21:  //33H
            memset(&g_T33, 0, sizeof(g_T33));
            memcpy(&g_T33, &m_BuffRecv[8], sizeof(g_T33));
+
+           x.push_back(f8countGraph);
+           y[0].push_back(g_T33.u2RealData[0]/1.0);
+           y[1].push_back(g_T33.u2RealData[1]/1.0);
+           y[2].push_back(g_T33.u2RealData[2]/1.0);
+           y[3].push_back(g_T33.u2RealData[3]/1.0);
+           y[4].push_back(g_T33.u2RealData[4]/1.0);
+           y[5].push_back(g_T33.u2RealData[5]/1.0);
+           y[6].push_back(g_T33.u2RealData[6]/1.0);
+           y[7].push_back(g_T33.u2RealData[7]/1.0);
+           y[8].push_back(g_T33.u2RealData[8]/1.0);
+           y[9].push_back(g_T33.u2RealData[9]/1.0);
+           y[10].push_back(g_T33.u2RealData[10]/1.0);
+           y[11].push_back(g_T33.u2RealData[11]/1.0);
+           y[12].push_back(g_T33.u2RealData[12]/1.0);
+           y[13].push_back(g_T33.u2RealData[13]/1.0);
+           y[14].push_back(g_T33.u2RealData[14]/1.0);
+           y[15].push_back(g_T33.u2RealData[15]/1.0);
+
+
+
+           p_GraphDialog->DrawGraph(x,y);
+           f8countGraph += 0.1;
+
            pRecvDialog->Update33H(&g_T33);
            if(1 == i4FlagSave)
            {
@@ -526,6 +552,8 @@ void MainWindow::clear_All()
     pRecv35HDialog->clear_35H();
     pSendDialog->clear_36H();
 
+    p_GraphDialog->clearGraph();
+
 }
 void MainWindow::collectSetting()
 {
@@ -535,7 +563,7 @@ void MainWindow::collectSetting()
 }
 void MainWindow::collectStart()
 {
-    p_GraphDialog->DrawGraph();
+    //p_GraphDialog->DrawGraph();
     QString strData0 = "24 42 49 4E 0C 00 01 00 01 01 00 0D 0A";  //开始采集
     QByteArray strData = strData0.toLocal8Bit();
     strData = QByteArray::fromHex(strData);
