@@ -163,6 +163,7 @@ MainWindow::MainWindow(QWidget *parent) :
     openSerialPort();  //开机即连接串口
     collectStart();  //开机设置为采集模式
 
+
     //p_GraphDialog->readSettings();
 }
 MainWindow::~MainWindow()
@@ -235,7 +236,9 @@ void MainWindow::saveFile()
                        .arg(QDate::currentDate().toString("yyyyMMdd"))
                        .arg(QTime::currentTime().toString("HHmmss"))
                        );
-       fileName = QFileDialog::getSaveFileName(this, tr("Save File"), fileName, tr("Data (*.dat *.txt)"));
+       //fileName = QFileDialog::getSaveFileName(this, tr("Save File"), fileName, tr("Data (*.dat *.txt)"));
+
+       fileName = QCoreApplication::applicationDirPath() + fileName + tr(".dat");
 
        fileName1 = fileName;
        fileName1.resize(fileName.size()-4);
@@ -581,6 +584,7 @@ void MainWindow::collectStart()
     ui->actionCollectStart->setEnabled(false);
     ui->actionCollectEnd->setEnabled(true);
     timer->start();
+    saveFile(); //开机即开始保存数据，一分钟后停止保存，数据有一份原始数(16进制)，一份可读数据，一张截图
 }
 void MainWindow::onScreenShot1()
 {
@@ -639,6 +643,7 @@ void MainWindow::collectEnd()
     serial->write(strData);
     ui->actionCollectEnd->setEnabled(false);
     ui->actionCollectStart->setEnabled(true);
+    saveFile(); //开机即开始保存数据，一分钟后停止保存，数据有一份原始数(16进制)，一份可读数据，一张截图
 }
 
 u2 MainWindow::u2GetSum(const char *p, int nLen)
