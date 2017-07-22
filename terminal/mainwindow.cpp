@@ -77,9 +77,10 @@ MainWindow::MainWindow(QWidget *parent) :
     p7373H = new C7373H(this);
 
     timer = new QTimer();   //新建一个QTimer对象
-    timer->setInterval(5000);  //1分钟
+    timer->setInterval(60000);  //1分钟
     timer->start();    //启动定时器
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimerOut()));
+    fileName_Grpha = "";
 
 
     i4FlagSave = 0;
@@ -226,8 +227,6 @@ void MainWindow::about()
 
 void MainWindow::saveFile()
 {
-
-
    if(0 == i4FlagSave)
    {
        QString fileName,fileName1;
@@ -240,6 +239,7 @@ void MainWindow::saveFile()
 
        fileName1 = fileName;
        fileName1.resize(fileName.size()-4);
+       fileName_Grpha = fileName1;
        fileName1 = fileName1 + tr("Hex.dat");
 
        if(!fileName.isEmpty())
@@ -273,6 +273,7 @@ void MainWindow::saveFile()
         outFile.close();
         outFile1.close();
         ui->actionSaveFile->setIcon(QIcon(":/images/SaveFile.png"));
+        onScreenShot(fileName_Grpha);
    }
 }
 
@@ -541,6 +542,8 @@ void MainWindow::initActionsConnections()
     connect(ui->actionCollectSetting, SIGNAL(triggered()), this, SLOT(collectSetting()));
     connect(ui->actionCollectStart, SIGNAL(triggered()), this, SLOT(collectStart()));
     connect(ui->actionCollectEnd, SIGNAL(triggered()), this, SLOT(collectEnd()));
+    connect(ui->actionScreenShot, SIGNAL(triggered()), this, SLOT(onScreenShot1()));
+
 }
 void MainWindow::clear_All()
 {
@@ -553,6 +556,13 @@ void MainWindow::clear_All()
     pSendDialog->clear_36H();
 
     p_GraphDialog->clearGraph();
+    x.clear();
+    for(int j=0; j<16;j++)
+    {
+        y[j].clear();
+    }
+    f8countGraph = 0;
+
 
 }
 void MainWindow::collectSetting()
@@ -572,6 +582,55 @@ void MainWindow::collectStart()
     ui->actionCollectEnd->setEnabled(true);
     timer->start();
 }
+void MainWindow::onScreenShot1()
+{
+    QString fileName;
+    QPixmap pix, bmp;
+    //pix =bmp.grabWindow(QApplication::desktop()->winId(),0,0,frameGeometry().width(),frameGeometry().height());
+    pix =bmp.grabWindow(QApplication::desktop()->winId(),geometry().x(),geometry().y()+90,geometry().width(),geometry().height()-90);
+    fileName= QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss")  + ".bmp";//通过时间命名文件
+    if (pix.isNull())
+    {
+        QMessageBox::information(this, "Error", "截屏失败 !", QMessageBox::Ok);
+    }
+    else
+    {
+        if(!pix.save("../"+fileName,"BMP"))
+        {
+            QMessageBox::information(this, "Right", "保存错误 !", QMessageBox::Ok);
+        }
+        else
+        {
+            QMessageBox::information(this, "Grab", "保存成功!",QMessageBox::Ok);
+        }
+    }
+}
+
+void MainWindow::onScreenShot(QString fileName)
+{
+    //QString fileName;
+    QPixmap pix, bmp;
+    //pix =bmp.grabWindow(QApplication::desktop()->winId(),0,0,frameGeometry().width(),frameGeometry().height());
+    pix =bmp.grabWindow(QApplication::desktop()->winId(),geometry().x(),geometry().y()+90,geometry().width(),geometry().height()-90);
+    fileName += tr(".bmp");//通过时间命名文件
+    if (pix.isNull())
+    {
+        QMessageBox::information(this, "Error", "截屏失败 !", QMessageBox::Ok);
+    }
+    else
+    {
+        if(!pix.save(fileName,"BMP"))
+        {
+            QMessageBox::information(this, "Right", "保存错误 !", QMessageBox::Ok);
+        }
+        else
+        {
+            QMessageBox::information(this, "Grab", "保存成功!",QMessageBox::Ok);
+        }
+    }
+
+}
+
 void MainWindow::collectEnd()
 {
     QString strData0 = "24 42 49 4E 0C 00 01 00 00 00 00 0D 0A";  //停止采集

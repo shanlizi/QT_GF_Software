@@ -200,14 +200,24 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
     ui->widget_Graph->yAxis->setLabel("y_(DAC)");
     // 设置坐标轴的范围，以看到所有数据
     qSort(x.begin(), x.end());
-    if(x.last() < 30)
+    if(x.last() < 20)
         ui->widget_Graph->xAxis->setTickStep(1);
-    else
+    else if(x.last() >= 20 && x.last() < 60)
         ui->widget_Graph->xAxis->setTickStep(5);
+    else
+        ui->widget_Graph->xAxis->setTickStep(10);
 
-    ui->widget_Graph->xAxis->setRange(-2, x.last()+2.0);
+    ui->widget_Graph->xAxis->setRange(0, x.last()*1.2+5);
     //ui->widget_Graph->xAxis->setRange(key+1.0, 60, Qt::AlignRight);
-    qSort(y[0].begin(), y[0].end());
+
+    for(int j=0;j<16;j++)
+    {
+        qSort(y[j].begin(), y[j].end());
+        y_max.push_back(y[j].last());
+        y_min.push_back(y[j].first());
+    }
+    qSort(y_max.begin(), y_max.end());
+    qSort(y_min.begin(), y_min.end());
 
     /*
     if(y.last() < 4)
@@ -220,7 +230,7 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
         ui->widget_Graph->yAxis->setRange(-100,100);
     */
 
-    ui->widget_Graph->yAxis->setRange(-1.5,y[0].last()+15.0);
+    ui->widget_Graph->yAxis->setRange(y_min.first()*0.7, y_max.last()*1.2+5);
     // 添加数据曲线（一个图像可以有多个数据曲线）;
     //ui->widget_Graph->graph(0)->removeDataBefore(7);
 

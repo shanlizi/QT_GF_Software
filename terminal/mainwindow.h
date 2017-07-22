@@ -91,6 +91,7 @@ private slots:
     void collectSetting();
     void collectStart();
     void collectEnd();
+    void onScreenShot1();
 
     void handleError(QSerialPort::SerialPortError error);
     void saveFile();
@@ -109,6 +110,8 @@ private:
     CRecv34HDialog *pRecv34HDialog;
     CGraphDialog *p_GraphDialog;
     double f8countGraph;
+    void onScreenShot(QString fileName);
+    QString fileName_Grpha;
 
 
 

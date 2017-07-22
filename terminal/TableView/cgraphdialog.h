@@ -27,6 +27,8 @@ public:
     void clearGraph();
     void saveSettings();
     void readSettings();
+    QVector<double> y_max;
+    QVector<double> y_min;
 
 private slots:
     void on_checkBoxAll_clicked(bool checked);

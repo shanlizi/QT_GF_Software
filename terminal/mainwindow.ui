@@ -55,6 +55,7 @@ background-color: rgb(115, 122, 126);</string>
     <addaction name="actionCollectSetting"/>
     <addaction name="actionCollectStart"/>
     <addaction name="actionCollectEnd"/>
+    <addaction name="actionScreenShot"/>
    </widget>
    <addaction name="menuCalls"/>
    <addaction name="menuTools"/>
@@ -77,6 +78,7 @@ background-color: rgb(115, 122, 126);</string>
    <addaction name="actionCollectSetting"/>
    <addaction name="actionCollectStart"/>
    <addaction name="actionCollectEnd"/>
+   <addaction name="actionScreenShot"/>
    <addaction name="separator"/>
    <addaction name="actionQuit"/>
   </widget>
@@ -221,6 +223,15 @@ background-color: rgb(115, 122, 126);</string>
    </property>
    <property name="text">
     <string>CollectSetting</string>
+   </property>
+  </action>
+  <action name="actionScreenShot">
+   <property name="icon">
+    <iconset resource="terminal.qrc">
+     <normaloff>:/images/screenshot.png</normaloff>:/images/screenshot.png</iconset>
+   </property>
+   <property name="text">
+    <string>ScreenShot</string>
    </property>
   </action>
  </widget>
