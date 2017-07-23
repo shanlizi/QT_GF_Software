@@ -61,8 +61,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-//! [0]
-//!
+    /*测试版本，到达一定日期则不可用*/
+    QString date = QDate::currentDate().toString("yyyyMMdd");
+    if(date.toInt() > 20171023)
+    {
+        return;
+    }
+
     ui->setupUi(this);
     serial = new QSerialPort(this);
     settings = new SettingsDialog;
@@ -162,6 +167,8 @@ MainWindow::MainWindow(QWidget *parent) :
     /**********开机初始操作***************/
     openSerialPort();  //开机即连接串口
     collectStart();  //开机设置为采集模式
+    this->showMaximized();
+
 
 
     //p_GraphDialog->readSettings();
