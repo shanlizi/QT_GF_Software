@@ -576,6 +576,15 @@ void MainWindow::collectSetting()
 }
 void MainWindow::collectStart()
 {
+    /*每次开始采集（1分钟）前，清除曲线*/
+    p_GraphDialog->clearGraph();
+    x.clear();
+    for(int j=0; j<16;j++)
+    {
+        y[j].clear();
+    }
+    f8countGraph = 0;
+
     //p_GraphDialog->DrawGraph();
     QString strData0 = "24 42 49 4E 0C 00 01 00 01 01 00 0D 0A";  //开始采集
     QByteArray strData = strData0.toLocal8Bit();
