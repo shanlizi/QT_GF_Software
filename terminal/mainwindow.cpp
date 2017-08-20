@@ -53,6 +53,7 @@
 #include <QFileDialog>
 #include <QDate>
 #include <QDebug>
+#include <QDir>
 
 
 
@@ -90,6 +91,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     i4FlagSave = 0;
     f8countGraph = 0.0;
+    for(int j=0;j<16;j++)
+    {
+        f4kx[j] = 1.0;
+        f4bx[j] = 0.0;
+    }
+    f4ADCValue = 0.0;
+    f4Range = 0;
 
 
     setCentralWidget(p7373H);
@@ -237,15 +245,23 @@ void MainWindow::saveFile()
 {
    if(0 == i4FlagSave)
    {
-       QString fileName,fileName1;
-       fileName.append(QString("%1_%2_%3")
-                       .arg(settings->settings().name)
+       QString fileName,fileName1,fullPath;
+       fileName.append(QString("%1_%2")
+                       //.arg(settings->settings().name)
                        .arg(QDate::currentDate().toString("yyyyMMdd"))
                        .arg(QTime::currentTime().toString("HHmmss"))
                        );
        //fileName = QFileDialog::getSaveFileName(this, tr("Save File"), fileName, tr("Data (*.dat *.txt)"));
 
-       fileName = QCoreApplication::applicationDirPath() + fileName + tr(".dat");
+       fullPath = QCoreApplication::applicationDirPath() + tr("/Data Saved");
+       //fileName = QCoreApplication::applicationDirPath() + tr("/Data Saved/") + fileName + tr(".dat");
+
+       QDir dir(fullPath);
+       if(!dir.exists())
+       {
+           dir.mkpath(fullPath);//创建多级目录
+       }
+       fileName = fullPath + tr("/") + fileName + tr(".dat");
 
        fileName1 = fileName;
        fileName1.resize(fileName.size()-4);
@@ -257,7 +273,7 @@ void MainWindow::saveFile()
            outFile.setFileName(fileName);
            if(!outFile.open(QIODevice::WriteOnly|QIODevice::Append))
            {
-               qDebug()<<"打开文件失败"<<"\r\n";
+               qDebug()<<tr("打开文件失败")<<"\r\n";
                return;
            }
        }
@@ -267,7 +283,7 @@ void MainWindow::saveFile()
            outFile1.setFileName(fileName1);
            if(!outFile1.open(QIODevice::WriteOnly|QIODevice::Append))
            {
-               qDebug()<<"打开文件失败"<<"\r\n";
+               qDebug()<<tr("打开文件失败")<<"\r\n";
                return;
            }
        }
@@ -445,22 +461,26 @@ void MainWindow::readData()
            memcpy(&g_T33, &m_BuffRecv[8], sizeof(g_T33));
 
            x.push_back(f8countGraph);
-           y[0].push_back(g_T33.u2RealData[0]/1.0);
-           y[1].push_back(g_T33.u2RealData[1]/1.0);
-           y[2].push_back(g_T33.u2RealData[2]/1.0);
-           y[3].push_back(g_T33.u2RealData[3]/1.0);
-           y[4].push_back(g_T33.u2RealData[4]/1.0);
-           y[5].push_back(g_T33.u2RealData[5]/1.0);
-           y[6].push_back(g_T33.u2RealData[6]/1.0);
-           y[7].push_back(g_T33.u2RealData[7]/1.0);
-           y[8].push_back(g_T33.u2RealData[8]/1.0);
-           y[9].push_back(g_T33.u2RealData[9]/1.0);
-           y[10].push_back(g_T33.u2RealData[10]/1.0);
-           y[11].push_back(g_T33.u2RealData[11]/1.0);
-           y[12].push_back(g_T33.u2RealData[12]/1.0);
-           y[13].push_back(g_T33.u2RealData[13]/1.0);
-           y[14].push_back(g_T33.u2RealData[14]/1.0);
-           y[15].push_back(g_T33.u2RealData[15]/1.0);
+           NormData(g_T33);
+
+           /*
+           y[0].push_back(g_T33.i2OriginData[0]/1.0);
+           y[1].push_back(g_T33.i2OriginData[1]/1.0);
+           y[2].push_back(g_T33.i2OriginData[2]/1.0);
+           y[3].push_back(g_T33.i2OriginData[3]/1.0);
+           y[4].push_back(g_T33.i2OriginData[4]/1.0);
+           y[5].push_back(g_T33.i2OriginData[5]/1.0);
+           y[6].push_back(g_T33.i2OriginData[6]/1.0);
+           y[7].push_back(g_T33.i2OriginData[7]/1.0);
+           y[8].push_back(g_T33.i2OriginData[8]/1.0);
+           y[9].push_back(g_T33.i2OriginData[9]/1.0);
+           y[10].push_back(g_T33.i2OriginData[10]/1.0);
+           y[11].push_back(g_T33.i2OriginData[11]/1.0);
+           y[12].push_back(g_T33.i2OriginData[12]/1.0);
+           y[13].push_back(g_T33.i2OriginData[13]/1.0);
+           y[14].push_back(g_T33.i2OriginData[14]/1.0);
+           y[15].push_back(g_T33.i2OriginData[15]/1.0);
+           */
 
 
 
@@ -670,4 +690,68 @@ u2 MainWindow::u2GetSum(const char *p, int nLen)
         u2Sum += p[i];
     }
     return u2Sum;
+}
+
+void MainWindow::NormData(T33H g_T33)
+{
+    //y[0].push_back(g_T33.i2OriginData[0]/1.0);
+
+    ReadIni_kxbx();
+    for(int i=0;i<16;i++)
+    {
+        if(g_T33.i2OriginData[i]>>15)
+        {
+            g_T33.i2OriginData[i] = g_T33.i2OriginData[i]-65536;
+        }
+        if(pSendDialog->m_TAcqParam_13H.mChannel[i].i1Range)
+        {
+            f4Range = 2.0;
+        }
+        else
+        {
+            f4Range = 20.0;
+        }
+
+        f4ADCValue = f4kx[i]*(f4)g_T33.i2OriginData[i]*f4Range/65.536 - 1000.0*f4bx[i];
+        y[i].push_back(f4ADCValue);
+    }
+}
+void MainWindow::ReadIni_kxbx()
+{
+    QSettings *configIniRead = new QSettings("Calibration.ini", QSettings::IniFormat);
+    //将读取到的ini文件保存在QString中，先取值，然后通过toString()函数转换成QString类型
+    f4kx[0] = configIniRead->value("/Channel 1/Slope").toFloat();
+    f4bx[0] = configIniRead->value("/Channel 1/Intercept").toFloat();
+    f4kx[1] = configIniRead->value("/Channel 2/Slope").toFloat();
+    f4bx[1] = configIniRead->value("/Channel 2/Intercept").toFloat();
+    f4kx[2] = configIniRead->value("/Channel 3/Slope").toFloat();
+    f4bx[2] = configIniRead->value("/Channel 3/Intercept").toFloat();
+    f4kx[3] = configIniRead->value("/Channel 4/Slope").toFloat();
+    f4bx[3] = configIniRead->value("/Channel 4/Intercept").toFloat();
+    f4kx[4] = configIniRead->value("/Channel 5/Slope").toFloat();
+    f4bx[4] = configIniRead->value("/Channel 5/Intercept").toFloat();
+    f4kx[5] = configIniRead->value("/Channel 6/Slope").toFloat();
+    f4bx[5] = configIniRead->value("/Channel 6/Intercept").toFloat();
+    f4kx[6] = configIniRead->value("/Channel 7/Slope").toFloat();
+    f4bx[6] = configIniRead->value("/Channel 7/Intercept").toFloat();
+    f4kx[7] = configIniRead->value("/Channel 8/Slope").toFloat();
+    f4bx[7] = configIniRead->value("/Channel 8/Intercept").toFloat();
+    f4kx[8] = configIniRead->value("/Channel 9/Slope").toFloat();
+    f4bx[8] = configIniRead->value("/Channel 9/Intercept").toFloat();
+    f4kx[9] = configIniRead->value("/Channel 10/Slope").toFloat();
+    f4bx[9] = configIniRead->value("/Channel 10/Intercept").toFloat();
+    f4kx[10] = configIniRead->value("/Channel 11/Slope").toFloat();
+    f4bx[10] = configIniRead->value("/Channel 11/Intercept").toFloat();
+    f4kx[11] = configIniRead->value("/Channel 12/Slope").toFloat();
+    f4bx[11] = configIniRead->value("/Channel 12/Intercept").toFloat();
+    f4kx[12] = configIniRead->value("/Channel 13/Slope").toFloat();
+    f4bx[12] = configIniRead->value("/Channel 13/Intercept").toFloat();
+    f4kx[13] = configIniRead->value("/Channel 14/Slope").toFloat();
+    f4bx[13] = configIniRead->value("/Channel 14/Intercept").toFloat();
+    f4kx[14] = configIniRead->value("/Channel 15/Slope").toFloat();
+    f4bx[14] = configIniRead->value("/Channel 15/Intercept").toFloat();
+    f4kx[15] = configIniRead->value("/Channel 16/Slope").toFloat();
+    f4bx[15] = configIniRead->value("/Channel 16/Intercept").toFloat();
+
+    delete configIniRead;
 }

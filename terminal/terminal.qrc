@@ -12,5 +12,6 @@
         <file>images/collectStart.png</file>
         <file>images/collectSetting.png</file>
         <file>images/screenshot.png</file>
+        <file>images/help.png</file>
     </qresource>
 </RCC>

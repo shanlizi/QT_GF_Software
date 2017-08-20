@@ -112,6 +112,11 @@ private:
     double f8countGraph;
     void onScreenShot(QString fileName);
     QString fileName_Grpha;
+    void NormData(T33H g_T33);
+    f4 f4kx[16],f4bx[16];
+    f4 f4Range;
+    f4 f4ADCValue;
+    void ReadIni_kxbx();
 
 
 

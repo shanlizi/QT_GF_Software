@@ -74,8 +74,8 @@ typedef struct _tAcqParam
 typedef struct _tAcqData
 {
     u2 u2Time;
-    u2 u2OriginData[18];
-    u2 u2RealData[16];
+    i2 i2OriginData[18];
+    i2 i2RealData[16];
 }T33H;
 
 

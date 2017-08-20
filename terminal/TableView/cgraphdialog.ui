@@ -20,7 +20,7 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QFrame" name="frame">
      <property name="styleSheet">
       <string notr="true">background-color: rgb(207, 220, 224);</string>
@@ -32,7 +32,7 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0" rowspan="17">
+      <item row="0" column="0" rowspan="19">
        <widget class="QCustomPlot" name="widget_Graph" native="true">
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
@@ -512,6 +512,20 @@
         </property>
         <property name="autoExclusive">
          <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="17" column="1">
+       <widget class="QRadioButton" name="radioButton">
+        <property name="text">
+         <string>Time</string>
+        </property>
+       </widget>
+      </item>
+      <item row="18" column="1">
+       <widget class="QRadioButton" name="radioButton_2">
+        <property name="text">
+         <string>DAC</string>
         </property>
        </widget>
       </item>

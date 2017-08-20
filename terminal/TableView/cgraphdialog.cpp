@@ -144,6 +144,9 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
 {
     QVector<double> x(xx);
     QVector<double> y[16];
+    double y_minlength = 0.0;
+    double y_maxlength = 0.0;
+
 
     for(int j=0;j<16;j++)
     {
@@ -172,9 +175,9 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
     }
     */
 
-    QString str[16] = {"DAC_1","DAC_2","DAC_3","DAC_4","DAC_5","DAC_6","DAC_7","DAC_8","DAC_9","DAC_10",
-                      "DAC_11","DAC_12","DAC_13","DAC_14","DAC_15","DAC_16"};
-    QPen pen[4] = {QPen(Qt::blue),QPen(Qt::blue),QPen(Qt::red),QPen(Qt::red)};
+    QString str[16] = {"ADC_1","ADC_2","ADC_3","ADC_4","ADC_5","ADC_6","ADC_7","ADC_8","ADC_9","ADC_10",
+                      "ADC_11","ADC_12","ADC_13","ADC_14","ADC_15","ADC_16"};
+    QPen pen[4] = {QPen(Qt::blue),QPen(Qt::green),QPen(Qt::red),QPen(Qt::yellow)};
 
     for(int j=0;j<16;j++)
     {
@@ -197,7 +200,7 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
 
     // 为坐标轴添加标签
     ui->widget_Graph->xAxis->setLabel("x_(time/s)");
-    ui->widget_Graph->yAxis->setLabel("y_(DAC)");
+    ui->widget_Graph->yAxis->setLabel("y_(ADC)");
     // 设置坐标轴的范围，以看到所有数据
     qSort(x.begin(), x.end());
     if(x.last() < 20)
@@ -230,7 +233,18 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
         ui->widget_Graph->yAxis->setRange(-100,100);
     */
 
-    ui->widget_Graph->yAxis->setRange(y_min.first()*0.7, y_max.last()*1.2+5);
+    y_minlength = y_min.first()*0.9;
+    y_maxlength = y_max.last()*1.1;
+    if(y_min.first() < 0)
+    {
+        y_minlength = y_min.first()*1.1;
+    }
+    if(y_max.last() < 0)
+    {
+        y_maxlength = y_max.last()*0.9;
+    }
+
+    ui->widget_Graph->yAxis->setRange(y_minlength, y_maxlength);
     // 添加数据曲线（一个图像可以有多个数据曲线）;
     //ui->widget_Graph->graph(0)->removeDataBefore(7);
 
