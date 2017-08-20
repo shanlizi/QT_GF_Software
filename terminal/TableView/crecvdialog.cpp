@@ -10,6 +10,7 @@ CRecvDialog::CRecvDialog(QWidget *parent) :
     ui->tableWidget_33H_1->verticalHeader()->show();
     ui->tableWidget_33H_2->horizontalHeader()->show();
     ui->tableWidget_33H_2->verticalHeader()->show();
+    i1SaveFlag = 1;
 }
 
 CRecvDialog::~CRecvDialog()
@@ -93,7 +94,12 @@ void CRecvDialog::clear_33H()
 QByteArray CRecvDialog::MakeSave(const T33H *p33H)
 {
     QByteArray BtAryMsg;
-    BtAryMsg.append(QString("33H:%1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15 %16 %17 %18 %19 \r\n  %20 %21 %22 %23 %24 %25 %26 %27 %28 %29 %30 %31 %32 %33 %34 %35\r\n")
+    if(i1SaveFlag)
+    {
+        BtAryMsg.append(QString("Time,Channel1,Channel2,Channel3,Channel4,Channel5,Channel6,Channel7,Channel8,Channel9,Channel10,Channel11,Channel12,Channel13,Channel14,Channel15,Channel16,,Potential1,Potential2,Potential3,Potential4,Potential5,Potential6,Potential7,Potential8,Potential9,Potential10,Potential11,Potential12,Potential13,Potential14,Potential15,Potential16\r\n"));
+        i1SaveFlag = 0;
+    }
+    BtAryMsg.append(QString("%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13,%14,%15,%16,%17,%18,%19,%20,%21,%22,%23,%24,%25,%26,%27,%28,%29,%30,%31,%32,%33,%34\r\n")
                     .arg(p33H->u2Time)
                     .arg(p33H->i2OriginData[0])
                     .arg(p33H->i2OriginData[1])
@@ -111,8 +117,8 @@ QByteArray CRecvDialog::MakeSave(const T33H *p33H)
                     .arg(p33H->i2OriginData[13])
                     .arg(p33H->i2OriginData[14])
                     .arg(p33H->i2OriginData[15])
-                    .arg(p33H->i2OriginData[16])
-                    .arg(p33H->i2OriginData[17])
+                    .arg(" ")
+
             .arg(p33H->i2RealData[0])
             .arg(p33H->i2RealData[1])
             .arg(p33H->i2RealData[2])

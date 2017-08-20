@@ -245,6 +245,7 @@ void MainWindow::saveFile()
 {
    if(0 == i4FlagSave)
    {
+       pRecvDialog->i1SaveFlag = 1;
        QString fileName,fileName1,fullPath;
        fileName.append(QString("%1_%2")
                        //.arg(settings->settings().name)
@@ -261,7 +262,7 @@ void MainWindow::saveFile()
        {
            dir.mkpath(fullPath);//创建多级目录
        }
-       fileName = fullPath + tr("/") + fileName + tr(".dat");
+       fileName = fullPath + tr("/") + fileName + tr(".csv");
 
        fileName1 = fileName;
        fileName1.resize(fileName.size()-4);
@@ -649,9 +650,11 @@ void MainWindow::onScreenShot1()
 void MainWindow::onScreenShot(QString fileName)
 {
     //QString fileName;
-    QPixmap pix, bmp;
+    QPixmap pix;
+    //QPixmap bmp;
+    pix=p_GraphDialog->grab(QRect(0,0,geometry().width(),geometry().height()-90));
     //pix =bmp.grabWindow(QApplication::desktop()->winId(),0,0,frameGeometry().width(),frameGeometry().height());
-    pix =bmp.grabWindow(QApplication::desktop()->winId(),geometry().x(),geometry().y()+90,geometry().width(),geometry().height()-90);
+    //pix =bmp.grabWindow(QApplication::desktop()->winId(),geometry().x(),geometry().y()+90,geometry().width(),geometry().height()-90);
     fileName += tr(".bmp");//通过时间命名文件
     if (pix.isNull())
     {
@@ -668,7 +671,6 @@ void MainWindow::onScreenShot(QString fileName)
             QMessageBox::information(this, "Grab", "保存成功!",QMessageBox::Ok);
         }
     }
-
 }
 
 void MainWindow::collectEnd()

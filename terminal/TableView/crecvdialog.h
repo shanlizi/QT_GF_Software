@@ -26,6 +26,7 @@ public:
     void clear_33H();
     QByteArray MakeSave(const T33H *p33H);
     short int GetComplement(short int a);
+    char i1SaveFlag;
 };
 
 #endif // CRECVDIALOG_H
