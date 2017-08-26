@@ -92,6 +92,7 @@ private:
     void fillPortsParameters();
     void fillPortsInfo();
     void updateSettings();
+    QString strPortName;
 
 private:
     Ui::SettingsDialog *ui;

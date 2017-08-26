@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer();   //新建一个QTimer对象
     timer->setInterval(60000);  //1分钟
-    timer->start();    //启动定时器
+    //timer->start();    //启动定时器
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimerOut()));
     fileName_Grpha = "";
 
@@ -174,8 +174,12 @@ MainWindow::MainWindow(QWidget *parent) :
     //tabifyDockWidget(m_Recv34HMsg, m_Recv35HMsg);
 
     /**********开机初始操作***************/
-    openSerialPort();  //开机即连接串口
-    collectStart();  //开机设置为采集模式
+    //openSerialPort();  //开机即连接串口
+    if(openSerialPort())
+    {
+        collectStart();  //开机设置为采集模式
+    }
+
     this->showMaximized();
 
 
@@ -184,6 +188,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     //p_GraphDialog->saveSettings();
+    if(timer->isActive())
+    {
+        timer->stop();
+    }
     delete settings;
     delete ui;
 }
@@ -194,7 +202,7 @@ void MainWindow::onFastCmd()
     m_FastCmd_data->setFloating(1);
 
 }
-void MainWindow::openSerialPort()
+bool MainWindow::openSerialPort()
 {
     SettingsDialog::Settings p = settings->settings();
     serial->setPortName(p.name);
@@ -203,17 +211,28 @@ void MainWindow::openSerialPort()
     serial->setParity(p.parity);
     serial->setStopBits(p.stopBits);
     serial->setFlowControl(p.flowControl);
-    if (serial->open(QIODevice::ReadWrite)) {
+    if (serial->open(QIODevice::ReadWrite))
+    {
             ui->actionConnect->setEnabled(false);
             ui->actionDisconnect->setEnabled(true);
+            ui->actionCollectEnd->setEnabled(true);
+            ui->actionCollectStart->setEnabled(true);
+            ui->actionSaveFile->setEnabled(true);
             ui->actionConfigure->setEnabled(false);
             ui->statusBar->showMessage(tr("Connected to %1 : %2, %3, %4, %5, %6")
                                        .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
                                        .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
-    } else {
-        QMessageBox::critical(this, tr("Error"), serial->errorString());
+            return true;
+    }
+    else
+    {
+        //QMessageBox::critical(this, tr("Error"), serial->errorString());
 
         ui->statusBar->showMessage(tr("Open error"));
+        ui->actionCollectEnd->setEnabled(false);
+        ui->actionCollectStart->setEnabled(false);
+        ui->actionSaveFile->setEnabled(false);
+        return false;
     }
 }
 
@@ -230,14 +249,18 @@ void MainWindow::closeSerialPort()
     ui->actionDisconnect->setEnabled(false);
     ui->actionConfigure->setEnabled(true);
     ui->statusBar->showMessage(tr("Disconnected"));
+    ui->actionCollectEnd->setEnabled(false);
+    ui->actionCollectStart->setEnabled(false);
+    ui->actionSaveFile->setEnabled(false);
 }
 //! [5]
 
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("关于GF_Software"),
-                       tr("        XXXXXX科技有限公司       \t\t \r\n\r\n"
-                          "     Verson V1.0          2017-5-31        "
+                       tr("          XXXXXX科技有限公司        \t\t \r\n\r\n"
+                          "        Verson V1.0      \t\t     2017-8-26  \r\n  "
+                          "   仅为测试版本试用，联系邮箱：shanli1026@163.com   "
                           ));
 }
 

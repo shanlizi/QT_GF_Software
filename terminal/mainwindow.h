@@ -81,7 +81,7 @@ public:
 
 
 private slots:
-    void openSerialPort();
+    bool openSerialPort();
     void closeSerialPort();
     void about();
     void writeData(const QByteArray &data);

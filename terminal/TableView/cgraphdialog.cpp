@@ -334,7 +334,7 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16], QVector
 
     if(xDAC_min.first() < 0)
     {
-        xDAC_minlength = xDAC_min.first()*1.1;
+        xDAC_minlength = xDAC_min.first()*1.2;
     }
     if(xDAC_max.last() < 0)
     {

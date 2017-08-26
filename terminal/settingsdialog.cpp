@@ -46,6 +46,8 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <QIntValidator>
 #include <QLineEdit>
+#include <QDebug>
+#include <QMessageBox>
 
 QT_USE_NAMESPACE
 
@@ -141,6 +143,7 @@ void SettingsDialog::fillPortsInfo()
     QString description;
     QString manufacturer;
     QString serialNumber;
+    int i = 0;
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
         QStringList list;
         //description = info.description();
@@ -154,13 +157,27 @@ void SettingsDialog::fillPortsInfo()
              << (info.vendorIdentifier() ? QString::number(info.vendorIdentifier(), 16) : blankString)
              << (info.productIdentifier() ? QString::number(info.productIdentifier(), 16) : blankString);
 
+        i++;
         ui->serialPortInfoListBox->addItem(list.first(), list);
+        if(info.description().startsWith(tr("USB Serial")))  //自动检测STMicroelectronics串口
+        //if(info.description().startsWith(tr("STMicroelectronics")))  //自动检测STMicroelectronics串口
+        {
+            strPortName = info.portName();
+        }
     }
 }
 
 void SettingsDialog::updateSettings()
 {
-    currentSettings.name = ui->serialPortInfoListBox->currentText();
+    if(strPortName.isNull())
+    {
+        QMessageBox::critical(this, tr("警告"), tr("没有检测到硬件端口，请手动选择！"));
+        return;
+    }
+    else
+    {
+        currentSettings.name = strPortName;//ui->serialPortInfoListBox->currentText();
+    }
 
     if (ui->baudRateBox->currentIndex() == 4) {
         currentSettings.baudRate = ui->baudRateBox->currentText().toInt();
@@ -190,7 +207,8 @@ void SettingsDialog::updateSettings()
 void SettingsDialog::readSettings()
 {
     QSettings settings("GF_Data2");
-    ui->serialPortInfoListBox->setCurrentIndex(settings.value(QString("%1").arg(1)).toInt());
+    //ui->serialPortInfoListBox->setCurrentIndex(settings.value(QString("%1").arg(1)).toInt());
+    ui->flowControlBox->setCurrentIndex(settings.value(QString("%1").arg(1)).toInt());
     ui->baudRateBox->setCurrentIndex(settings.value(QString("%1").arg(2)).toInt());
     ui->dataBitsBox->setCurrentIndex(settings.value(QString("%1").arg(3)).toInt());
     ui->parityBox->setCurrentIndex(settings.value(QString("%1").arg(4)).toInt());
@@ -202,7 +220,8 @@ void SettingsDialog::readSettings()
 void SettingsDialog::saveSettings()
 {
     QSettings settings("GF_Data2");
-    settings.setValue(QString("%1").arg(1),ui->serialPortInfoListBox->currentIndex());
+    //settings.setValue(QString("%1").arg(1),ui->serialPortInfoListBox->currentIndex());
+    ui->flowControlBox->setCurrentIndex(settings.value(QString("%1").arg(1)).toInt());
     settings.setValue(QString("%1").arg(2),ui->baudRateBox->currentIndex());
     settings.setValue(QString("%1").arg(3),ui->dataBitsBox->currentIndex());
     settings.setValue(QString("%1").arg(4),ui->parityBox->currentIndex());
