@@ -8,6 +8,7 @@ CGraphDialog::CGraphDialog(QWidget *parent) :
     ui->setupUi(this);
     bFlagIsFirst = true;
     readSettings();
+    ui->radioButton_Time->setChecked(true);
     /*
     ui->checkBox1->setChecked(true);
     ui->checkBox2->setChecked(true);
@@ -140,18 +141,28 @@ void CGraphDialog::InitGraph()
     //ui->widget_Graph->replot(); // 重画图像
 }
 
-void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
+void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16], QVector<double> xx_DAC[16])
 {
     QVector<double> x(xx);
     QVector<double> y[16];
+    QVector<double> x_DAC[16];
     double y_minlength = 0.0;
     double y_maxlength = 0.0;
+    double xDAC_minlength = 0.0;
+    double xDAC_maxlength = 0.0;
 
 
     for(int j=0;j<16;j++)
     {
         y[j] = yy[j];
     }
+
+
+    for(int j=0;j<16;j++)
+    {
+        x_DAC[j] = xx_DAC[j];
+    }
+
 
 
     ui->widget_Graph->replot(); // 重画图像
@@ -175,33 +186,97 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
     }
     */
 
-    QString str[16] = {"ADC_1","ADC_2","ADC_3","ADC_4","ADC_5","ADC_6","ADC_7","ADC_8","ADC_9","ADC_10",
-                      "ADC_11","ADC_12","ADC_13","ADC_14","ADC_15","ADC_16"};
+    QString str[16];
+    if(ui->radioButton_Time->isChecked())
+    {
+        str[0] = "ADC_1";
+        str[1] = "ADC_2";
+        str[2] = "ADC_3";
+        str[3] = "ADC_4";
+        str[4] = "ADC_5";
+        str[5] = "ADC_6";
+        str[6] = "ADC_7";
+        str[7] = "ADC_8";
+        str[8] = "ADC_9";
+        str[9] = "ADC_10";
+        str[10] = "ADC_11";
+        str[11] = "ADC_12";
+        str[12] = "ADC_13";
+        str[13] = "ADC_14";
+        str[14] = "ADC_15";
+        str[15] = "ADC_16";
+    }
+    else
+    {
+        str[0] = "DAC_1";
+        str[1] = "DAC_2";
+        str[2] = "DAC_3";
+        str[3] = "DAC_4";
+        str[4] = "DAC_5";
+        str[5] = "DAC_6";
+        str[6] = "DAC_7";
+        str[7] = "DAC_8";
+        str[8] = "DAC_9";
+        str[9] = "DAC_10";
+        str[10] = "DAC_11";
+        str[11] = "DAC_12";
+        str[12] = "DAC_13";
+        str[13] = "DAC_14";
+        str[14] = "DAC_15";
+        str[15] = "DAC_16";
+    }
     QPen pen[4] = {QPen(Qt::blue),QPen(Qt::green),QPen(Qt::red),QPen(Qt::yellow)};
 
-    for(int j=0;j<16;j++)
+
+    if(ui->radioButton_Time->isChecked())
     {
-        ui->widget_Graph->addGraph();
-        ui->widget_Graph->graph(j)->setPen(pen[j%4]);
-        ui->widget_Graph->graph(j)->setAntialiasedFill(false);
-        ui->widget_Graph->graph(j)->setName(str[j]);
-        ui->widget_Graph->graph(j)->setData(x, y[j]);
+        for(int j=0;j<16;j++)
+        {
+            ui->widget_Graph->addGraph();
+            ui->widget_Graph->graph(j)->setPen(pen[j%4]);
+            ui->widget_Graph->graph(j)->setAntialiasedFill(false);
+            ui->widget_Graph->graph(j)->setName(str[j]);
+            ui->widget_Graph->graph(j)->setData(x, y[j]);
+        }
+    }
+    else
+    {
+        for(int j=0;j<16;j++)
+        {
+            ui->widget_Graph->addGraph();
+            ui->widget_Graph->graph(j)->setPen(pen[j%4]);
+            ui->widget_Graph->graph(j)->setAntialiasedFill(false);
+            ui->widget_Graph->graph(j)->setName(str[j]);
+            ui->widget_Graph->graph(j)->setData(x_DAC[j], y[j]);
+        }
     }
 
 
-    ui->widget_Graph->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-    //ui->widget_Graph->xAxis->setDateTimeFormat("hh:mm:ss");
-    ui->widget_Graph->xAxis->setDateTimeFormat("ss");
-    ui->widget_Graph->xAxis->setAutoTickStep(false);
-    ui->widget_Graph->xAxis->setTickStep(1);
+    if(ui->radioButton_Time->isChecked())
+    {
+        ui->widget_Graph->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+        //ui->widget_Graph->xAxis->setDateTimeFormat("hh:mm:ss");
+        ui->widget_Graph->xAxis->setDateTimeFormat("ss");
+        ui->widget_Graph->xAxis->setAutoTickStep(false);
+        ui->widget_Graph->xAxis->setTickStep(1);
+
+        ui->widget_Graph->xAxis->setLabel("x_(time/s)");
+    }
+    else
+    {
+        ui->widget_Graph->xAxis->setTickLabelType(QCPAxis::ltNumber);
+        ui->widget_Graph->xAxis->setAutoTickStep(true);
+        ui->widget_Graph->xAxis->setLabel("x_DAC(mV))");
+    }
+
 
 
 
 
     // 为坐标轴添加标签
-    ui->widget_Graph->xAxis->setLabel("x_(time/s)");
-    ui->widget_Graph->yAxis->setLabel("y_(ADC)");
+    ui->widget_Graph->yAxis->setLabel("y_ADC(nA)");
     // 设置坐标轴的范围，以看到所有数据
+
     qSort(x.begin(), x.end());
     if(x.last() < 20)
         ui->widget_Graph->xAxis->setTickStep(1);
@@ -210,17 +285,27 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
     else
         ui->widget_Graph->xAxis->setTickStep(10);
 
-    ui->widget_Graph->xAxis->setRange(0, x.last()*1.2+5);
+    //ui->widget_Graph->xAxis->setRange(0, x.last()*1.2+5);
     //ui->widget_Graph->xAxis->setRange(key+1.0, 60, Qt::AlignRight);
 
+
+    //DAC排序算出显示范围
     for(int j=0;j<16;j++)
     {
         qSort(y[j].begin(), y[j].end());
         y_max.push_back(y[j].last());
         y_min.push_back(y[j].first());
+
+        qSort(x_DAC[j].begin(), x_DAC[j].end());
+        xDAC_max.push_back(x_DAC[j].last());
+        xDAC_min.push_back(x_DAC[j].first());
     }
     qSort(y_max.begin(), y_max.end());
     qSort(y_min.begin(), y_min.end());
+
+    qSort(xDAC_max.begin(), xDAC_max.end());
+    qSort(xDAC_min.begin(), xDAC_min.end());
+
 
     /*
     if(y.last() < 4)
@@ -235,6 +320,9 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
 
     y_minlength = y_min.first()*0.9;
     y_maxlength = y_max.last()*1.1;
+    //xDAC_minlength
+    xDAC_minlength = xDAC_min.first()*0.9;
+    xDAC_maxlength = xDAC_max.last()*1.1;
     if(y_min.first() < 0)
     {
         y_minlength = y_min.first()*1.1;
@@ -244,6 +332,23 @@ void CGraphDialog::DrawGraph(QVector<double> xx, QVector<double> yy[16])
         y_maxlength = y_max.last()*0.9;
     }
 
+    if(xDAC_min.first() < 0)
+    {
+        xDAC_minlength = xDAC_min.first()*1.1;
+    }
+    if(xDAC_max.last() < 0)
+    {
+        xDAC_maxlength = xDAC_max.last()*0.9;
+    }
+
+    if(ui->radioButton_Time->isChecked())
+    {
+        ui->widget_Graph->xAxis->setRange(0, x.last()*1.2+5);
+    }
+    else
+    {
+        ui->widget_Graph->xAxis->setRange(xDAC_minlength, xDAC_maxlength);
+    }
     ui->widget_Graph->yAxis->setRange(y_minlength, y_maxlength);
     // 添加数据曲线（一个图像可以有多个数据曲线）;
     //ui->widget_Graph->graph(0)->removeDataBefore(7);

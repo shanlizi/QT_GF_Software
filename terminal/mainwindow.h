@@ -116,6 +116,7 @@ private:
     f4 f4kx[16],f4bx[16];
     f4 f4Range;
     f4 f4ADCValue;
+    f4 f4DACValue;
     void ReadIni_kxbx();
 
 
@@ -144,6 +145,7 @@ public:
 
     QVector<double> x;
     QVector<double> y[16];
+    QVector<double> x_DAC[16];
 
 
 };

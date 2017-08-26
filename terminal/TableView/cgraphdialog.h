@@ -22,13 +22,15 @@ private:
 
 public:
     void InitGraph();
-    void DrawGraph(QVector<double> xx, QVector<double> yy[16]);
+    void DrawGraph(QVector<double> xx, QVector<double> yy[16], QVector<double> xx_DAC[16]);
     bool bFlagIsFirst;
     void clearGraph();
     void saveSettings();
     void readSettings();
     QVector<double> y_max;
     QVector<double> y_min;
+    QVector<double> xDAC_max;
+    QVector<double> xDAC_min;
 
 private slots:
     void on_checkBoxAll_clicked(bool checked);

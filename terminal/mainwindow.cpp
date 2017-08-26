@@ -98,6 +98,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     f4ADCValue = 0.0;
     f4Range = 0;
+    f4DACValue = 0.0;
 
 
     setCentralWidget(p7373H);
@@ -176,7 +177,6 @@ MainWindow::MainWindow(QWidget *parent) :
     openSerialPort();  //开机即连接串口
     collectStart();  //开机设置为采集模式
     this->showMaximized();
-
 
 
     //p_GraphDialog->readSettings();
@@ -485,7 +485,7 @@ void MainWindow::readData()
 
 
 
-           p_GraphDialog->DrawGraph(x,y);
+           p_GraphDialog->DrawGraph(x,y,x_DAC);
            f8countGraph += 0.1;
 
            pRecvDialog->Update33H(&g_T33);
@@ -591,6 +591,7 @@ void MainWindow::clear_All()
     for(int j=0; j<16;j++)
     {
         y[j].clear();
+        x_DAC[j].clear();
     }
     f8countGraph = 0;
 
@@ -610,6 +611,7 @@ void MainWindow::collectStart()
     for(int j=0; j<16;j++)
     {
         y[j].clear();
+        x_DAC[j].clear();
     }
     f8countGraph = 0;
 
@@ -701,6 +703,7 @@ void MainWindow::NormData(T33H g_T33)
     ReadIni_kxbx();
     for(int i=0;i<16;i++)
     {
+        /*******************ADC的计算**********************/
         if(g_T33.i2OriginData[i]>>15)
         {
             g_T33.i2OriginData[i] = g_T33.i2OriginData[i]-65536;
@@ -716,6 +719,10 @@ void MainWindow::NormData(T33H g_T33)
 
         f4ADCValue = f4kx[i]*(f4)g_T33.i2OriginData[i]*f4Range/65.536 - 1000.0*f4bx[i];
         y[i].push_back(f4ADCValue);
+
+        /*******************DAC的计算**********************/
+        f4DACValue = 5000.0*((f4)g_T33.i2RealData[i]-32768.0)/65536.0;
+        x_DAC[i].push_back(f4DACValue);
     }
 }
 void MainWindow::ReadIni_kxbx()
