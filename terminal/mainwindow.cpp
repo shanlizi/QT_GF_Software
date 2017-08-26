@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     /*测试版本，到达一定日期则不可用*/
     QString date = QDate::currentDate().toString("yyyyMMdd");
-    if(date.toInt() > 20171023)
+    if(date.toInt() > 20171126)
     {
         return;
     }
@@ -83,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
     p7373H = new C7373H(this);
 
     timer = new QTimer();   //新建一个QTimer对象
-    timer->setInterval(60000);  //1分钟
+    timer->setInterval(6000);  //1分钟
     //timer->start();    //启动定时器
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimerOut()));
     fileName_Grpha = "";

@@ -56,6 +56,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui(new Ui::SettingsDialog)
 {
     ui->setupUi(this);
+    i1FlagTheFirst = 1;
 
     intValidator = new QIntValidator(0, 4000000, this);
 
@@ -71,6 +72,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 
     readSettings();
     updateSettings();
+
 
 }
 
@@ -159,8 +161,8 @@ void SettingsDialog::fillPortsInfo()
 
         i++;
         ui->serialPortInfoListBox->addItem(list.first(), list);
-        if(info.description().startsWith(tr("USB Serial")))  //自动检测STMicroelectronics串口
-        //if(info.description().startsWith(tr("STMicroelectronics")))  //自动检测STMicroelectronics串口
+        //if(info.description().startsWith(tr("USB Serial")))  //自动检测STMicroelectronics串口
+        if(info.description().startsWith(tr("STMicroelectronics")))  //自动检测STMicroelectronics串口
         {
             strPortName = info.portName();
         }
@@ -169,14 +171,21 @@ void SettingsDialog::fillPortsInfo()
 
 void SettingsDialog::updateSettings()
 {
-    if(strPortName.isNull())
+    if(strPortName.isNull() && i1FlagTheFirst)
     {
         QMessageBox::critical(this, tr("警告"), tr("没有检测到硬件端口，请手动选择！"));
-        return;
+        i1FlagTheFirst = 0;
     }
     else
     {
-        currentSettings.name = strPortName;//ui->serialPortInfoListBox->currentText();
+        if(strPortName.isNull())
+        {
+            currentSettings.name = ui->serialPortInfoListBox->currentText();
+        }
+        else
+        {
+            currentSettings.name = strPortName;//ui->serialPortInfoListBox->currentText();
+        }
     }
 
     if (ui->baudRateBox->currentIndex() == 4) {

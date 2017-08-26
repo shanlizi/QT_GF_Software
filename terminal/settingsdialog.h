@@ -93,6 +93,7 @@ private:
     void fillPortsInfo();
     void updateSettings();
     QString strPortName;
+    char i1FlagTheFirst;
 
 private:
     Ui::SettingsDialog *ui;

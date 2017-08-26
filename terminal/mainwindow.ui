@@ -72,7 +72,6 @@ background-color: rgb(115, 122, 126);</string>
    <addaction name="actionConfigure"/>
    <addaction name="separator"/>
    <addaction name="actionFastCmd"/>
-   <addaction name="actionSaveFile"/>
    <addaction name="actionClear"/>
    <addaction name="separator"/>
    <addaction name="actionCollectSetting"/>
@@ -143,6 +142,12 @@ background-color: rgb(115, 122, 126);</string>
    <property name="shortcut">
     <string>Alt+C</string>
    </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionClear">
    <property name="icon">
@@ -181,6 +186,12 @@ background-color: rgb(115, 122, 126);</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionFastCmd">
